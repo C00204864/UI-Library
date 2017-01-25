@@ -1,11 +1,12 @@
 #include "Game.h"
+#include <iostream>
 
 #define MS_PER_UPDATE 10.0
 
 Game::Game()
 	: m_window(sf::VideoMode(800, 600, 32), "Global Game Jam", sf::Style::Default)
 {
-
+	std::cout << "Liam Hickey waz here 2k17" << std::endl;
 }
 
 void Game::run()
