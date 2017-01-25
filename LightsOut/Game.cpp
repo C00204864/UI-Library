@@ -55,7 +55,7 @@ void Game::update(double dt)
 {
 	switch (currentGameState)
 	{
-		case GameState::Game:
+		case GameState::GamePlay:
 		{
 		
 
@@ -73,7 +73,7 @@ void Game::render()
 
 	switch (currentGameState)
 	{
-	case GameState::Game:
+	case GameState::GamePlay:
 	{
 		
 		break;

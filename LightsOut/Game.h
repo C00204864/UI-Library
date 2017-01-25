@@ -19,10 +19,10 @@ protected:
 
 	enum class GameState
 	{
-		Game
+		GamePlay
 	};
 
-	GameState currentGameState = GameState::Game;
+	GameState currentGameState = GameState::GamePlay;
 };
 
 #endif
