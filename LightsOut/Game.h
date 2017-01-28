@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <SFML\Graphics.hpp>
+#include "OpitionsScreen.h"
 
 class Game
 {
@@ -19,10 +20,13 @@ protected:
 
 	enum class GameState
 	{
+		Options,
 		GamePlay
 	};
+	GameState currentGameState = GameState::Options;
 
-	GameState currentGameState = GameState::GamePlay;
+	XboxController xboxController;
+	OptionsScreen optionsScreen;
 };
 
 #endif

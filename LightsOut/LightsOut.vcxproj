@@ -159,11 +159,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gui\Gui.cpp" />
+    <ClCompile Include="Gui\Label.cpp" />
+    <ClCompile Include="Gui\Slider.cpp" />
+    <ClCompile Include="Gui\Widget.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Widget.cpp" />
+    <ClCompile Include="OpitionsScreen.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="XboxController.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gui\Gui.h" />
+    <ClInclude Include="Gui\Label.h" />
+    <ClInclude Include="Gui\Slider.h" />
+    <ClInclude Include="Gui\Widget.h" />
+    <ClInclude Include="OpitionsScreen.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="XboxController.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
