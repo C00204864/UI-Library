@@ -3,6 +3,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "Widget.h"
+#include "../ResourceManager.h"
 
 /// 
 /// 
@@ -21,8 +22,6 @@ public:
 
 private:
 	sf::Text m_text;
-	// TODO(Darren): Remove this
-	sf::Font font;
 
 };
 

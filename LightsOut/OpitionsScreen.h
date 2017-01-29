@@ -11,9 +11,10 @@
 #include "Gui\Gui.h"
 #include "Gui\Slider.h"
 
+/// The Opitions screen that will be displayed in game
 /// 
-/// 
-/// 
+/// Handles all functionality of the opitions menu, Gui elements, 
+/// updating and rendering.
 class OptionsScreen
 {
 public:
@@ -33,8 +34,6 @@ private:
 	void volumeDownSliderMusic();
 	void volumeUpSliderEffects();
 	void volumeDownSliderEffects();
-
-	sf::Font m_font;
 };
 
 #endif

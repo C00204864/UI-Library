@@ -83,7 +83,7 @@ void Game::update(double dt)
 
 		case GameState::GamePlay:
 		{
-		
+			
 
 			break;
 		}
@@ -111,7 +111,8 @@ void Game::render()
 
 		case GameState::GamePlay:
 		{
-		
+			
+
 			break;
 		}
 

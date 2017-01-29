@@ -24,15 +24,10 @@ OptionsScreen::OptionsScreen()
 /// <summary>
 /// 
 /// </summary>
-OptionsScreen::~OptionsScreen()
-{
-	// NOTE(Darren): Already deleted
-	/*delete volume;
-	delete effects;*/
-}
+OptionsScreen::~OptionsScreen() { }
 
 /// <summary>
-/// 
+/// Initalises all Gui elements
 /// </summary>
 void OptionsScreen::initialise()
 {
@@ -47,7 +42,6 @@ void OptionsScreen::initialise()
 void OptionsScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
-	//m_gui.update();
 }
 
 void OptionsScreen::volumeUpSliderMusic()
@@ -71,9 +65,9 @@ void OptionsScreen::volumeDownSliderEffects()
 }
 
 /// <summary>
-/// 
+/// Draws everything in the opitions menu
 /// </summary>
-/// <param name="window"></param>
+/// <param name="window">A reference to an instacne of RenderWindow</param>
 void OptionsScreen::render(sf::RenderWindow& window)
 {
 	window.draw(m_gui);

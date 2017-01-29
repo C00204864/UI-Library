@@ -91,8 +91,10 @@ bool Slider::processInput(XboxController &controller)
 /// <param name="states"></param>
 void Slider::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	// Call the super class overridden draw function
+	// Call the super class overridden draw function.
 	Label::draw(target, states);
+
+	// Draw the slider.
 	target.draw(m_base);
 	target.draw(m_bar, states);
 }

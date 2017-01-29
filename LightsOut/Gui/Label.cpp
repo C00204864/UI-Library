@@ -3,14 +3,7 @@
 Label::Label(const std::string& text, Widget* parent) :
 	Widget(parent)
 {
-	// TODO(Darren): Remove this (loads for every widget)
-	if (!font.loadFromFile("Assets/Fonts/arial.ttf"))
-	{
-		std::cout << "Error loading font" << std::endl;
-	}
-
-	// NOTE(Darren): Will create a global resource manager
-	m_text.setFont(font); // Configuration::fonts.get(Configuration::Fonts::Gui));
+	m_text.setFont(*g_resourceMgr.getGameFont());
 	setText(text);
 	setTextColor(sf::Color(180, 93, 23));
 }

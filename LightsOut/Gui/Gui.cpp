@@ -1,6 +1,9 @@
 #include "Gui.h"
 
-// FUck
+/// <summary>
+/// 
+/// </summary>
+/// <param name="parent"></param>
 Gui::Gui(Widget *parent) { }
 
 /// <summary>

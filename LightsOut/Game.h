@@ -1,8 +1,14 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
 #ifndef GAME_H
 #define GAME_H
 
 #include <SFML\Graphics.hpp>
 #include "OpitionsScreen.h"
+#include "ResourceManager.h"
 
 class Game
 {
