@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="Gui\Button.cpp" />
     <ClCompile Include="Gui\Gui.cpp" />
     <ClCompile Include="Gui\Label.cpp" />
     <ClCompile Include="Gui\Slider.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Gui\Button.h" />
     <ClInclude Include="Gui\Gui.h" />
     <ClInclude Include="Gui\Label.h" />
     <ClInclude Include="Gui\Slider.h" />

@@ -137,6 +137,60 @@ bool XboxController::isButtonPressed(unsigned int button)
 }
 
 /// <summary>
+/// Checks if a button on the controller is held down.
+/// Updates the currentstate state of the controller.
+/// </summary>
+/// <param name="button">The index of the button</param>
+/// <returns>Returns true if the button is held down, false otherwise</returns>
+bool XboxController::isButtonHeldDown(unsigned int button)
+{
+	bool buttonPressed = false;
+
+	if (button >= XBOX360_A && button <= XBOX360_RIGHT_JOY_BUTTON)
+	{
+		buttonPressed = m_controller.isButtonPressed(m_controllerIndex, button);
+
+		// Update the current face button state
+		m_currentState.buttons[button] = buttonPressed;
+	}
+
+	else if (button == XBOX360_LEFT || button == XBOX360_RIGHT)
+	{
+		float axis = m_controller.getAxisPosition(m_controllerIndex, sf::Joystick::Axis::PovX);
+
+		if (axis < -DPAD_THRESHHOLD && button == XBOX360_LEFT)
+		{
+			buttonPressed = true;
+		}
+		else if (axis > DPAD_THRESHHOLD && button == XBOX360_RIGHT)
+		{
+			buttonPressed = true;
+		}
+
+		// Update the current face button state
+		m_currentState.buttons[button] = buttonPressed;
+	}
+	else if (button == XBOX360_UP || button == XBOX360_DOWN)
+	{
+		float axis = m_controller.getAxisPosition(m_controllerIndex, sf::Joystick::Axis::PovY);
+
+		if (axis < -DPAD_THRESHHOLD && button == XBOX360_UP)
+		{
+			buttonPressed = true;
+		}
+		else if (axis > DPAD_THRESHHOLD && button == XBOX360_DOWN)
+		{
+			buttonPressed = true;
+		}
+
+		// Update the current face button state
+		m_currentState.buttons[button] = buttonPressed;
+	}
+
+	return buttonPressed;
+}
+
+/// <summary>
 /// Gets the coordinates of the x and y axis on the left joystick in the range of [-100, 100]. 
 /// The current state of left joystick is updated
 /// </summary>

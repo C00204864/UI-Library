@@ -17,7 +17,7 @@ bool Button::processInput(XboxController & controller)
 	{
 		return false;
 	}
-	else if (controller.isButtonPressed(XBOX360_B)
+	else if (controller.isButtonPressed(XBOX360_UP)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (m_up != nullptr)
@@ -27,7 +27,7 @@ bool Button::processInput(XboxController & controller)
 			return true;
 		}
 	}
-	else if (controller.isButtonPressed(XBOX360_A)
+	else if (controller.isButtonPressed(XBOX360_DOWN)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
 		if (m_down != nullptr)

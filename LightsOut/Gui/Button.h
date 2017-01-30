@@ -1,7 +1,7 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "Gui\Label.h"
+#include "Label.h"
 #include <functional>
 
 class Button : public Label {

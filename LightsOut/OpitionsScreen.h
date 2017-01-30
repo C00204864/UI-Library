@@ -10,6 +10,7 @@
 #include "XboxController.h"
 #include "Gui\Gui.h"
 #include "Gui\Slider.h"
+#include "Gui\Button.h"
 
 /// The Opitions screen that will be displayed in game
 /// 
@@ -28,6 +29,7 @@ public:
 	Gui m_gui;
 	Slider *volume;
 	Slider *effects;
+	Button *applyButton;
 	Slider *other_1;
 	Slider *other_2;
 

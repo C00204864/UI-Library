@@ -43,7 +43,7 @@ bool Slider::processInput(XboxController &controller)
 
 	else if (m_hasFocus)
 	{
-		if (controller.isButtonPressed(XBOX360_RIGHT) 
+		if (controller.isButtonHeldDown(XBOX360_RIGHT) 
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
 			if(m_barSize < m_barBaseWidth)
@@ -52,7 +52,7 @@ bool Slider::processInput(XboxController &controller)
 			m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight));
 			return true;
 		}
-		else if (controller.isButtonPressed(XBOX360_LEFT)
+		else if (controller.isButtonHeldDown(XBOX360_LEFT)
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
 			if (m_barSize > 0)

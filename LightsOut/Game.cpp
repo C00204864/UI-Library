@@ -6,7 +6,7 @@
 /// </summary>
 Game::Game()
 	: m_window(sf::VideoMode(800, 600, 32), "Button Game Project", sf::Style::Default),
-	xboxController(CONTROLLER_TWO)
+	xboxController(CONTROLLER_ONE)
 {
 	std::cout << "Liam Hickey waz here 2k17" << std::endl;
 
