@@ -28,6 +28,8 @@ public:
 	Gui m_gui;
 	Slider *volume;
 	Slider *effects;
+	Slider *other_1;
+	Slider *other_2;
 
 private:
 	void volumeUpSliderMusic();

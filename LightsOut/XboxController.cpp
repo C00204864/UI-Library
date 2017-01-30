@@ -77,7 +77,26 @@ bool XboxController::isButtonPressed(unsigned int button)
 			buttonPressed = true;
 		}
 
-		m_currentState.buttons[button] = buttonPressed;
+		if (buttonPressed)
+		{
+			// Check if the previous button state is false (button up)
+			if (!m_previousState.buttons[button])
+			{
+				m_currentState.buttons[button] = buttonPressed;
+			}
+			else  // If the previous state is true (button down) then button can't be down agian
+			{
+				buttonPressed = false;
+			}
+		}
+		else
+		{
+			// Button is not pressed so update the current state
+			m_currentState.buttons[button] = false;
+		}
+
+		// Update the previous face button state
+		m_previousState.buttons[button] = m_currentState.buttons[button];
 	}
 	else if (button == XBOX360_UP || button == XBOX360_DOWN)
 	{
@@ -92,7 +111,26 @@ bool XboxController::isButtonPressed(unsigned int button)
 			buttonPressed = true;
 		}
 
-		m_currentState.buttons[button] = buttonPressed;
+		if (buttonPressed)
+		{
+			// Check if the previous button state is false (button up)
+			if (!m_previousState.buttons[button])
+			{
+				m_currentState.buttons[button] = buttonPressed;
+			}
+			else  // If the previous state is true (button down) then button can't be down agian
+			{
+				buttonPressed = false;
+			}
+		}
+		else
+		{
+			// Button is not pressed so update the current state
+			m_currentState.buttons[button] = false;
+		}
+
+		// Update the previous face button state
+		m_previousState.buttons[button] = m_currentState.buttons[button];
 	}
 
 	return buttonPressed;
