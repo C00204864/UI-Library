@@ -5,11 +5,12 @@
 /// 
 /// </summary>
 Game::Game()
-	: m_window(sf::VideoMode(800, 800, 32), "Button Game Project", sf::Style::Default),
+	: m_window(sf::VideoMode(800, 600, 32), "Button Game Project", sf::Style::Default),
 	xboxController(CONTROLLER_ONE)
 {
 	std::cout << "Liam Hickey waz here 2k17" << std::endl;
 
+	mainMenuScreen.initialise();
 	optionsScreen.initialise();
 }
 
@@ -74,6 +75,13 @@ void Game::update(double dt)
 {
 	switch (currentGameState)
 	{
+		case GameState::MainMenu:
+		{
+			mainMenuScreen.update(xboxController);
+
+			break;
+		}
+
 		case GameState::Options:
 		{
 			optionsScreen.update(xboxController);
@@ -102,6 +110,13 @@ void Game::render()
 
 	switch (currentGameState)
 	{
+		case GameState::MainMenu:
+		{
+			mainMenuScreen.render(m_window);
+
+			break;
+		}
+
 		case GameState::Options:
 		{
 			optionsScreen.render(m_window);

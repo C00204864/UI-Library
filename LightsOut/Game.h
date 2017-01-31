@@ -7,8 +7,9 @@
 #define GAME_H
 
 #include <SFML\Graphics.hpp>
-#include "OpitionsScreen.h"
 #include "ResourceManager.h"
+#include "MainMenuScreen.h"
+#include "OpitionsScreen.h"
 
 class Game
 {
@@ -26,12 +27,15 @@ protected:
 
 	enum class GameState
 	{
+		MainMenu,
 		Options,
 		GamePlay
 	};
-	GameState currentGameState = GameState::Options;
+	GameState currentGameState = GameState::MainMenu;
 
 	XboxController xboxController;
+	
+	MainMenuScreen mainMenuScreen;
 	OptionsScreen optionsScreen;
 };
 
