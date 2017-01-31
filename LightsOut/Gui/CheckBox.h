@@ -1,7 +1,7 @@
 #ifndef CHECKBOX_H
 #define CHECKBOX_H
 
-#include "Gui/Label.h"
+#include "Label.h"
 #include <functional>
 
 class CheckBox : public Label {

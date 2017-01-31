@@ -7,7 +7,7 @@
 #define WIDGET_H
 
 #include <SFML\Graphics.hpp>
-#include "..\XboxController.h"
+#include "..\Input\XboxController.h"
 
 /// Provides a base class for objects that are a widget.
 ///

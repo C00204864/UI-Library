@@ -1,8 +1,8 @@
 #include "RadioButton.h"
 
-RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, std::vector<RadioButton *> & radGroup,
-	int characterSize, float boxWidth, float boxHeight) : Label(textIn, parent),
-	m_otherButtons(radGroup)
+RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, 
+	std::vector<RadioButton *> & radGroup, int characterSize, float boxWidth, float boxHeight) 
+		: Label(textIn, parent), m_otherButtons(radGroup)
 {
 	widgetPos = positionIn;
 	m_box.setPosition(widgetPos);

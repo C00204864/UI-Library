@@ -7,10 +7,12 @@
 #define OPITIONS_SCREEN_H
 
 #include <SFML\Graphics.hpp>
-#include "XboxController.h"
+#include "Input\XboxController.h"
 #include "Gui\Gui.h"
 #include "Gui\Slider.h"
 #include "Gui\Button.h"
+#include "Gui\RadioButton.h"
+#include "Gui\CheckBox.h"
 
 /// The Opitions screen that will be displayed in game
 /// 
@@ -32,6 +34,10 @@ public:
 	Button *applyButton;
 	Slider *other_1;
 	Slider *other_2;
+	RadioButton *radioButton;
+	RadioButton *radioButton_2;
+	std::vector<RadioButton*> radioButtons;
+	CheckBox *checkBox;
 
 private:
 	void volumeUpSliderMusic();

@@ -10,6 +10,10 @@ OptionsScreen::OptionsScreen()
 	other_1 = new Slider("other_1", nullptr, sf::Vector2f(250.0f, 250.0f), 18, 200.0f);
 	other_2 = new Slider("other_2", nullptr, sf::Vector2f(250.0f, 350.0f), 18, 200.0f);
 	applyButton = new Button("Apply", nullptr, sf::Vector2f(250.0f, 450.0f));
+	//radioButton = new RadioButton("Radio button 1", nullptr, sf::Vector2f(250.0f, 500.0f),);
+	radioButtons.push_back(new RadioButton("Radio button 1", nullptr, sf::Vector2f(250.0f, 550.0f), radioButtons));
+	radioButtons.push_back(new RadioButton("Radio button 2", nullptr, sf::Vector2f(350.0f, 550.0f), radioButtons));
+	checkBox = new CheckBox("Check Box", nullptr, sf::Vector2f(250.0f, 600.0f));
 
 	volume->m_down = effects;
 	effects->m_up = volume;
@@ -21,6 +25,14 @@ OptionsScreen::OptionsScreen()
 	other_2->m_up = other_1;
 	other_2->m_down = applyButton;
 	applyButton->m_up = other_2;
+	radioButtons.at(0)->m_up = applyButton;
+	applyButton->m_down = radioButtons.at(0);
+	radioButtons.at(0)->m_right = radioButtons.at(1);
+	radioButtons.at(1)->m_left = radioButtons.at(0);
+	radioButtons.at(1)->m_up = applyButton;
+	radioButtons.at(0)->m_down = checkBox;
+	radioButtons.at(1)->m_down = checkBox;
+	checkBox->m_up = radioButtons.at(0);
 
 	// Set the first UI element the user has control over to the volume
 	volume->promoteFocus();
@@ -55,6 +67,11 @@ void OptionsScreen::initialise()
 	m_gui.add(other_1);
 	m_gui.add(other_2);
 	m_gui.add(applyButton);
+	for (RadioButton * radioButton : radioButtons)
+	{
+		m_gui.add(radioButton);
+	}
+	m_gui.add(checkBox);
 }
 
 /// <summary>
