@@ -5,19 +5,27 @@ Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f & posit
 	Label(textIn, parent)
 {
 	widgetPos = positionIn;
-	m_front.setPosition(widgetPos);
-	m_front.setSize(sf::Vector2f(buttonWidth, buttonHeight));
-	m_front.setFillColor(sf::Color::Blue);
-	Label::setPosition(widgetPos);
+	m_buttonRect.setPosition(widgetPos);
+	m_buttonRect.setSize(sf::Vector2f(buttonWidth, buttonHeight));
+	m_buttonRect.setOrigin(m_buttonRect.getLocalBounds().width / 2.0f, m_buttonRect.getLocalBounds().height / 2.0f);
+	m_buttonRect.setFillColor(sf::Color::Blue);
+	Label::setCharacterSize(characterSize);
+	Label::setPosition(positionIn);
 }
 
 bool Button::processInput(XboxController & controller)
 {
 	if (!m_hasFocus)
 	{
+		m_buttonRect.setFillColor(sf::Color::Cyan);
 		return false;
 	}
-	else if (controller.isButtonPressed(XBOX360_UP)
+	else
+	{
+		m_buttonRect.setFillColor(sf::Color::Blue);
+	}
+	
+	if (controller.isButtonPressed(XBOX360_UP)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (m_up != nullptr)
@@ -46,6 +54,6 @@ bool Button::processInput(XboxController & controller)
 
 void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	target.draw(m_front);
+	target.draw(m_buttonRect);
 	Label::draw(target, states);
 }

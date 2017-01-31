@@ -6,6 +6,10 @@ Label::Label(const std::string& text, Widget* parent) :
 	m_text.setFont(*g_resourceMgr.getGameFont());
 	setText(text);
 	setTextColor(sf::Color(180, 93, 23));
+
+	sf::FloatRect textRect = m_text.getLocalBounds();
+	m_text.setOrigin(textRect.left + textRect.width / 2.0f,
+		textRect.top + textRect.height / 2.0f);
 }
 
 void Label::setText(const std::string& text)

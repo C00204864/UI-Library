@@ -3,10 +3,10 @@
 MainMenuScreen::MainMenuScreen()
 {
 	m_gameTitle = new Label("Lights Out!!!");
-	m_gameTitle->setPosition(sf::Vector2f(300.0f, 50.0f));
-	m_playButton = new Button("Play!", nullptr, sf::Vector2f(250.0f, 300.0f));
-	m_optionsButton = new Button("Options", nullptr, sf::Vector2f(250.0f, 350.0f));
-	m_quitButton = new Button("Quit?", nullptr, sf::Vector2f(250.0f, 400.0f));
+	m_gameTitle->setPosition(sf::Vector2f(400.0f, 50.0f));
+	m_playButton = new Button("Play!", nullptr, sf::Vector2f(400.0f, 300.0f), 30, 150.0f, 30.0f);
+	m_optionsButton = new Button("Options", nullptr, sf::Vector2f(400.0f, 350.0f), 30, 150.0f, 30.0f);
+	m_quitButton = new Button("Quit?", nullptr, sf::Vector2f(400.0f, 400.0f), 30, 150.0f, 30.0f);
 
 	m_playButton->promoteFocus();
 

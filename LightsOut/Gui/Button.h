@@ -13,6 +13,6 @@ public:
 	typedef std::function<void()> Callback;
 	Callback select;
 private:
-	sf::RectangleShape m_front;
+	sf::RectangleShape m_buttonRect;
 };
 #endif
