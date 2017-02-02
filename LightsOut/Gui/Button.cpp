@@ -2,15 +2,23 @@
 
 Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
 	int characterSize, float buttonWidth, float buttonHeight) :
-	Label(textIn, parent)
+	Label(textIn, parent, characterSize)
 {
 	widgetPos = positionIn;
-	m_buttonRect.setPosition(widgetPos);
+	m_buttonRect.setFillColor(sf::Color::Blue);
+	Label::setPosition(sf::Vector2f(widgetPos.x - characterSize / 12.f, widgetPos.y - characterSize / 3.5f));
+	sf::Vector2f textSize(Label::getText().getGlobalBounds().width + BUTTON_BUFFER, Label::getTextHeight() + BUTTON_BUFFER);
+	if (buttonWidth < textSize.x)
+	{
+		buttonWidth = textSize.x;
+	}
+	if (buttonHeight < textSize.y)
+	{
+		buttonHeight = textSize.y;
+	}
 	m_buttonRect.setSize(sf::Vector2f(buttonWidth, buttonHeight));
 	m_buttonRect.setOrigin(m_buttonRect.getLocalBounds().width / 2.0f, m_buttonRect.getLocalBounds().height / 2.0f);
-	m_buttonRect.setFillColor(sf::Color::Blue);
-	Label::setCharacterSize(characterSize);
-	Label::setPosition(positionIn);
+	m_buttonRect.setPosition(widgetPos);
 }
 
 bool Button::processInput(XboxController & controller)
@@ -22,7 +30,7 @@ bool Button::processInput(XboxController & controller)
 	}
 	else
 	{
-		m_buttonRect.setFillColor(sf::Color::Blue);
+		m_buttonRect.setFillColor(sf::Color::Magenta);
 	}
 	
 	if (controller.isButtonPressed(XBOX360_UP)

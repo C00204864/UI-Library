@@ -11,7 +11,7 @@
 /// <param name="sliderHeight"></param>
 Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position,
 	int characterSize, float sliderWidth, float sliderHeight)
-	: Label(text, parent), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight)
+	: Label(text, parent, characterSize), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight)
 {
 	widgetPos = position;
 
@@ -28,7 +28,6 @@ Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position,
 	m_bar.setPosition(widgetPos);
 
 	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
-	Label::setCharacterSize(characterSize);
 }
 
 /// <summary>
@@ -39,9 +38,17 @@ Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position,
 bool Slider::processInput(XboxController &controller)
 {
 	if (!m_hasFocus)
+	{
+		m_base.setOutlineColor(sf::Color::Cyan);
 		return false;
+	}
+	else
+	{
+		m_base.setOutlineColor(sf::Color::Magenta);
+	}
+		
 
-	else if (m_hasFocus)
+	if (m_hasFocus)
 	{
 		if (controller.isButtonHeldDown(XBOX360_RIGHT) 
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))

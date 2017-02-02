@@ -14,5 +14,6 @@ public:
 	Callback select;
 private:
 	sf::RectangleShape m_buttonRect;
+	const int BUTTON_BUFFER = 15;
 };
 #endif

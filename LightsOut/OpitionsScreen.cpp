@@ -9,11 +9,11 @@ OptionsScreen::OptionsScreen()
 	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(250.0f, 150.0f), 18, 200.0f);
 	other_1 = new Slider("other_1", nullptr, sf::Vector2f(250.0f, 250.0f), 18, 200.0f);
 	other_2 = new Slider("other_2", nullptr, sf::Vector2f(250.0f, 350.0f), 18, 200.0f);
-	applyButton = new Button("Apply", nullptr, sf::Vector2f(250.0f, 450.0f));
+	applyButton = new Button("Apply", nullptr, sf::Vector2f(250.0f, 450.0f), 30);
 	//radioButton = new RadioButton("Radio button 1", nullptr, sf::Vector2f(250.0f, 500.0f),);
-	radioButtons.push_back(new RadioButton("Radio button 1", nullptr, sf::Vector2f(250.0f, 550.0f), radioButtons));
-	radioButtons.push_back(new RadioButton("Radio button 2", nullptr, sf::Vector2f(350.0f, 550.0f), radioButtons));
-	checkBox = new CheckBox("Check Box", nullptr, sf::Vector2f(250.0f, 600.0f));
+	radioButtons.push_back(new RadioButton("Clinton", nullptr, sf::Vector2f(250.0f, 550.0f), radioButtons));
+	radioButtons.push_back(new RadioButton("Trump", nullptr, sf::Vector2f(350.0f, 550.0f), radioButtons));
+	checkBox = new CheckBox("Sanders", nullptr, sf::Vector2f(250.0f, 700.0f));
 
 	volume->m_down = effects;
 	effects->m_up = volume;

@@ -2,26 +2,30 @@
 
 RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, 
 	std::vector<RadioButton *> & radGroup, int characterSize, float boxWidth, float boxHeight) 
-		: Label(textIn, parent), m_otherButtons(radGroup)
+		: Label(textIn, parent, characterSize), m_otherButtons(radGroup)
 {
 	widgetPos = positionIn;
 	m_box.setPosition(widgetPos);
 	m_box.setSize(sf::Vector2f(boxWidth, boxHeight));
 	m_box.setFillColor(sf::Color::White);
 	m_box.setOutlineColor(sf::Color::White);
-	m_box.setOutlineThickness(2.f);
-	sf::Vector2f textOffset(widgetPos.x + boxWidth, widgetPos.y);
+	m_box.setOutlineThickness(3.f);
+	sf::Vector2f textOffset(widgetPos.x + m_box.getGlobalBounds().width / 2.f, widgetPos.y - m_box.getGlobalBounds().height / 2.f);
 	Label::setPosition(textOffset);
-	Label::setCharacterSize(characterSize);
 }
 
 bool RadioButton::processInput(XboxController & controller)
 {
 	if (!m_hasFocus)
 	{
+		m_box.setOutlineColor(sf::Color::Cyan);
 		return false;
 	}
-	else if (controller.isButtonPressed(XBOX360_UP)
+	else
+	{
+		m_box.setOutlineColor(sf::Color::Magenta);
+	}
+	if (controller.isButtonPressed(XBOX360_UP)
 		|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
 		if (m_up != nullptr)
@@ -69,7 +73,7 @@ bool RadioButton::processInput(XboxController & controller)
 			radioButton->deActivate();
 		}
 		m_state = true;
-		m_box.setFillColor(sf::Color::Red);
+		m_box.setFillColor(sf::Color::Blue);
 	}
 }
 
