@@ -1,21 +1,26 @@
 #include "Label.h"
 
 /// <summary>
-/// 
+/// Constructor function for the Label class
 /// </summary>
-/// <param name="text"></param>
-/// <param name="parent"></param>
-/// <param name="size"></param>
+/// <param name="text">Text to be displayed by the Label</param>
+/// <param name="parent">parent widget to the label</param>
+/// <param name="size">Font size of the Label</param>
 Label::Label(const std::string& text, Widget* parent, unsigned int size) :
 	Widget(parent)
 {
-	m_text.setFont(*g_resourceMgr.getGameFont());
+	m_text.setFont(*g_resourceMgr.getGameFont()); // Set the font
+	//Set the text attributes
 	setText(text);
 	setTextColor(sf::Color(180, 93, 23));
 	m_text.setCharacterSize(size);
 	textRect = m_text.getGlobalBounds();
 	updateShape();
+
 	sf::Text fontCheck;
+	/* We use this to make sure the heigh of the buttons is constant as the 
+	   bounding box IS affected by ascenders and descenders in strings so
+	   the true text height is the maximum height possible*/
 	fontCheck.setFont(*m_text.getFont());
 	fontCheck.setCharacterSize(size);
 	fontCheck.setString("ph|");
@@ -25,9 +30,9 @@ Label::Label(const std::string& text, Widget* parent, unsigned int size) :
 }
 
 /// <summary>
-/// 
+/// Function simply sets the string for the text object
 /// </summary>
-/// <param name="text"></param>
+/// <param name="text">string to be displayed</param>
 void Label::setText(const std::string& text)
 {
 	m_text.setString(text);
@@ -35,7 +40,7 @@ void Label::setText(const std::string& text)
 }
 
 /// <summary>
-/// 
+/// Function simply sets the position of the text object
 /// </summary>
 /// <param name="relativePosition"></param>
 void Label::setPosition(sf::Vector2f &relativePosition)
@@ -44,7 +49,7 @@ void Label::setPosition(sf::Vector2f &relativePosition)
 }
 
 /// <summary>
-/// 
+/// Function simply gets the character size used by the text object
 /// </summary>
 /// <returns></returns>
 unsigned int Label::getCharacterSize() const
@@ -78,18 +83,18 @@ void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 }
 
 /// <summary>
-/// 
+/// Function simply returns the text object
 /// </summary>
-/// <returns></returns>
+/// <returns>Text object</returns>
 sf::Text Label::getText()
 {
 	return m_text;
 }
 
 /// <summary>
-/// 
+/// Function simply returns the maximum possible height for the bounding
 /// </summary>
-/// <returns></returns>
+/// <returns>Max possible height of the text bounding rectangle</returns>
 float Label::getTextHeight()
 {
 	return m_trueTextHeight;

@@ -38,11 +38,19 @@ void Widget::demoteFocus()
 	m_hasFocus = false;
 }
 
+/// <summary>
+/// Simply sets the position of the inherited widget
+/// </summary>
+/// <param name="pos">position</param>
 void Widget::setPosition(sf::Vector2f &pos)
 {
 	widgetPos = pos;
 }
 
+/// <summary>
+/// Function simply gets the position of the inherited widget
+/// </summary>
+/// <returns>Widget position</returns>
 sf::Vector2f Widget::getPosition()
 {
 	return widgetPos;
