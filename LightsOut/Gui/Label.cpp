@@ -46,6 +46,7 @@ void Label::setText(const std::string& text)
 void Label::setPosition(sf::Vector2f &position)
 {
 	m_text.setPosition(position);
+	widgetPos = position;
 }
 
 /// <summary>

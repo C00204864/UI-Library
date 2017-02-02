@@ -34,7 +34,11 @@ void MainMenuScreen::update(XboxController &controller)
 
 	if (playButtonPressed)
 	{
-		m_gui.transition(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(800.0f, 2.0f), 0.005f);
+		m_gui.transition(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(1080.0f, 400.0f), 0.008f);
+	}
+	else if (optionsButtonPressed)
+	{
+		m_gui.transition(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(-1080.0f, 400.0f), 0.008f);
 	}
 }
 
@@ -52,6 +56,7 @@ void MainMenuScreen::playButtonSelected()
 void MainMenuScreen::optionsButtonSelected()
 {
 	std::cout << "Options button has been pressed" << std::endl;
+	optionsButtonPressed = true;
 }
 
 void MainMenuScreen::quitButtonSelected()

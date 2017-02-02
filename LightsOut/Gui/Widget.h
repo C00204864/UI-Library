@@ -40,6 +40,8 @@ protected:
 	// The widget the player is currenly on and can interact with.
 	bool m_hasFocus;
 	sf::Vector2f widgetPos;
+	// NOTE(Darren): Might add this in for transitions
+	//sf::Vector2f widgetStartPos;
 };
 
 #endif
