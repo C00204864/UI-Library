@@ -1,5 +1,11 @@
 #include "Label.h"
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="text"></param>
+/// <param name="parent"></param>
+/// <param name="size"></param>
 Label::Label(const std::string& text, Widget* parent, unsigned int size) :
 	Widget(parent)
 {
@@ -18,27 +24,48 @@ Label::Label(const std::string& text, Widget* parent, unsigned int size) :
 		m_trueTextHeight / 2.f);
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="text"></param>
 void Label::setText(const std::string& text)
 {
 	m_text.setString(text);
 	updateShape();
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <param name="relativePosition"></param>
 void Label::setPosition(sf::Vector2f &relativePosition)
 {
 	m_text.setPosition(relativePosition);
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
 unsigned int Label::getCharacterSize() const
 {
 	return m_text.getCharacterSize();
 }
 
+/// <summary>
+/// Set the color of the Text
+/// </summary>
+/// <param name="color">The desired text color</param>
 void Label::setTextColor(const sf::Color& color)
 {
 	m_text.setColor(color);
 }
 
+/// <summary>
+/// Draw function allows the window to draw the object directly
+/// </summary>
+/// <param name="target">Targets used for drawing</param>
+/// <param name="states">States used for drawing</param>
 void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	//sf::RectangleShape s(sf::Vector2f(textRect.width, textRect.height));
@@ -50,11 +77,19 @@ void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
 sf::Text Label::getText()
 {
 	return m_text;
 }
 
+/// <summary>
+/// 
+/// </summary>
+/// <returns></returns>
 float Label::getTextHeight()
 {
 	return m_trueTextHeight;

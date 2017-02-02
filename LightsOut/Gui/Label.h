@@ -5,9 +5,10 @@
 #include "Widget.h"
 #include "../ResourceManager.h"
 
-/// 
-/// 
-/// 
+/// <summary>
+/// Label class used to draw Labels (Text) to the screen
+/// Class inherits from Widget and thus is a widget.
+/// </summary>
 class Label : public Widget
 {
 public:
@@ -24,7 +25,6 @@ private:
 	sf::FloatRect textRect;
 	sf::Text m_text;
 	float m_trueTextHeight;
-
 };
 
 #endif
