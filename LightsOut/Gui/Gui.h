@@ -21,13 +21,20 @@ public:
 	~Gui();
 	bool processInput(XboxController &controller);
 	void add(Widget* widget);
-	void transition(sf::Vector2f &targetPos, float transitionSpeed);
+	void transition(sf::Vector2f &startPos, sf::Vector2f &targetPos, float transitionSpeed);
+	void processAnimation();
 	
 private:
 	// A vector of all the widgets this Gui handles
 	std::vector<Widget*> m_widgets;
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+
+	// Testing
+	bool do_transition;
+	float speed;
+	float inter = 0.0f;
 };
 
 #endif

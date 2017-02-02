@@ -43,9 +43,9 @@ void Label::setText(const std::string& text)
 /// Function simply sets the position of the text object
 /// </summary>
 /// <param name="relativePosition"></param>
-void Label::setPosition(sf::Vector2f &relativePosition)
+void Label::setPosition(sf::Vector2f &position)
 {
-	m_text.setPosition(relativePosition);
+	m_text.setPosition(position);
 }
 
 /// <summary>

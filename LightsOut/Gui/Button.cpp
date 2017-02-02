@@ -78,6 +78,15 @@ bool Button::processInput(XboxController & controller)
 	}
 }
 
+void Button::setPosition(sf::Vector2f &position)
+{
+	widgetPos = position;
+	m_buttonRect.setPosition(widgetPos);
+
+	Label::setPosition(sf::Vector2f(widgetPos.x - Label::getCharacterSize() / 12.f, 
+		widgetPos.y - Label::getCharacterSize() / 3.5f));
+}
+
 /// <summary>
 /// Draw function allows the window to draw the object directly
 /// </summary>

@@ -28,6 +28,8 @@ public:
 	Button *m_optionsButton;
 	Button *m_quitButton;
 
+	bool playButtonPressed;
+
 private:
 	void playButtonSelected();
 	void optionsButtonSelected();
