@@ -38,9 +38,9 @@ void Label::setText(const std::string& text)
 /// 
 /// </summary>
 /// <param name="relativePosition"></param>
-void Label::setPosition(sf::Vector2f &relativePosition)
+void Label::setPosition(sf::Vector2f &position)
 {
-	m_text.setPosition(relativePosition);
+	m_text.setPosition(position);
 }
 
 /// <summary>

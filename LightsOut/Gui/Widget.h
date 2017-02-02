@@ -33,7 +33,7 @@ public:
 
 	void promoteFocus();
 	void demoteFocus();
-	void setPosition(sf::Vector2f &pos);
+	virtual void setPosition(sf::Vector2f &pos);
 	sf::Vector2f getPosition();
 
 protected:

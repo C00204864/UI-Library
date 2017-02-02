@@ -4,7 +4,8 @@
 /// 
 /// </summary>
 /// <param name="parent"></param>
-Gui::Gui(Widget *parent) { }
+Gui::Gui(Widget *parent) 
+	: speed(0.0f) { }
 
 /// <summary>
 /// Delets all widgets added to the widgets vector
@@ -39,6 +40,11 @@ bool Gui::processInput(XboxController &controller)
 	return true;
 }
 
+void Gui::processAnimation()
+{
+	// TODO(Darren): Take this out
+}
+
 /// <summary>
 /// Adds a widget to the vector for widgets
 /// </summary>
@@ -50,15 +56,18 @@ void Gui::add(Widget* widget)
 	updateShape();
 }
 
-void Gui::transition(sf::Vector2f &targetPos, float transitionSpeed)
+void Gui::transition(sf::Vector2f &startPos, sf::Vector2f &targetPos, float transitionSpeed)
 {
-	/*float inter = 0.0f;
-	inter += transitionSpeed;
+	if (inter < 1.0f)
+		inter += transitionSpeed;
+	else
+		inter = 1.0f;
 
 	for (Widget* widget : m_widgets)
 	{
-		widget->setPosition(lerp(widget->getPosition(), targetPos, inter));
-	}*/
+		sf::Vector2f transitionPos = lerp(widget->getPosition(), targetPos, inter);
+		widget->setPosition(transitionPos);
+	}
 }
 
 /// <summary>

@@ -169,6 +169,7 @@
     <ClCompile Include="Input\XboxController.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainMenuScreen.cpp" />
+    <ClCompile Include="MathUtility.cpp" />
     <ClCompile Include="OpitionsScreen.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
