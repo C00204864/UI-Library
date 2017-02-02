@@ -8,6 +8,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "Widget.h"
+#include "..\MathUtility.h"
 
 /// Handles all Gui elements added to it
 ///
@@ -20,6 +21,7 @@ public:
 	~Gui();
 	bool processInput(XboxController &controller);
 	void add(Widget* widget);
+	void transition(sf::Vector2f &targetPos, float transitionSpeed);
 	
 private:
 	// A vector of all the widgets this Gui handles

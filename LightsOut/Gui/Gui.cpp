@@ -50,6 +50,17 @@ void Gui::add(Widget* widget)
 	updateShape();
 }
 
+void Gui::transition(sf::Vector2f &targetPos, float transitionSpeed)
+{
+	/*float inter = 0.0f;
+	inter += transitionSpeed;
+
+	for (Widget* widget : m_widgets)
+	{
+		widget->setPosition(lerp(widget->getPosition(), targetPos, inter));
+	}*/
+}
+
 /// <summary>
 /// Draws all widgets contained in the widgets
 /// </summary>

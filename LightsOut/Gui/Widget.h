@@ -33,6 +33,8 @@ public:
 
 	void promoteFocus();
 	void demoteFocus();
+	void setPosition(sf::Vector2f &pos);
+	sf::Vector2f getPosition();
 
 protected:
 	// The widget the player is currenly on and can interact with.

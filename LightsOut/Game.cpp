@@ -5,7 +5,7 @@
 /// 
 /// </summary>
 Game::Game()
-	: m_window(sf::VideoMode(800, 600, 32), "Lights Out!", sf::Style::Default),
+	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Default),
 	xboxController(CONTROLLER_ONE)
 {
 	mainMenuScreen.initialise();

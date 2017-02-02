@@ -41,6 +41,7 @@ void MainMenuScreen::render(sf::RenderWindow &window)
 void MainMenuScreen::playButtonSelected()
 {
 	std::cout << "Play button has been pressed" << std::endl;
+	//m_gui.
 }
 
 void MainMenuScreen::optionsButtonSelected()

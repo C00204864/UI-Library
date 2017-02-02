@@ -183,6 +183,7 @@
     <ClInclude Include="Gui\Widget.h" />
     <ClInclude Include="Input\XboxController.h" />
     <ClInclude Include="MainMenuScreen.h" />
+    <ClInclude Include="MathUtility.h" />
     <ClInclude Include="OpitionsScreen.h" />
     <ClInclude Include="ResourceManager.h" />
   </ItemGroup>

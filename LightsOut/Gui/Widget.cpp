@@ -38,6 +38,16 @@ void Widget::demoteFocus()
 	m_hasFocus = false;
 }
 
+void Widget::setPosition(sf::Vector2f &pos)
+{
+	widgetPos = pos;
+}
+
+sf::Vector2f Widget::getPosition()
+{
+	return widgetPos;
+}
+
 /// <summary>
 /// Updates the parent update metod.
 /// </summary>
