@@ -69,11 +69,19 @@ bool Button::processInput(XboxController & controller)
 				return true;
 			}
 		}
-		else if (controller.isButtonPressed(XBOX360_A) // A input
-			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+
+		try
 		{
-			select(); // Call the callback function
-			return true;
+			if (controller.isButtonPressed(XBOX360_A) // A input
+				|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
+			{
+				select(); // Call the callback function
+				return true;
+			}
+		}
+		catch (std::bad_function_call &e)
+		{
+			std::cout << "BUTTON:: Bad function call" << std::endl;
 		}
 	}
 }

@@ -15,7 +15,7 @@ MainMenuScreen::MainMenuScreen()
 	m_optionsButton->m_down = m_quitButton;
 	m_quitButton->m_up = m_optionsButton;
 
-	m_playButton->select = std::bind(&MainMenuScreen::playButtonSelected, this);
+	//m_playButton->select = std::bind(&MainMenuScreen::playButtonSelected, this);
 	m_optionsButton->select = std::bind(&MainMenuScreen::optionsButtonSelected, this);
 	m_quitButton->select = std::bind(&MainMenuScreen::quitButtonSelected, this);
 }
@@ -38,7 +38,7 @@ void MainMenuScreen::update(XboxController &controller)
 	}
 	else if (optionsButtonPressed)
 	{
-		m_gui.transition(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(-1080.0f, 400.0f), 0.008f);
+		m_gui.transition(sf::Vector2f(400.0f, 200.0f), sf::Vector2f(-300.0f, 400.0f), 0.008f);
 	}
 }
 
