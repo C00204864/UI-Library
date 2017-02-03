@@ -15,7 +15,7 @@ MainMenuScreen::MainMenuScreen()
 	m_optionsButton->m_down = m_quitButton;
 	m_quitButton->m_up = m_optionsButton;
 
-	//m_playButton->select = std::bind(&MainMenuScreen::playButtonSelected, this);
+	m_playButton->select = std::bind(&MainMenuScreen::playButtonSelected, this);
 	m_optionsButton->select = std::bind(&MainMenuScreen::optionsButtonSelected, this);
 	m_quitButton->select = std::bind(&MainMenuScreen::quitButtonSelected, this);
 }
