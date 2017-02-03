@@ -84,6 +84,14 @@ bool CheckBox::processInput(XboxController & controller)
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
 			m_state = !m_state; // Flip the state of the checkbox
+			try
+			{
+				stateSwitch();
+			}
+			catch (const std::bad_function_call &e)
+			{
+				std::cout << "CHECKBOX:: Bad function call" << std::endl;
+			}
 			if (m_state)
 			{
 				m_checkBoxRect.setFillColor(sf::Color::Blue); // Set the fill color to Blue if the box is checked

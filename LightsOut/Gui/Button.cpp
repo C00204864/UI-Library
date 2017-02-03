@@ -17,6 +17,7 @@ Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f & posit
 	m_buttonRect.setFillColor(sf::Color::Blue);
 	/* Set the position of the inherited label which must be moved slightly 
 	   due to the variance in size of the text object with respect to the button rectangle */
+	m_buttonRect.setPosition(widgetPos); // Set the position now as the base widgets position will be reset by setting the Label position <---> (LIAM) - Might want to give this a dirty refactor
 	Label::setPosition(sf::Vector2f(widgetPos.x - characterSize / 12.f, widgetPos.y - characterSize / 3.5f)); 
 	sf::Vector2f textSize(Label::getText().getGlobalBounds().width + BUTTON_BUFFER, Label::getTextHeight() + BUTTON_BUFFER); // Get the size of the Text bounding Box
 	if (buttonWidth < textSize.x)
@@ -30,7 +31,6 @@ Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f & posit
 	// Set other aspects of the button rectangle
 	m_buttonRect.setSize(sf::Vector2f(buttonWidth, buttonHeight));
 	m_buttonRect.setOrigin(m_buttonRect.getLocalBounds().width / 2.0f, m_buttonRect.getLocalBounds().height / 2.0f);
-	m_buttonRect.setPosition(widgetPos);
 }
 
 /// <summary>
@@ -90,7 +90,6 @@ void Button::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
 	m_buttonRect.setPosition(widgetPos);
-
 	Label::setPosition(sf::Vector2f(widgetPos.x - Label::getCharacterSize() / 12.f, 
 		widgetPos.y - Label::getCharacterSize() / 3.5f));
 }

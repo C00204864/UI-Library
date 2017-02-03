@@ -14,6 +14,9 @@ public:
 		int characterSize = 22.f, float boxWidth = 40.f, float boxHeight = 40.f);
 	bool processInput(XboxController & controller);
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;
+	// Callback function to link to external functions
+	typedef std::function<void()> Callback;
+	Callback stateSwitch;
 private:
 	bool m_state = false;
 	sf::RectangleShape m_checkBoxRect;

@@ -50,7 +50,14 @@ bool Slider::processInput(XboxController &controller)
 		{
 			if(m_barSize < m_barBaseWidth)
 				m_barSize += 1.0f; // Increase the bar size
-			increase(); // Call the associated callback function
+			try 
+			{
+				increase(); // Call the associated callback function
+			}
+			catch (std::bad_function_call &e)
+			{
+				std::cout << "SLIDER:: Bad function call (increase() function)" << std::endl;
+			}
 			m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight)); // Set the new size of the bar
 			return true;
 		}
@@ -59,7 +66,14 @@ bool Slider::processInput(XboxController &controller)
 		{
 			if (m_barSize > 0)
 				m_barSize -= 1.0f; // Decrease the bar size
-			decrease(); // Call the associtaed callback function
+			try
+			{
+				decrease(); // Call the associtaed callback function
+			}
+			catch (std::bad_function_call &e)
+			{
+				std::cout << "SLIDER:: Bad function call (decrease() function)" << std::endl;
+			}
 			m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight)); // Set the new size of the bar
 			return true;
 		}
@@ -87,10 +101,10 @@ bool Slider::processInput(XboxController &controller)
 }
 
 /// <summary>
-/// 
+/// Draw function allows the window to draw the object directly
 /// </summary>
-/// <param name="target"></param>
-/// <param name="states"></param>
+/// <param name="target">Targets used for drawing</param>
+/// <param name="states">States used for drawing</param>
 void Slider::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	// Call the super class overridden draw function.
