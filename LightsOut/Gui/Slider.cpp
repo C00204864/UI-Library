@@ -30,6 +30,14 @@ Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position,
 	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
 }
 
+void Slider::setPosition(sf::Vector2f &position)
+{
+	widgetPos = position;
+	m_base.setPosition(widgetPos);
+	m_bar.setPosition(widgetPos);
+	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
+}
+
 /// <summary>
 /// Processes the input from a controller / keyboard and updates the CheckBox as well as other widgets
 /// </summary>

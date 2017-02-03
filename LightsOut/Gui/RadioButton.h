@@ -13,6 +13,7 @@ public:
 	RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, std::vector<RadioButton *> & radGroup,
 		int characterSize = 22.f, float boxWidth = 40.f, float boxHeight = 40.f);
 	bool processInput(XboxController & controller);
+	virtual void setPosition(sf::Vector2f &position) override;
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const;
 	//void add(RadioButton * radioButtonIn); <---> NOTE <---> IM LEAVING THIS FUNCTION FOR NOW BUT TAKE IT OUT(!!!)
 	void deActivate();

@@ -34,14 +34,17 @@ public:
 	void promoteFocus();
 	void demoteFocus();
 	virtual void setPosition(sf::Vector2f &pos);
+	void setStartPosition(sf::Vector2f &pos);
+	void setEndPosition(sf::Vector2f &pos);
 	sf::Vector2f getPosition();
+	sf::Vector2f getStartPos();
+	sf::Vector2f getEndPos();
 
 protected:
+	sf::Vector2f widgetPos;
 	// The widget the player is currenly on and can interact with.
 	bool m_hasFocus;
-	sf::Vector2f widgetPos;
-	// NOTE(Darren): Might add this in for transitions
-	//sf::Vector2f widgetStartPos;
+	sf::Vector2f widgetStartPos, widgetEndPos;
 };
 
 #endif

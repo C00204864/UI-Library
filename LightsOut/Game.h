@@ -31,7 +31,7 @@ protected:
 		Options,
 		GamePlay
 	};
-	GameState currentGameState = GameState::Options;
+	GameState currentGameState = GameState::MainMenu;
 
 	XboxController xboxController;
 	

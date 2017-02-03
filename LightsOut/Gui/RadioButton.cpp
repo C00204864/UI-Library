@@ -27,6 +27,16 @@ RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector
 	Label::setPosition(textOffset);
 }
 
+void RadioButton::setPosition(sf::Vector2f &position)
+{
+	widgetPos = position;
+	m_radioButtonRect.setPosition(widgetPos);
+	// Set the position of the Label
+	sf::Vector2f textOffset(widgetPos.x + m_radioButtonRect.getGlobalBounds().width / 2.f,
+		widgetPos.y - m_radioButtonRect.getGlobalBounds().height / 2.f); // We offset the Label to be directly above the RadioButton
+	Label::setPosition(textOffset);
+}
+
 /// <summary>
 /// Processes the input from a controller / keyboard and updates the RadioButton as well as other widgets
 /// </summary>

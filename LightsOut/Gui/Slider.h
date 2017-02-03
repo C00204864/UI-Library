@@ -19,6 +19,7 @@ public:
 	Slider(const std::string& text, Widget* parent, sf::Vector2f &position, 
 		int characerSize = 18.0f, float sliderWidth = 100.0f, float sliderHeight = 15.0f);
 	bool processInput(XboxController & controller);
+	virtual void setPosition(sf::Vector2f &position) override;
 	typedef std::function<void()> Callback;
 	Callback increase, decrease;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;

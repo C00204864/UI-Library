@@ -25,6 +25,16 @@ CheckBox::CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & p
 	Label::setPosition(textOffset);
 }
 
+void CheckBox::setPosition(sf::Vector2f &position)
+{
+	widgetPos = position;
+	m_checkBoxRect.setPosition(widgetPos);
+	// Set the position of the Label object
+	sf::Vector2f textOffset(widgetPos.x + m_checkBoxRect.getGlobalBounds().width / 2.f,
+		widgetPos.y - m_checkBoxRect.getGlobalBounds().height / 2.f); // We offset the Label to be directly above the CheckBox
+	Label::setPosition(textOffset);
+}
+
 /// <summary>
 /// Processes the input from a controller / keyboard and updates the CheckBox as well as other widgets
 /// </summary>
