@@ -22,6 +22,7 @@ public:
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
 	bool getChangeStateOptions();
+	void reset();
 
 	Gui m_gui;
 	Label *m_gameTitle;
@@ -38,6 +39,8 @@ private:
 	bool optionsButtonPressed;
 	bool quitButtonPressed;
 	bool changeToOptionsState;
+
+	float interpolation;
 };
 
 #endif

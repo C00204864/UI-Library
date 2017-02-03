@@ -36,40 +36,56 @@ void MainMenuScreen::initialise()
 	m_gui.add(m_quitButton);
 }
 
+// TODO(Darren): Remove this
 bool go_back = false;
+void MainMenuScreen::reset()
+{
+	m_gameTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
+	m_playButton->setPosition(sf::Vector2f(400.0f, 900.0f));
+	m_optionsButton->setPosition(sf::Vector2f(400.0f, 900.0f));
+	m_quitButton->setPosition(sf::Vector2f(400.0f, 900.0f));
+
+	changeToOptionsState = false;
+	optionsButtonPressed = false;
+	playButtonPressed = false;
+	go_back = true;
+	interpolation = 0.0f;
+}
+
 void MainMenuScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
 
 	if (playButtonPressed)
 	{
-		m_gui.transitionOut(0.05f);
+		m_gui.transitionOut(0.05f, interpolation);
 	}
 	else if (optionsButtonPressed)
 	{
-		m_gui.transitionOut(0.05f);
+		m_gui.transitionOut(0.05f, interpolation);
 
-		if (m_gui.isTranstionFinished())
+		if (interpolation >= 1.0f)
 		{
 			std::cout << "Transition play finished" << std::endl;
 			changeToOptionsState = true;
+			interpolation = 0.0f;
 		}
 	}
 	else if (quitButtonPressed)
 	{
-		m_gui.transitionOut(0.05f);
+		m_gui.transitionOut(0.05f, interpolation);
 	}
 
 	if (go_back)
 	{
-		m_gui.transitionIn(0.05f);
-	}
+		m_gui.transitionIn(0.05f, interpolation);
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		go_back = true;
-		optionsButtonPressed = false;
-		playButtonPressed = false;
+		if (interpolation >= 1.0f)
+		{
+			std::cout << "Transition play finished" << std::endl;
+			interpolation = 0.0f;
+			go_back = false;
+		}
 	}
 }
 

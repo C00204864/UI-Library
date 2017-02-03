@@ -80,6 +80,7 @@ void Game::update(double dt)
 			if (mainMenuScreen.getChangeStateOptions())
 			{
 				currentGameState = GameState::Options;
+				mainMenuScreen.reset();
 			}
 
 			break;
@@ -88,6 +89,12 @@ void Game::update(double dt)
 		case GameState::Options:
 		{
 			optionsScreen.update(xboxController);
+
+			if (optionsScreen.getChangeStateMenu())
+			{
+				currentGameState = GameState::MainMenu;
+				optionsScreen.reset();
+			}
 
 			break;
 		}

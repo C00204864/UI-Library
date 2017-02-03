@@ -51,44 +51,34 @@ void Gui::add(Widget* widget)
 	updateShape();
 }
 
-void Gui::transitionOut(float transitionSpeed)
+void Gui::transitionOut(float transitionSpeed, float &interpolation)
 {
-	if (interpolationOut < 1.0f)
-		interpolationOut += transitionSpeed;
+	if (interpolation < 1.0f)
+		interpolation += transitionSpeed;
 	else
-		interpolationOut = 1.0f;
+		interpolation = 1.0f;
 
 	for (Widget* widget : m_widgets)
 	{
-		sf::Vector2f transitionPos = lerp(widget->getStartPos(), widget->getEndPos(), interpolationOut);
+		sf::Vector2f transitionPos = lerp(widget->getStartPos(), widget->getEndPos(), interpolation);
 		widget->setPosition(transitionPos);
 	}
 }
 
-void Gui::transitionIn(float transitionSpeed)
+void Gui::transitionIn(float transitionSpeed, float &interpolation)
 {
-	if (interpolationIn < 1.0f)
-		interpolationIn += transitionSpeed;
+	if (interpolation < 1.0f)
+		interpolation += transitionSpeed;
 	else
-		interpolationIn = 1.0f;
+		interpolation = 1.0f;
 
 	for (Widget* widget : m_widgets)
 	{
 		sf::Vector2f startPos = widget->getStartPos();
 		sf::Vector2f endPos = widget->getEndPos();
-		sf::Vector2f transitionPos = lerp(widget->getEndPos(), widget->getStartPos(), interpolationIn);
+		sf::Vector2f transitionPos = lerp(widget->getEndPos(), widget->getStartPos(), interpolation);
 		widget->setPosition(transitionPos);
 	}
-}
-
-bool Gui::isTranstionFinished()
-{
-	if (interpolationOut >= 1.0f || interpolationIn >= 1.0f)
-	{
-		return true;
-	}
-
-	return false;
 }
 
 /// <summary>

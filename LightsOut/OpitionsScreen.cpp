@@ -73,7 +73,7 @@ OptionsScreen::OptionsScreen()
 	other_2->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
 	other_2->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
 	// NOTE(Darren): Testing apply button callback
-	applyButton->select = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
+	applyButton->select = std::bind(&OptionsScreen::applyButtonSelected, this);
 }
 
 /// <summary>
@@ -98,6 +98,26 @@ void OptionsScreen::initialise()
 	m_gui.add(checkBox);
 }
 
+// Remove this
+bool go_back_1 = true;
+
+void OptionsScreen::reset()
+{
+	volume->setPosition(sf::Vector2f(400.0f, 900.0f));
+	effects->setPosition(sf::Vector2f(400.0f, 900.0f));
+	other_1->setPosition(sf::Vector2f(400.0f, 900.0f));
+	other_2->setPosition(sf::Vector2f(400.0f, 900.0f));
+	applyButton->setPosition(sf::Vector2f(400.0f, 900.0f));
+	radioButtons.at(0)->setPosition(sf::Vector2f(400.0f, 900.0f));
+	radioButtons.at(1)->setPosition(sf::Vector2f(400.0f, 900.0f));
+	checkBox->setPosition(sf::Vector2f(400.0f, 900.0f));
+
+	m_backToMenu = false;
+	go_back_1 = true;
+	interpolation = 0.0f;
+	m_applyButtonPressed = false;
+}
+
 /// <summary>
 /// 
 /// </summary>
@@ -106,7 +126,29 @@ void OptionsScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
 
-	m_gui.transitionIn(0.04f);
+	if (m_applyButtonPressed)
+	{
+		m_gui.transitionOut(0.05f, interpolation);
+
+		if (interpolation >= 1.0f)
+		{
+			std::cout << "Transition play finished" << std::endl;
+			m_backToMenu = true;
+			interpolation = 0.0f;
+		}
+	}
+
+	if (go_back_1)
+	{
+		m_gui.transitionIn(0.05f, interpolation);
+
+		if (interpolation >= 1.0f)
+		{
+			std::cout << "Transition play finished" << std::endl;
+			interpolation = 0.0f;
+			go_back_1 = false;
+		}
+	}
 }
 
 void OptionsScreen::volumeUpSliderMusic()
@@ -127,6 +169,16 @@ void OptionsScreen::volumeUpSliderEffects()
 void OptionsScreen::volumeDownSliderEffects()
 {
 	std::cout << "volumeDownEffects callback" << std::endl;
+}
+
+void OptionsScreen::applyButtonSelected()
+{
+	m_applyButtonPressed = true;
+}
+
+bool OptionsScreen::getChangeStateMenu()
+{
+	return m_backToMenu;
 }
 
 /// <summary>

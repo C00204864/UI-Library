@@ -21,9 +21,8 @@ public:
 	~Gui();
 	bool processInput(XboxController &controller);
 	void add(Widget* widget);
-	void transitionOut(float transitionSpeed);
-	void transitionIn(float transitionSpeed);
-	bool isTranstionFinished();
+	void transitionOut(float transitionSpeed, float &interpolation);
+	void transitionIn(float transitionSpeed, float &interpolation);
 	
 	// A vector of all the widgets this Gui handles
 	std::vector<Widget*> m_widgets;
@@ -34,7 +33,6 @@ private:
 	// NOTE(Darren): This if for testing, remove it
 	bool do_transition;
 	float speed;
-	float interpolationOut, interpolationIn;
 };
 
 #endif

@@ -27,6 +27,8 @@ public:
 	void initialise();
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
+	bool getChangeStateMenu();
+	void reset();
 
 	Gui m_gui;
 	Slider *volume;
@@ -44,6 +46,12 @@ private:
 	void volumeDownSliderMusic();
 	void volumeUpSliderEffects();
 	void volumeDownSliderEffects();
+	void applyButtonSelected();
+
+	bool m_applyButtonPressed;
+	bool m_backToMenu;
+
+	float interpolation;
 };
 
 #endif
