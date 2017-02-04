@@ -10,8 +10,8 @@
 /// </summary>
 class CheckBox : public Label {
 public:
-	CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
-		int characterSize = 22.f, float boxWidth = 40.f, float boxHeight = 40.f);
+	CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize = 22.f, float boxWidth = 40.f, 
+		float boxHeight = 40.f, sf::Vector2f &startPos = sf::Vector2f(), sf::Vector2f &endPos = sf::Vector2f());
 	bool processInput(XboxController & controller);
 	virtual void setPosition(sf::Vector2f &position) override;
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const override;

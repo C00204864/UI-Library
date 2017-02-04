@@ -9,11 +9,13 @@
 /// <param name="characterSize">Size of the font used for drawing the text</param>
 /// <param name="sliderWidth">Width of the slider</param>
 /// <param name="sliderHeight">Height of the slider</param>
-Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position,
-	int characterSize, float sliderWidth, float sliderHeight)
+Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position, int characterSize, 
+	float sliderWidth, float sliderHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
 	: Label(text, parent, characterSize), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight)
 {
 	widgetPos = position;
+	widgetStartPos = startPos;
+	widgetEndPos = endPos;
 
 	// Base under the moving slider bar
 	m_base.setSize(sf::Vector2f(m_barBaseWidth, m_barBaseHeight));

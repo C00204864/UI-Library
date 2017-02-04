@@ -51,6 +51,7 @@ private:
 	bool m_applyButtonPressed;
 	bool m_backToMenu;
 
+	bool transitionIn;
 	float interpolation;
 };
 

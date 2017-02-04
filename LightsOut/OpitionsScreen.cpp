@@ -4,44 +4,28 @@
 /// 
 /// </summary>
 OptionsScreen::OptionsScreen()
+	: transitionIn(true)
 {
-	volume = new Slider("Music Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f);
-	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f);
-	other_1 = new Slider("other_1", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f);
-	other_2 = new Slider("other_2", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f);
-	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30);
-	//radioButton = new RadioButton("Radio button 1", nullptr, sf::Vector2f(250.0f, 500.0f),);
-	radioButtons.push_back(new RadioButton("Clinton", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons));
-	radioButtons.push_back(new RadioButton("Trump", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons));
-	checkBox = new CheckBox("Sanders", nullptr, sf::Vector2f(400.0f, 900.0f));
+	volume = new Slider("Music Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(250.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
+	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(250.0f, 150.0f), sf::Vector2f(400.0f, 900.0f));
+	other_1 = new Slider("other_1", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(250.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
+	other_2 = new Slider("other_2", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f, 
+		sf::Vector2f(250.0f, 350.0f), sf::Vector2f(400.0f, 900.0f));
+	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f, 
+		sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
+	radioButtons.push_back(new RadioButton("Clinton", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+		sf::Vector2f(250.0f, 550.0f), sf::Vector2f(400.0f, 900.0f)));
+	radioButtons.push_back(new RadioButton("Trump", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+		sf::Vector2f(350.0f, 550.0f), sf::Vector2f(400.0f, 900.0f)));
+	checkBox = new CheckBox("Sanders", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 40.0f, 40.0f, 
+		sf::Vector2f(250.0f, 700.0f), sf::Vector2f(400.0f, 900.0f));
 
 	volume->m_down = effects;
 	effects->m_up = volume;
 	effects->m_down = other_1;
-
-	// TODO(Darren): Maybe refactor this into constuctor
-
-	// Set up the start and end transitions positions
-	volume->setStartPosition(sf::Vector2f(250.0f, 50.0f));
-	volume->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	effects->setStartPosition(sf::Vector2f(250.0f, 150.0f));
-	effects->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	other_1->setStartPosition(sf::Vector2f(250.0f, 250.0f));
-	other_1->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	other_2->setStartPosition(sf::Vector2f(250.0f, 350.0f));
-	other_2->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-
-	applyButton->setStartPosition(sf::Vector2f(250.0f, 450.0f));
-	applyButton->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-
-	radioButtons.at(0)->setStartPosition(sf::Vector2f(250.0f, 550.0f));
-	radioButtons.at(0)->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-
-	radioButtons.at(1)->setStartPosition(sf::Vector2f(350.0f, 550.0f));
-	radioButtons.at(1)->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-
-	checkBox->setStartPosition(sf::Vector2f(250.0f, 700.0f));
-	checkBox->setEndPosition(sf::Vector2f(400.0f, 900.0f));
 
 	// NOTE(Darren): This is for testing only
 	other_1->m_up = effects;
@@ -98,11 +82,11 @@ void OptionsScreen::initialise()
 	m_gui.add(checkBox);
 }
 
-// Remove this
-bool go_back_1 = true;
-
 void OptionsScreen::reset()
 {
+	// Reset the top Gui elements to be in focus
+	volume->promoteFocus();
+
 	volume->setPosition(sf::Vector2f(400.0f, 900.0f));
 	effects->setPosition(sf::Vector2f(400.0f, 900.0f));
 	other_1->setPosition(sf::Vector2f(400.0f, 900.0f));
@@ -113,7 +97,7 @@ void OptionsScreen::reset()
 	checkBox->setPosition(sf::Vector2f(400.0f, 900.0f));
 
 	m_backToMenu = false;
-	go_back_1 = true;
+	transitionIn = true;
 	interpolation = 0.0f;
 	m_applyButtonPressed = false;
 }
@@ -138,7 +122,7 @@ void OptionsScreen::update(XboxController &controller)
 		}
 	}
 
-	if (go_back_1)
+	if (transitionIn)
 	{
 		m_gui.transitionIn(0.05f, interpolation);
 
@@ -146,7 +130,7 @@ void OptionsScreen::update(XboxController &controller)
 		{
 			std::cout << "Transition play finished" << std::endl;
 			interpolation = 0.0f;
-			go_back_1 = false;
+			transitionIn = false;
 		}
 	}
 }
@@ -174,6 +158,7 @@ void OptionsScreen::volumeDownSliderEffects()
 void OptionsScreen::applyButtonSelected()
 {
 	m_applyButtonPressed = true;
+	applyButton->demoteFocus();
 }
 
 bool OptionsScreen::getChangeStateMenu()

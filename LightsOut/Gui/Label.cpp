@@ -6,9 +6,12 @@
 /// <param name="text">Text to be displayed by the Label</param>
 /// <param name="parent">parent widget to the label</param>
 /// <param name="size">Font size of the Label</param>
-Label::Label(const std::string& text, Widget* parent, unsigned int size) :
-	Widget(parent)
+Label::Label(const std::string& text, Widget* parent, unsigned int size, sf::Vector2f &startPos, sf::Vector2f &endPos) 
+	: Widget(parent)
 {
+	widgetStartPos = startPos;
+	widgetEndPos = endPos;
+
 	m_text.setFont(*g_resourceMgr.getGameFont()); // Set the font
 	//Set the text attributes
 	setText(text);

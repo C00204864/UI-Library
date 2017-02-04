@@ -16,8 +16,8 @@
 class Slider : public Label
 {
 public:
-	Slider(const std::string& text, Widget* parent, sf::Vector2f &position, 
-		int characerSize = 18.0f, float sliderWidth = 100.0f, float sliderHeight = 15.0f);
+	Slider(const std::string& text, Widget* parent, sf::Vector2f &position, int characerSize = 18.0f, float sliderWidth = 100.0f, 
+		float sliderHeight = 15.0f, sf::Vector2f &startPos = sf::Vector2f(), sf::Vector2f &endPos = sf::Vector2f());
 	bool processInput(XboxController & controller);
 	virtual void setPosition(sf::Vector2f &position) override;
 	typedef std::function<void()> Callback;

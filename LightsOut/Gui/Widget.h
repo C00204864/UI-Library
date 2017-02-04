@@ -34,8 +34,6 @@ public:
 	void promoteFocus();
 	void demoteFocus();
 	virtual void setPosition(sf::Vector2f &pos);
-	void setStartPosition(sf::Vector2f &pos);
-	void setEndPosition(sf::Vector2f &pos);
 	sf::Vector2f getPosition();
 	sf::Vector2f getStartPos();
 	sf::Vector2f getEndPos();

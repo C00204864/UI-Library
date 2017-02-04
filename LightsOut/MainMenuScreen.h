@@ -40,6 +40,7 @@ private:
 	bool quitButtonPressed;
 	bool changeToOptionsState;
 
+	bool transitionIn;
 	float interpolation;
 };
 

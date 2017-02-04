@@ -2,19 +2,15 @@
 
 MainMenuScreen::MainMenuScreen()
 {
-	m_gameTitle = new Label("Lights Out!", nullptr, 80);
+	m_gameTitle = new Label("Lights Out!", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 50.0f));
-	m_gameTitle->setStartPosition(sf::Vector2f(400.0f, 50.0f));
-	m_gameTitle->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	m_playButton = new Button("Play", nullptr, sf::Vector2f(400.0f, 200.0f), 50, 500.0f, 60.0f);
-	m_playButton->setStartPosition(sf::Vector2f(400.0f, 200.0f));
-	m_playButton->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	m_optionsButton = new Button("Options", nullptr, sf::Vector2f(400.0f, 400.0f),50, 500.0f, 60.0f);
-	m_optionsButton->setStartPosition(sf::Vector2f(400.0f, 400.0f));
-	m_optionsButton->setEndPosition(sf::Vector2f(400.0f, 900.0f));
-	m_quitButton = new Button("Quit", nullptr, sf::Vector2f(400.0f, 600.0f), 50, 500.0f, 60.0f);
-	m_quitButton->setStartPosition(sf::Vector2f(400.0f, 600.0f));
-	m_quitButton->setEndPosition(sf::Vector2f(400.0f, 900.0f));
+
+	m_playButton = new Button("Play", nullptr, sf::Vector2f(400.0f, 200.0f), 50, 500.0f, 60.0f, 
+		sf::Vector2f(400.0f, 200.0f), sf::Vector2f(400.0f, 900.0f));
+	m_optionsButton = new Button("Options", nullptr, sf::Vector2f(400.0f, 400.0f),50, 500.0f, 60.0f,
+		sf::Vector2f(400.0f, 400.0f), sf::Vector2f(400.0f, 900.0f));
+	m_quitButton = new Button("Quit", nullptr, sf::Vector2f(400.0f, 600.0f), 50, 500.0f, 60.0f,
+		sf::Vector2f(400.0f, 600.0f), sf::Vector2f(400.0f, 900.0f));
 
 	m_playButton->promoteFocus();
 
@@ -36,8 +32,6 @@ void MainMenuScreen::initialise()
 	m_gui.add(m_quitButton);
 }
 
-// TODO(Darren): Remove this
-bool go_back = false;
 void MainMenuScreen::reset()
 {
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
@@ -48,7 +42,7 @@ void MainMenuScreen::reset()
 	changeToOptionsState = false;
 	optionsButtonPressed = false;
 	playButtonPressed = false;
-	go_back = true;
+	transitionIn = true;
 	interpolation = 0.0f;
 }
 
@@ -66,7 +60,6 @@ void MainMenuScreen::update(XboxController &controller)
 
 		if (interpolation >= 1.0f)
 		{
-			std::cout << "Transition play finished" << std::endl;
 			changeToOptionsState = true;
 			interpolation = 0.0f;
 		}
@@ -76,15 +69,14 @@ void MainMenuScreen::update(XboxController &controller)
 		m_gui.transitionOut(0.05f, interpolation);
 	}
 
-	if (go_back)
+	if (transitionIn)
 	{
 		m_gui.transitionIn(0.05f, interpolation);
 
 		if (interpolation >= 1.0f)
 		{
-			std::cout << "Transition play finished" << std::endl;
 			interpolation = 0.0f;
-			go_back = false;
+			transitionIn = false;
 		}
 	}
 }

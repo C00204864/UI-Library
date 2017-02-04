@@ -11,10 +11,13 @@
 /// <param name="boxWidth">Width of the RadioButton Box</param>
 /// <param name="boxHeight">Height of the RadioButton box</param>
 RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, 
-	std::vector<RadioButton *> & radGroup, int characterSize, float boxWidth, float boxHeight) 
+	std::vector<RadioButton *> & radGroup, sf::Vector2f &startPos, sf::Vector2f &endPos, 
+	int characterSize, float boxWidth, float boxHeight)
 		: Label(textIn, parent, characterSize), m_otherButtons(radGroup)
 {
 	widgetPos = positionIn; // Set the position of the inherited Widget
+	widgetStartPos = startPos;
+	widgetEndPos = endPos;
 	// Set the position, size, colour and outline of the RadioButton Box
 	m_radioButtonRect.setPosition(widgetPos);
 	m_radioButtonRect.setSize(sf::Vector2f(boxWidth, boxHeight));

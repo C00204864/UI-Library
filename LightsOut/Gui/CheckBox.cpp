@@ -9,10 +9,13 @@
 /// <param name="characterSize">Size of the Characters to be used by the font when drawing text</param>
 /// <param name="boxWidth">Width of the Check Box</param>
 /// <param name="boxHeight">Height of the Chec Box</param>
-CheckBox::CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
-	int characterSize, float boxWidth, float boxHeight) : Label(textIn, parent, characterSize)
+CheckBox::CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize, 
+		float boxWidth, float boxHeight, sf::Vector2f &startPos, sf::Vector2f &endPos) 
+	: Label(textIn, parent, characterSize)
 {
 	widgetPos = positionIn; // Set the position in the base class
+	widgetStartPos = startPos;
+	widgetEndPos = endPos;
 	//Set the position, size, colours and outlines of the CheckBox
 	m_checkBoxRect.setPosition(widgetPos);
 	m_checkBoxRect.setSize(sf::Vector2f(boxWidth, boxHeight));

@@ -9,11 +9,12 @@
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
-Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
-	int characterSize, float buttonWidth, float buttonHeight) :
-	Label(textIn, parent, characterSize)
+Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos) 
+	: Label(textIn, parent, characterSize)
 {
 	widgetPos = positionIn; // Set the position in the base class
+	widgetStartPos = startPos;
+	widgetEndPos = endPos;
 	m_buttonRect.setFillColor(sf::Color::Blue);
 	/* Set the position of the inherited label which must be moved slightly 
 	   due to the variance in size of the text object with respect to the button rectangle */

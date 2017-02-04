@@ -47,16 +47,6 @@ void Widget::setPosition(sf::Vector2f &pos)
 	widgetPos = pos;
 }
 
-void Widget::setStartPosition(sf::Vector2f &pos)
-{
-	widgetStartPos = pos;
-}
-
-void Widget::setEndPosition(sf::Vector2f &pos)
-{
-	widgetEndPos = pos;
-}
-
 /// <summary>
 /// Function simply gets the position of the inherited widget
 /// </summary>
