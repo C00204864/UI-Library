@@ -31,11 +31,14 @@ public:
 	void reset();
 
 	Gui m_gui;
+	Label *m_optionsTitle;
 	Slider *volume;
 	Slider *effects;
 	Button *applyButton;
-	Slider *other_1;
-	Slider *other_2;
+	Slider *m_redSlider;
+	Slider *m_greenSlider;
+	Slider *m_blueSlider;
+	Label *m_difficultyTitle;
 	RadioButton *radioButton;
 	RadioButton *radioButton_2;
 	std::vector<RadioButton*> radioButtons;

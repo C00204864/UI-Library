@@ -29,6 +29,8 @@ Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position, 
 	m_bar.setOutlineColor(sf::Color::Red);
 	m_bar.setPosition(widgetPos);
 
+	m_base.setOrigin(m_base.getLocalBounds().width / 2.0f, m_base.getLocalBounds().height / 2.0f);
+	m_bar.setOrigin(m_base.getLocalBounds().width / 2.0f, m_base.getLocalBounds().height / 2.0f);
 	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
 }
 

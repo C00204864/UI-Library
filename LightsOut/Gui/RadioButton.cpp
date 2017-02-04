@@ -25,8 +25,8 @@ RadioButton::RadioButton(const std::string & textIn, Widget * parent, sf::Vector
 	m_radioButtonRect.setOutlineColor(sf::Color::White);
 	m_radioButtonRect.setOutlineThickness(3.f);
 	// Set the position of the Label
-	sf::Vector2f textOffset(widgetPos.x + m_radioButtonRect.getGlobalBounds().width / 2.f, 
-		widgetPos.y - m_radioButtonRect.getGlobalBounds().height / 2.f); // We offset the Label to be directly above the RadioButton
+	sf::Vector2f textOffset(widgetPos.x, widgetPos.y - m_radioButtonRect.getGlobalBounds().height); // We offset the Label to be directly above the RadioButton
+	m_radioButtonRect.setOrigin(m_radioButtonRect.getLocalBounds().width / 2.0f, m_radioButtonRect.getLocalBounds().height / 2.0f);
 	Label::setPosition(textOffset);
 }
 
@@ -35,8 +35,7 @@ void RadioButton::setPosition(sf::Vector2f &position)
 	widgetPos = position;
 	m_radioButtonRect.setPosition(widgetPos);
 	// Set the position of the Label
-	sf::Vector2f textOffset(widgetPos.x + m_radioButtonRect.getGlobalBounds().width / 2.f,
-		widgetPos.y - m_radioButtonRect.getGlobalBounds().height / 2.f); // We offset the Label to be directly above the RadioButton
+	sf::Vector2f textOffset(widgetPos.x, widgetPos.y - m_radioButtonRect.getGlobalBounds().height); // We offset the Label to be directly above the RadioButton
 	Label::setPosition(textOffset);
 }
 

@@ -6,41 +6,53 @@
 OptionsScreen::OptionsScreen()
 	: transitionIn(true)
 {
+	// TODO(Darren): Rename these variables
+	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
 	volume = new Slider("Music Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(250.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
+		sf::Vector2f(400.0f, 180.0f), sf::Vector2f(400.0f, 900.0f));
 	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(250.0f, 150.0f), sf::Vector2f(400.0f, 900.0f));
-	other_1 = new Slider("other_1", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(250.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
-	other_2 = new Slider("other_2", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f, 
-		sf::Vector2f(250.0f, 350.0f), sf::Vector2f(400.0f, 900.0f));
-	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f, 
-		sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
-	radioButtons.push_back(new RadioButton("Clinton", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
-		sf::Vector2f(250.0f, 550.0f), sf::Vector2f(400.0f, 900.0f)));
-	radioButtons.push_back(new RadioButton("Trump", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
-		sf::Vector2f(350.0f, 550.0f), sf::Vector2f(400.0f, 900.0f)));
-	checkBox = new CheckBox("Sanders", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 40.0f, 40.0f, 
-		sf::Vector2f(250.0f, 700.0f), sf::Vector2f(400.0f, 900.0f));
+		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
+	checkBox = new CheckBox("Mute", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f,
+		sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
+	m_difficultyTitle = new Label("Difficulty", nullptr, 35, sf::Vector2f(400.0f, 370.0f), sf::Vector2f(400.0f, 900.0f));
+	radioButtons.push_back(new RadioButton("3 x 3", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+		sf::Vector2f(300.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	radioButtons.push_back(new RadioButton("4 x 4", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	radioButtons.push_back(new RadioButton("10 x 10", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
+		sf::Vector2f(500.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	m_redSlider = new Slider("Red", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 540.0f), sf::Vector2f(400.0f, 900.0f));
+	m_greenSlider = new Slider("Green", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 610.0f), sf::Vector2f(400.0f, 900.0f));
+	m_blueSlider = new Slider("Blue", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 680.0f), sf::Vector2f(400.0f, 900.0f));
+	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
+		sf::Vector2f(400.0f, 750.0f), sf::Vector2f(400.0f, 900.0f));
 
 	volume->m_down = effects;
 	effects->m_up = volume;
-	effects->m_down = other_1;
-
-	// NOTE(Darren): This is for testing only
-	other_1->m_up = effects;
-	other_1->m_down = other_2;
-	other_2->m_up = other_1;
-	other_2->m_down = applyButton;
-	applyButton->m_up = other_2;
-	radioButtons.at(0)->m_up = applyButton;
-	applyButton->m_down = radioButtons.at(0);
+	effects->m_down = checkBox;
+	checkBox->m_down = radioButtons.at(0);
+	checkBox->m_up = effects;
 	radioButtons.at(0)->m_right = radioButtons.at(1);
 	radioButtons.at(1)->m_left = radioButtons.at(0);
-	radioButtons.at(1)->m_up = applyButton;
-	radioButtons.at(0)->m_down = checkBox;
-	radioButtons.at(1)->m_down = checkBox;
-	checkBox->m_up = radioButtons.at(0);
+	radioButtons.at(1)->m_right = radioButtons.at(2);
+	radioButtons.at(2)->m_left = radioButtons.at(1);
+	radioButtons.at(0)->m_up = checkBox;
+	radioButtons.at(1)->m_up = checkBox;
+	radioButtons.at(2)->m_up = checkBox;
+	radioButtons.at(0)->m_down = m_redSlider;
+	radioButtons.at(1)->m_down = m_redSlider;
+	radioButtons.at(2)->m_down = m_redSlider;
+
+	m_redSlider->m_up = radioButtons.at(0);
+	m_redSlider->m_down = m_greenSlider;
+	m_greenSlider->m_up = m_redSlider;
+	m_greenSlider->m_down = m_blueSlider;
+	m_blueSlider->m_down = applyButton;
+	m_blueSlider->m_up = m_greenSlider;
+	applyButton->m_up = m_blueSlider;
 
 	// Set the first UI element the user has control over to the volume
 	volume->promoteFocus();
@@ -52,10 +64,10 @@ OptionsScreen::OptionsScreen()
 	effects->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
 
 	// NOTE(Darren): Again, all for testing
-	other_1->increase = std::bind(&OptionsScreen::volumeUpSliderMusic, this);
-	other_1->decrease = std::bind(&OptionsScreen::volumeDownSliderMusic, this);
-	other_2->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
-	other_2->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
+	m_redSlider->increase = std::bind(&OptionsScreen::volumeUpSliderMusic, this);
+	m_redSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderMusic, this);
+	m_greenSlider->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
+	m_greenSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
 	// NOTE(Darren): Testing apply button callback
 	applyButton->select = std::bind(&OptionsScreen::applyButtonSelected, this);
 }
@@ -70,16 +82,19 @@ OptionsScreen::~OptionsScreen() { }
 /// </summary>
 void OptionsScreen::initialise()
 {
+	m_gui.add(m_optionsTitle);
 	m_gui.add(volume);
 	m_gui.add(effects);
-	m_gui.add(other_1);
-	m_gui.add(other_2);
-	m_gui.add(applyButton);
+	m_gui.add(checkBox);
+	m_gui.add(m_difficultyTitle);
 	for (RadioButton * radioButton : radioButtons)
 	{
 		m_gui.add(radioButton);
 	}
-	m_gui.add(checkBox);
+	m_gui.add(m_redSlider);
+	m_gui.add(m_greenSlider);
+	m_gui.add(m_blueSlider);
+	m_gui.add(applyButton);
 }
 
 void OptionsScreen::reset()
@@ -87,10 +102,11 @@ void OptionsScreen::reset()
 	// Reset the top Gui elements to be in focus
 	volume->promoteFocus();
 
+	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
 	volume->setPosition(sf::Vector2f(400.0f, 900.0f));
 	effects->setPosition(sf::Vector2f(400.0f, 900.0f));
-	other_1->setPosition(sf::Vector2f(400.0f, 900.0f));
-	other_2->setPosition(sf::Vector2f(400.0f, 900.0f));
+	m_redSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
+	m_greenSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
 	applyButton->setPosition(sf::Vector2f(400.0f, 900.0f));
 	radioButtons.at(0)->setPosition(sf::Vector2f(400.0f, 900.0f));
 	radioButtons.at(1)->setPosition(sf::Vector2f(400.0f, 900.0f));
