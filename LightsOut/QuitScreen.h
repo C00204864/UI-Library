@@ -21,7 +21,8 @@ public:
 	void initialise();
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
-	bool getChangeStateOptions();
+	bool getChangeStateMenu();
+	bool getExitGameState();
 	void reset();
 
 private:
@@ -36,6 +37,7 @@ private:
 	bool m_noButtonSelected;
 	bool m_yesButtonSelected;
 	bool m_changeToMenuState;
+	bool m_exitGame;
 
 	bool transitionIn;
 	float interpolation;

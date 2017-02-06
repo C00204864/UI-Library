@@ -3,10 +3,10 @@
 QuitScreen::QuitScreen()
 	: transitionIn(true)
 {
-	m_quitTitle = new Label("Are you sure?", nullptr, 50, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
+	m_quitTitle = new Label("Are you sure?", nullptr, 80, sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
 	m_quitTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_yesButton = new Button("Yes", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 100.0f, 40.0f, sf::Vector2f(550.0f, 600.0f), sf::Vector2f(400.0f, 900.0f));
-	m_noButton = new Button("No", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 100.0f, 40.0f, sf::Vector2f(250.0f, 600.0f), sf::Vector2f(400.0f, 900.0f));
+	m_yesButton = new Button("Yes", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
+	m_noButton = new Button("No", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
 
 	m_noButton->promoteFocus();
 
@@ -28,7 +28,7 @@ void QuitScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
 
-	if (m_changeToMenuState)
+	if (m_noButtonSelected)
 	{
 		m_gui.transitionOut(0.05f, interpolation);
 
@@ -39,6 +39,10 @@ void QuitScreen::update(XboxController &controller)
 			interpolation = 0.0f;
 		}
 	}
+	else if (m_yesButtonSelected)
+	{
+		m_exitGame = true;
+	}
 
 	if (transitionIn)
 	{
@@ -46,6 +50,7 @@ void QuitScreen::update(XboxController &controller)
 
 		if (interpolation >= 1.0f)
 		{
+			std::cout << "Transition play finished" << std::endl;
 			interpolation = 0.0f;
 			transitionIn = false;
 		}
@@ -57,14 +62,21 @@ void QuitScreen::render(sf::RenderWindow &window)
 	window.draw(m_gui);
 }
 
-bool QuitScreen::getChangeStateOptions()
+bool QuitScreen::getChangeStateMenu()
 {
 	return m_changeToMenuState;
 }
 
+bool QuitScreen::getExitGameState()
+{
+	return m_exitGame;
+}
+
 void QuitScreen::reset()
 {
-	m_changeToMenuState = true;
+	m_noButtonSelected = false;
+	m_yesButtonSelected = false;
+	m_changeToMenuState = false;
 	m_noButton->promoteFocus();
 	transitionIn = true;
 	interpolation = 0.0f;
@@ -76,10 +88,10 @@ void QuitScreen::reset()
 
 void QuitScreen::noButtonSelected()
 {
-	m_changeToMenuState = true;
+	m_noButtonSelected = true;
 }
 
 void QuitScreen::yesButtonSelected()
 {
-	// Exit Game
+	m_exitGame = true;
 }

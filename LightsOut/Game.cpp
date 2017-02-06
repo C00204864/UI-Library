@@ -109,10 +109,14 @@ void Game::update(double dt)
 		{
 			quiteScreen.update(xboxController);
 
-			if (quiteScreen.getChangeStateOptions())
+			if (quiteScreen.getChangeStateMenu())
 			{
 				currentGameState = GameState::MainMenu;
 				quiteScreen.reset();
+			}
+			else if (quiteScreen.getExitGameState())
+			{
+				m_window.close();
 			}
 
 			break;
