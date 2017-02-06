@@ -11,7 +11,7 @@ Game::Game()
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
 	quiteScreen.initialise();
-	gamePlayScreen.init(10);
+	gamePlayScreen.init(3);
 }
 
 /// <summary>

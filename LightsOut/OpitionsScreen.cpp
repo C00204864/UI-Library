@@ -31,6 +31,7 @@ OptionsScreen::OptionsScreen()
 	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
 		sf::Vector2f(400.0f, 750.0f), sf::Vector2f(400.0f, 900.0f));
 
+	volume->m_up = applyButton;
 	volume->m_down = effects;
 	effects->m_up = volume;
 	effects->m_down = checkBox;
@@ -54,6 +55,7 @@ OptionsScreen::OptionsScreen()
 	m_blueSlider->m_down = applyButton;
 	m_blueSlider->m_up = m_greenSlider;
 	applyButton->m_up = m_blueSlider;
+	applyButton->m_down = volume;
 
 	// Set the first UI element the user has control over to the volume
 	volume->promoteFocus();

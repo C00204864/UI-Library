@@ -24,14 +24,11 @@ void GamePlay::init(int gridSizeIn)
 	selectedIndex = 0;
 	m_moves = 0;
 	m_timeInSeconds = 0;
-	m_movesLabel = new Label("", nullptr, 30);
-	m_timeLabel = new Label("", nullptr, 30);
+	m_movesLabel = new Label("", nullptr, 30, sf::Vector2f(sf::Vector2f(260, 650)), sf::Vector2f(400.0f, 900.0f));
+	m_timeLabel = new Label("", nullptr, 30, sf::Vector2f(sf::Vector2f(460, 650)), sf::Vector2f(400.0f, 900.0f));
 	m_gui.add(m_movesLabel);
 	m_gui.add(m_timeLabel);
-	m_movesLabel->setPosition(sf::Vector2f(260, 650));
-	m_timeLabel->setPosition(sf::Vector2f(460, 650));
 	m_pcheckBoxArray[0]->promoteFocus();
-	timeTotal.restart(); // Start the clock
 }
 
 /// <summary>
@@ -46,7 +43,8 @@ void GamePlay::initArray(int gridSize)
 	m_pcheckBoxArray = new CheckBox*[arrayLength];
 	for (int i = 0; i < arrayLength; i++)
 	{
-		m_pcheckBoxArray[i] = new CheckBox("", nullptr, posCalc(gridSize, i), 10, buttonSize, buttonSize); // Create the check box
+		m_pcheckBoxArray[i] = new CheckBox("", nullptr, sf::Vector2f(400.0f - rand() % 1400, 900.0f + rand() % 1900),
+			10, buttonSize, buttonSize, posCalc(gridSize, i), sf::Vector2f(400.0f - rand() % 1400, 900.0f + rand() % 1900)); // Create the check box
 		// Bind callback functions
 		m_pcheckBoxArray[i]->select = std::bind(&GamePlay::switchArea, this);
 		m_pcheckBoxArray[i]->up = std::bind(&GamePlay::selectedUp, this);
@@ -94,16 +92,17 @@ void GamePlay::update(XboxController & controller)
 	ss << TIME << m_timeInSeconds;
 	m_timeLabel->setText(ss.str());
 
-	/*if (transitionIn)
+	if (transitionIn)
 	{
-		m_gui.transitionIn(0.05f, interpolation);
-
 		if (interpolation >= 1.0f)
 		{
-			interpolation = 0.0f;
+			interpolation = 1.0f;
 			transitionIn = false;
+			timeTotal.restart(); // Start the clock
 		}
-	}*/
+
+		m_gui.transitionIn(0.010f, interpolation);
+	}
 }
 
 /// <summary>
