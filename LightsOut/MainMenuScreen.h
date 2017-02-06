@@ -21,6 +21,7 @@ public:
 	void initialise();
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
+	bool getChangeStateGamePlay();
 	bool getChangeStateOptions();
 	bool getChangeStateQuit();
 	void reset();
@@ -39,6 +40,7 @@ private:
 	bool playButtonPressed;
 	bool optionsButtonPressed;
 	bool quitButtonPressed;
+	bool m_changeToGamePlayState;
 	bool changeToOptionsState;
 	bool changeToQuitState;
 

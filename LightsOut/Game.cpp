@@ -78,7 +78,12 @@ void Game::update(double dt)
 		{
 			mainMenuScreen.update(xboxController);
 
-			if (mainMenuScreen.getChangeStateOptions())
+			if (mainMenuScreen.getChangeStateGamePlay())
+			{
+				currentGameState = GameState::GamePlay;
+				mainMenuScreen.reset();
+			}
+			else if (mainMenuScreen.getChangeStateOptions())
 			{
 				currentGameState = GameState::Options;
 				mainMenuScreen.reset();

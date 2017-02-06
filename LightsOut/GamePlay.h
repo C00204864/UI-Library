@@ -45,6 +45,9 @@ private:
 	int m_moves;
 	int m_timeInSeconds;
 	sf::Clock timeTotal;
+
+	float interpolation;
+	bool transitionIn;
 };
 
 #endif

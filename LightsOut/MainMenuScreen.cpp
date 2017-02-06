@@ -55,6 +55,12 @@ void MainMenuScreen::update(XboxController &controller)
 	if (playButtonPressed)
 	{
 		m_gui.transitionOut(0.05f, interpolation);
+
+		if (interpolation >= 1.0f)
+		{
+			m_changeToGamePlayState = true;
+			interpolation = 0.0f;
+		}
 	}
 	else if (optionsButtonPressed)
 	{
@@ -87,6 +93,11 @@ void MainMenuScreen::update(XboxController &controller)
 			transitionIn = false;
 		}
 	}
+}
+
+bool MainMenuScreen::getChangeStateGamePlay()
+{
+	return m_changeToGamePlayState;
 }
 
 bool MainMenuScreen::getChangeStateOptions()

@@ -3,10 +3,12 @@
 /// <summary>
 /// 
 /// </summary>
-GamePlay::GamePlay() {}
+GamePlay::GamePlay()
+	: transitionIn(true) 
+{}
 
 GamePlay::~GamePlay() {}
-
+ 
 void GamePlay::init(int gridSizeIn)
 {
 	gridSize = gridSizeIn;
@@ -32,7 +34,7 @@ void GamePlay::initArray(int gridSize)
 	m_pcheckBoxArray = new CheckBox*[arrayLength];
 	for (int i = 0; i < arrayLength; i++)
 	{
-		m_pcheckBoxArray[i] = new CheckBox("", nullptr, posCalc(gridSize, i), 10, buttonSize, buttonSize);
+		m_pcheckBoxArray[i] = new CheckBox("", nullptr, posCalc(gridSize, i), 10, buttonSize, buttonSize, posCalc(gridSize, i), sf::Vector2f(400.0f, 900.0f));
 		m_pcheckBoxArray[i]->select = std::bind(&GamePlay::switchArea, this);
 		m_pcheckBoxArray[i]->up = std::bind(&GamePlay::selectedUp, this);
 		m_pcheckBoxArray[i]->down = std::bind(&GamePlay::selectedDown, this);
@@ -76,6 +78,17 @@ void GamePlay::update(XboxController & controller)
 	ss.str(std::string());
 	ss << TIME << m_timeInSeconds;
 	m_timeLabel->setText(ss.str());
+
+	if (transitionIn)
+	{
+		m_gui.transitionIn(0.05f, interpolation);
+
+		if (interpolation >= 1.0f)
+		{
+			interpolation = 0.0f;
+			transitionIn = false;
+		}
+	}
 
 }
 
