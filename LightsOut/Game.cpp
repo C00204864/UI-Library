@@ -10,7 +10,7 @@ Game::Game()
 {
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
-	gamePlayScreen.init(7);
+	gamePlayScreen.init(3);
 }
 
 /// <summary>

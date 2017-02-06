@@ -61,7 +61,14 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the check box to be out of focus
-				up();
+				try
+				{
+					up();
+				}
+				catch (const std::bad_function_call &e)
+				{
+					std::cout << "CHECKBOX:: Bad function call" << std::endl;
+				}
 				return true;
 			}
 		}
@@ -72,7 +79,14 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_down->promoteFocus();
 				demoteFocus();
-				down();
+				try
+				{
+					down();
+				}
+				catch (const std::bad_function_call &e)
+				{
+					std::cout << "CHECKBOX:: Bad function call" << std::endl;
+				}
 				return true;
 			}
 		}
@@ -83,7 +97,14 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_left->promoteFocus();
 				demoteFocus();
-				left();
+				try
+				{
+					left();
+				}
+				catch (const std::bad_function_call &e)
+				{
+					std::cout << "CHECKBOX:: Bad function call" << std::endl;
+				}
 				return true;
 			}
 		}
@@ -94,7 +115,14 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_right->promoteFocus();
 				demoteFocus();
-				right();
+				try
+				{
+					right();
+				}
+				catch (const std::bad_function_call &e)
+				{
+					std::cout << "CHECKBOX:: Bad function call" << std::endl;
+				}
 				return true;
 			}
 		}

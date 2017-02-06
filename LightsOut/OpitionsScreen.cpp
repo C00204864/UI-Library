@@ -19,7 +19,7 @@ OptionsScreen::OptionsScreen()
 		sf::Vector2f(300.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	radioButtons.push_back(new RadioButton("4 x 4", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	radioButtons.push_back(new RadioButton("10 x 10", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
+	radioButtons.push_back(new RadioButton("7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
 		sf::Vector2f(500.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	m_redSlider = new Slider("Red", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 540.0f), sf::Vector2f(400.0f, 900.0f));
