@@ -7,9 +7,11 @@ GamePlay::GamePlay() {}
 
 GamePlay::~GamePlay() {}
 
-void GamePlay::init(int gridSize)
+void GamePlay::init(int gridSizeIn)
 {
-	initArray(gridSize);
+	gridSize = gridSizeIn;
+	initArray(gridSizeIn);
+	selectedIndex = 0;
 	m_moves = 0;
 	m_timeInSeconds = 0;
 	m_movesLabel = new Label("", nullptr, 30);
@@ -32,6 +34,10 @@ void GamePlay::initArray(int gridSize)
 	{
 		m_pcheckBoxArray[i] = new CheckBox("", nullptr, posCalc(gridSize, i), 10, buttonSize, buttonSize);
 		m_pcheckBoxArray[i]->select = std::bind(&GamePlay::switchArea, this);
+		m_pcheckBoxArray[i]->up = std::bind(&GamePlay::selectedUp, this);
+		m_pcheckBoxArray[i]->down = std::bind(&GamePlay::selectedDown, this);
+		m_pcheckBoxArray[i]->left = std::bind(&GamePlay::selectedLeft, this);
+		m_pcheckBoxArray[i]->right = std::bind(&GamePlay::selectedRight, this);
 		m_pcheckBoxArray[i]->setState(rand() % 2); // Booleans will accept 1's or 0's as values
 		m_gui.add(m_pcheckBoxArray[i]);
 	}
@@ -92,32 +98,25 @@ sf::Vector2f GamePlay::posCalc(float gridSize, int i)
 void GamePlay::switchArea()
 {
 	m_moves++;
-	for (int i = 0; i < arrayLength; i++)
+	CheckBox * left = dynamic_cast<CheckBox *>(m_pcheckBoxArray[selectedIndex]->m_left);
+	CheckBox * right = dynamic_cast<CheckBox *>(m_pcheckBoxArray[selectedIndex]->m_right);
+	CheckBox * up = dynamic_cast<CheckBox *>(m_pcheckBoxArray[selectedIndex]->m_up);
+	CheckBox * down = dynamic_cast<CheckBox *>(m_pcheckBoxArray[selectedIndex]->m_down);
+	if (left != nullptr)
 	{
-		if (m_pcheckBoxArray[i]->getFocus())
-		{
-			CheckBox * left = dynamic_cast<CheckBox *>(m_pcheckBoxArray[i]->m_left);
-			CheckBox * right = dynamic_cast<CheckBox *>(m_pcheckBoxArray[i]->m_right);
-			CheckBox * up = dynamic_cast<CheckBox *>(m_pcheckBoxArray[i]->m_up);
-			CheckBox * down = dynamic_cast<CheckBox *>(m_pcheckBoxArray[i]->m_down);
-			if (left != nullptr)
-			{
-				left->switchState();
-			}
-			if (right != nullptr)
-			{
-				right->switchState();
-			}
-			if (up != nullptr)
-			{
-				up->switchState();
-			}
-			if (down != nullptr)
-			{
-				down->switchState();
-			}
-			break;
-		}
+		left->switchState();
+	}
+	if (right != nullptr)
+	{
+		right->switchState();
+	}
+	if (up != nullptr)
+	{
+		up->switchState();
+	}
+	if (down != nullptr)
+	{
+		down->switchState();
 	}
 	if (checkWin())
 	{
@@ -135,4 +134,21 @@ bool GamePlay::checkWin()
 		}
 	}
 	return true;
+}
+
+void GamePlay::selectedUp()
+{
+	selectedIndex -= gridSize;
+}
+void GamePlay::selectedDown()
+{
+	selectedIndex += gridSize;
+}
+void GamePlay::selectedLeft()
+{
+	selectedIndex--;
+}
+void GamePlay::selectedRight()
+{
+	selectedIndex++;
 }

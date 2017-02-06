@@ -22,7 +22,7 @@ public:
 	void setState(bool stateIn);
 	// Callback function to link to external functions
 	typedef std::function<void()> Callback;
-	Callback select;
+	Callback select, up, down, left, right;
 private:
 	bool m_state = false;
 	sf::RectangleShape m_checkBoxRect;

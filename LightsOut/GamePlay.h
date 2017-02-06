@@ -26,6 +26,10 @@ private:
 	//Private Functions
 	void initArray(int gridSize);
 	void switchArea();
+	void selectedUp();
+	void selectedDown();
+	void selectedLeft();
+	void selectedRight();
 	sf::Vector2f posCalc(float gridSize, int i);
 	bool checkWin();
 	// Constants and Variables
@@ -35,7 +39,9 @@ private:
 	const int INIT_X = 225;
 	const int INIT_Y = 120;
 	const int BUTTON_SIZE_NUMERATOR = 300;
+	int selectedIndex;
 	int arrayLength;
+	int gridSize;
 	int m_moves;
 	int m_timeInSeconds;
 	sf::Clock timeTotal;

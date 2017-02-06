@@ -61,6 +61,7 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the check box to be out of focus
+				up();
 				return true;
 			}
 		}
@@ -71,6 +72,7 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_down->promoteFocus();
 				demoteFocus();
+				down();
 				return true;
 			}
 		}
@@ -81,6 +83,7 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_left->promoteFocus();
 				demoteFocus();
+				left();
 				return true;
 			}
 		}
@@ -91,6 +94,7 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				m_right->promoteFocus();
 				demoteFocus();
+				right();
 				return true;
 			}
 		}
