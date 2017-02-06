@@ -10,6 +10,7 @@ Game::Game()
 {
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
+	gamePlayScreen.init(7);
 }
 
 /// <summary>
@@ -32,7 +33,6 @@ void Game::run()
 			update(timeSinceLastUpdate.asMilliseconds());
 			timeSinceLastUpdate = sf::Time::Zero;
 		}
-
 		render();
 	}
 }
@@ -102,7 +102,7 @@ void Game::update(double dt)
 		case GameState::GamePlay:
 		{
 			
-
+			gamePlayScreen.update(xboxController);
 			break;
 		}
 
@@ -136,7 +136,7 @@ void Game::render()
 
 		case GameState::GamePlay:
 		{
-			
+			gamePlayScreen.render(m_window);
 
 			break;
 		}

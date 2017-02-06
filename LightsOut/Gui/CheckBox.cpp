@@ -1,5 +1,7 @@
 #include "CheckBox.h"
  
+CheckBox::CheckBox() : Label("", nullptr) {}
+
 /// <summary>
 /// Constructor function for the CheckBox class
 /// </summary>
@@ -95,22 +97,14 @@ bool CheckBox::processInput(XboxController & controller)
 		else if (controller.isButtonPressed(XBOX360_A) // A input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
-			m_state = !m_state; // Flip the state of the checkbox
+			switchState();
 			try
 			{
-				stateSwitch();
+				select();
 			}
 			catch (const std::bad_function_call &e)
 			{
 				std::cout << "CHECKBOX:: Bad function call" << std::endl;
-			}
-			if (m_state)
-			{
-				m_checkBoxRect.setFillColor(sf::Color::Blue); // Set the fill color to Blue if the box is checked
-			}
-			else
-			{
-				m_checkBoxRect.setFillColor(sf::Color::White); // oTherwise set the color White
 			}
 		}
 	}
@@ -125,4 +119,35 @@ void CheckBox::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
 	target.draw(m_checkBoxRect); // Draw the checkBoxRect
 	Label::draw(target, states); // Draw the inherited Label
+}
+
+bool CheckBox::getFocus()
+{
+	return m_hasFocus;
+}
+
+void CheckBox::switchState()
+{
+	m_state = !m_state; // Flip the state of the bool
+	if (m_state)
+	{
+		m_checkBoxRect.setFillColor(sf::Color::Blue); // Set the fill color to Blue if the box is checked
+	}
+	else
+	{
+		m_checkBoxRect.setFillColor(sf::Color::White); // oTherwise set the color White
+	}
+}
+
+void CheckBox::setState(bool stateIn)
+{
+	if (stateIn)
+	{
+		switchState();
+	}
+}
+
+bool CheckBox::getState()
+{
+	return m_state;
 }

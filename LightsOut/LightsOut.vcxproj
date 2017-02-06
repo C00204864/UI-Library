@@ -159,6 +159,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="GamePlay.cpp" />
     <ClCompile Include="Gui\Button.cpp" />
     <ClCompile Include="Gui\CheckBox.cpp" />
     <ClCompile Include="Gui\Gui.cpp" />
@@ -175,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h" />
+    <ClInclude Include="GamePlay.h" />
     <ClInclude Include="Gui\Button.h" />
     <ClInclude Include="Gui\CheckBox.h" />
     <ClInclude Include="Gui\Gui.h" />

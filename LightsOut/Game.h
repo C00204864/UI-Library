@@ -10,6 +10,7 @@
 #include "ResourceManager.h"
 #include "MainMenuScreen.h"
 #include "OpitionsScreen.h"
+#include "GamePlay.h"
 
 class Game
 {
@@ -31,12 +32,13 @@ protected:
 		Options,
 		GamePlay
 	};
-	GameState currentGameState = GameState::MainMenu;
+	GameState currentGameState = GameState::GamePlay;
 
 	XboxController xboxController;
 	
 	MainMenuScreen mainMenuScreen;
 	OptionsScreen optionsScreen;
+	GamePlay gamePlayScreen;
 };
 
 #endif
