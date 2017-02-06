@@ -172,6 +172,7 @@
     <ClCompile Include="MainMenuScreen.cpp" />
     <ClCompile Include="MathUtility.cpp" />
     <ClCompile Include="OpitionsScreen.cpp" />
+    <ClCompile Include="QuitScreen.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -188,6 +189,7 @@
     <ClInclude Include="MainMenuScreen.h" />
     <ClInclude Include="MathUtility.h" />
     <ClInclude Include="OpitionsScreen.h" />
+    <ClInclude Include="QuitScreen.h" />
     <ClInclude Include="ResourceManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

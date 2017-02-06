@@ -67,6 +67,12 @@ void MainMenuScreen::update(XboxController &controller)
 	else if (quitButtonPressed)
 	{
 		m_gui.transitionOut(0.05f, interpolation);
+
+		if (interpolation >= 1.0f)
+		{
+			changeToQuitState = true;
+			interpolation = 0.0f;
+		}
 	}
 
 	if (transitionIn)
@@ -84,6 +90,11 @@ void MainMenuScreen::update(XboxController &controller)
 bool MainMenuScreen::getChangeStateOptions()
 {
 	return changeToOptionsState;
+}
+
+bool MainMenuScreen::getChangeStateQuit()
+{
+	return changeToQuitState;
 }
 
 void MainMenuScreen::render(sf::RenderWindow &window)

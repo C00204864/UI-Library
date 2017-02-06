@@ -8,6 +8,7 @@ OptionsScreen::OptionsScreen()
 {
 	// TODO(Darren): Rename these variables
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
+	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
 	volume = new Slider("Music Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 180.0f), sf::Vector2f(400.0f, 900.0f));
 	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,

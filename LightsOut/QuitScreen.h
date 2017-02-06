@@ -3,8 +3,8 @@
 /// @version 1.0
 /// </summary>
 
-#ifndef MAIN_MENU_SCREEN_H
-#define MAIN_MENU_SCREEN_H
+#ifndef QUIT_SCREEN_H
+#define QUIT_SCREEN_H
 
 #include <SFML\Graphics.hpp>
 #include "Input\XboxController.h"
@@ -13,34 +13,29 @@
 #include "Gui\Label.h"
 #include <iostream>
 
-class MainMenuScreen
+class QuitScreen
 {
 public:
-	MainMenuScreen();
+	QuitScreen();
 
 	void initialise();
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
 	bool getChangeStateOptions();
-	bool getChangeStateQuit();
 	void reset();
 
 private:
-	void playButtonSelected();
-	void optionsButtonSelected();
-	void quitButtonSelected();
+	void noButtonSelected();
+	void yesButtonSelected();
 
 	Gui m_gui;
-	Label *m_gameTitle;
-	Button *m_playButton;
-	Button *m_optionsButton;
-	Button *m_quitButton;
+	Label *m_quitTitle;
+	Button *m_yesButton;
+	Button *m_noButton;
 
-	bool playButtonPressed;
-	bool optionsButtonPressed;
-	bool quitButtonPressed;
-	bool changeToOptionsState;
-	bool changeToQuitState;
+	bool m_noButtonSelected;
+	bool m_yesButtonSelected;
+	bool m_changeToMenuState;
 
 	bool transitionIn;
 	float interpolation;

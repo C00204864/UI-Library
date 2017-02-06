@@ -61,12 +61,32 @@ bool Button::processInput(XboxController & controller)
 				return true;
 			}
 		}
-		else if (controller.isButtonPressed(XBOX360_DOWN) // Down input (see up input)
+		else if (controller.isButtonPressed(XBOX360_DOWN) // Down input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 		{
 			if (m_down != nullptr)
 			{
 				m_down->promoteFocus();
+				demoteFocus();
+				return true;
+			}
+		}
+		if (controller.isButtonPressed(XBOX360_LEFT) // Left input
+			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+		{
+			if (m_left != nullptr)
+			{
+				m_left->promoteFocus(); // Set the button above *this to be in focus
+				demoteFocus(); // Set the button to be out of focus
+				return true;
+			}
+		}
+		else if (controller.isButtonPressed(XBOX360_RIGHT) // Right input 
+			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+		{
+			if (m_right != nullptr)
+			{
+				m_right->promoteFocus();
 				demoteFocus();
 				return true;
 			}

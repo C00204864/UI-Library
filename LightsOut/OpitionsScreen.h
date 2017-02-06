@@ -30,6 +30,13 @@ public:
 	bool getChangeStateMenu();
 	void reset();
 
+private:
+	void volumeUpSliderMusic();
+	void volumeDownSliderMusic();
+	void volumeUpSliderEffects();
+	void volumeDownSliderEffects();
+	void applyButtonSelected();
+
 	Gui m_gui;
 	Label *m_optionsTitle;
 	Slider *volume;
@@ -43,13 +50,6 @@ public:
 	RadioButton *radioButton_2;
 	std::vector<RadioButton*> radioButtons;
 	CheckBox *checkBox;
-
-private:
-	void volumeUpSliderMusic();
-	void volumeDownSliderMusic();
-	void volumeUpSliderEffects();
-	void volumeDownSliderEffects();
-	void applyButtonSelected();
 
 	bool m_applyButtonPressed;
 	bool m_backToMenu;

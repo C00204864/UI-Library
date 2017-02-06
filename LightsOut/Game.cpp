@@ -10,7 +10,8 @@ Game::Game()
 {
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
-	gamePlayScreen.init(3);
+	quiteScreen.initialise();
+	gamePlayScreen.init(10);
 }
 
 /// <summary>
@@ -82,6 +83,11 @@ void Game::update(double dt)
 				currentGameState = GameState::Options;
 				mainMenuScreen.reset();
 			}
+			else if (mainMenuScreen.getChangeStateQuit())
+			{
+				currentGameState = GameState::Quit;
+				mainMenuScreen.reset();
+			}
 
 			break;
 		}
@@ -99,9 +105,21 @@ void Game::update(double dt)
 			break;
 		}
 
+		case GameState::Quit:
+		{
+			quiteScreen.update(xboxController);
+
+			if (quiteScreen.getChangeStateOptions())
+			{
+				currentGameState = GameState::MainMenu;
+				quiteScreen.reset();
+			}
+
+			break;
+		}
+
 		case GameState::GamePlay:
 		{
-			
 			gamePlayScreen.update(xboxController);
 			break;
 		}
@@ -130,6 +148,13 @@ void Game::render()
 		case GameState::Options:
 		{
 			optionsScreen.render(m_window);
+
+			break;
+		}
+
+		case GameState::Quit:
+		{
+			quiteScreen.render(m_window);
 
 			break;
 		}
