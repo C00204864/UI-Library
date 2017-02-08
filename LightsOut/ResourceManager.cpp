@@ -11,6 +11,10 @@ ResourceManager::ResourceManager()
 	{
 		std::cout << "ResourceManager:: gameFont failed to load!" << std::endl;
 	}
+	if (!backingSoundBuffer.loadFromFile("Assets/Sounds/BackingTrack.wav"))
+	{
+		std::cout << "ResourceManager:: backingSoundBuffer failed to load!" << std::endl;
+	}
 }
 
 /// <summary>
@@ -20,4 +24,13 @@ ResourceManager::ResourceManager()
 sf::Font* ResourceManager::getGameFont()
 {
 	return &gameFont;
+}
+
+/// <summary>
+/// Gets the sound buffer loaded in memory
+/// </summary>
+/// <returns>Returns a pointer to the loaded sound buffer in memory</returns>
+sf::SoundBuffer* ResourceManager::getBackingTrackBuffer()
+{
+	return &backingSoundBuffer;
 }

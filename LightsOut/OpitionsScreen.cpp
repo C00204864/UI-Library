@@ -3,8 +3,9 @@
 /// <summary>
 /// 
 /// </summary>
-OptionsScreen::OptionsScreen()
-	: transitionIn(true)
+OptionsScreen::OptionsScreen(sf::Sound &backingTrackIn)
+	: transitionIn(true),
+	backingTrack(backingTrackIn)
 {
 	// TODO(Darren): Rename these variables
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
@@ -157,11 +158,13 @@ void OptionsScreen::update(XboxController &controller)
 void OptionsScreen::volumeUpSliderMusic()
 {
 	std::cout << "volumeUpMusic callback" << std::endl;
+	backingTrack.setVolume(100 * volume->getPercentageFull());
 }
 
 void OptionsScreen::volumeDownSliderMusic()
 {
 	std::cout << "volumeDownMusic callback" << std::endl;
+	backingTrack.setVolume(100 * (volume->getPercentageFull()));
 }
 
 void OptionsScreen::volumeUpSliderEffects()

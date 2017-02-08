@@ -7,6 +7,7 @@
 #define OPITIONS_SCREEN_H
 
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "Input\XboxController.h"
 #include "Gui\Gui.h"
 #include "Gui\Slider.h"
@@ -21,7 +22,7 @@
 class OptionsScreen
 {
 public:
-	OptionsScreen();
+	OptionsScreen(sf::Sound &backingTrackIn);
 	~OptionsScreen();
 
 	void initialise();
@@ -50,6 +51,8 @@ private:
 	RadioButton *radioButton_2;
 	std::vector<RadioButton*> radioButtons;
 	CheckBox *checkBox;
+
+	sf::Sound &backingTrack;
 
 	bool m_applyButtonPressed;
 	bool m_backToMenu;
