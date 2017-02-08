@@ -7,6 +7,7 @@
 #define GAME_H
 
 #include <SFML\Graphics.hpp>
+#include <SFML\Audio.hpp>
 #include "ResourceManager.h"
 #include "MainMenuScreen.h"
 #include "OpitionsScreen.h"
@@ -45,6 +46,8 @@ protected:
 	OptionsScreen optionsScreen;
 	QuitScreen quiteScreen;
 	GamePlay gamePlayScreen;
+
+	sf::Sound m_backingTrack;
 };
 
 #endif

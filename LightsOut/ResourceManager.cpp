@@ -16,6 +16,11 @@ ResourceManager::ResourceManager()
 	{
 		std::cout << "ResourceManager:: StudioLogo.png failed to load!" << std::endl;
 	}
+
+	if (!backingSoundBuffer.loadFromFile("Assets/Sounds/BackingTrack.wav"))
+	{
+		std::cout << "ResourceManager:: backingSoundBuffer failed to load!" << std::endl;
+	}
 }
 
 /// <summary>
@@ -34,4 +39,13 @@ sf::Font* ResourceManager::getGameFont()
 sf::Texture* ResourceManager::getStudioTexture()
 {
 	return &m_studioLogo;
+}
+
+/// <summary>
+/// Gets the sound buffer loaded in memory
+/// </summary>
+/// <returns>Returns a pointer to the loaded sound buffer in memory</returns>
+sf::SoundBuffer* ResourceManager::getBackingTrackBuffer()
+{
+	return &backingSoundBuffer;
 }

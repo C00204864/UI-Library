@@ -23,6 +23,7 @@ public:
 	typedef std::function<void()> Callback;
 	Callback increase, decrease;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
+	float getPercentageFull();
 
 private:
 	sf::RectangleShape m_bar, m_base;

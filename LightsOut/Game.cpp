@@ -6,12 +6,17 @@
 /// </summary>
 Game::Game()
 	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close),
-	xboxController(CONTROLLER_ONE)
+	xboxController(CONTROLLER_ONE),
+	optionsScreen(m_backingTrack)
 {
+	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
+
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
 	quiteScreen.initialise();
 	gamePlayScreen.init(3);
+	m_backingTrack.setLoop(true);
+	m_backingTrack.play();
 }
 
 /// <summary>
