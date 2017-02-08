@@ -1,3 +1,8 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
 #ifndef LABEL_H
 #define LABEL_H
 

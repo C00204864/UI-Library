@@ -1,3 +1,9 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
+
 #ifndef CHECKBOX_H
 #define CHECKBOX_H
 

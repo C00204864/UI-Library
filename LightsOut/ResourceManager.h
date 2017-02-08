@@ -15,10 +15,12 @@ public:
 	ResourceManager();
 
 	sf::Font* getGameFont();
+	sf::Texture* getStudioTexture();
 
 private:
 	// The font used in our game Lights Out.
-	sf::Font gameFont;
+	sf::Font m_gameFont;
+	sf::Texture m_studioLogo;
 };
 
 extern ResourceManager g_resourceMgr;

@@ -12,6 +12,7 @@
 #include "OpitionsScreen.h"
 #include "QuitScreen.h"
 #include "GamePlay.h"
+#include "SplashScreen.h"
 
 class Game
 {
@@ -29,15 +30,17 @@ protected:
 
 	enum class GameState
 	{
+		SplashScreen,
 		MainMenu,
 		Options,
 		Quit,
 		GamePlay
 	};
-	GameState currentGameState = GameState::MainMenu;
+	GameState currentGameState = GameState::SplashScreen;
 
 	XboxController xboxController;
 	
+	SplashScreen splashScreen;
 	MainMenuScreen mainMenuScreen;
 	OptionsScreen optionsScreen;
 	QuitScreen quiteScreen;

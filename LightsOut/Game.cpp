@@ -5,7 +5,7 @@
 /// 
 /// </summary>
 Game::Game()
-	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Default),
+	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close),
 	xboxController(CONTROLLER_ONE)
 {
 	mainMenuScreen.initialise();
@@ -74,6 +74,18 @@ void Game::update(double dt)
 {
 	switch (currentGameState)
 	{
+		case GameState::SplashScreen:
+		{
+			splashScreen.update(dt);
+
+			if (splashScreen.splashOverState())
+			{
+				currentGameState = GameState::MainMenu;
+			}
+
+			break;
+		}
+
 		case GameState::MainMenu:
 		{
 			mainMenuScreen.update(xboxController);
@@ -147,6 +159,13 @@ void Game::render()
 
 	switch (currentGameState)
 	{
+		case GameState::SplashScreen:
+		{
+			splashScreen.render(m_window);
+
+			break;
+		}
+
 		case GameState::MainMenu:
 		{
 			mainMenuScreen.render(m_window);

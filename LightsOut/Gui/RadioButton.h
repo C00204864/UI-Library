@@ -1,3 +1,9 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
+
 #ifndef RADIOBUTTON_H
 #define RADIOBUTTON_H
 

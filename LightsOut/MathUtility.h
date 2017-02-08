@@ -1,3 +1,8 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
 #ifndef MATH_UTIL
 #define MATH_UTIL
 
