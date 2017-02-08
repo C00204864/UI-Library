@@ -9,8 +9,9 @@
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
-Button::Button(const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos) 
-	: Label(textIn, parent, characterSize)
+Button::Button(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
+	: Label(textIn, parent, characterSize),
+	selectSound(selectSoundIn)
 {
 	widgetPos = positionIn; // Set the position in the base class
 	widgetStartPos = startPos;
@@ -56,6 +57,7 @@ bool Button::processInput(XboxController & controller)
 		{
 			if (m_up != nullptr)
 			{
+				selectSound.play();
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the button to be out of focus
 				return true;
@@ -66,6 +68,7 @@ bool Button::processInput(XboxController & controller)
 		{
 			if (m_down != nullptr)
 			{
+				selectSound.play();
 				m_down->promoteFocus();
 				demoteFocus();
 				return true;
@@ -76,6 +79,7 @@ bool Button::processInput(XboxController & controller)
 		{
 			if (m_left != nullptr)
 			{
+				selectSound.play();
 				m_left->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the button to be out of focus
 				return true;
@@ -86,6 +90,7 @@ bool Button::processInput(XboxController & controller)
 		{
 			if (m_right != nullptr)
 			{
+				selectSound.play();
 				m_right->promoteFocus();
 				demoteFocus();
 				return true;

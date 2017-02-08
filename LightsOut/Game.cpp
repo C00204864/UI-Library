@@ -7,9 +7,14 @@
 Game::Game()
 	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close),
 	xboxController(CONTROLLER_ONE),
-	optionsScreen(m_backingTrack)
+	mainMenuScreen(m_selectSound),
+	optionsScreen(m_backingTrack, m_selectSound),
+	quiteScreen(m_selectSound),
+	gamePlayScreen(m_selectSound)
+
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
+	m_selectSound.setBuffer(*g_resourceMgr.getSelectSoundBuffer());
 
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();

@@ -18,7 +18,7 @@
 
 class GamePlay {
 public:
-	GamePlay();
+	GamePlay(sf::Sound &selectSound);
 	~GamePlay();
 	void init(int gridSize);
 	void update(XboxController& controller);
@@ -53,6 +53,8 @@ private:
 
 	float interpolation;
 	bool transitionIn;
+
+	sf::Sound &selectSound;
 };
 
 #endif

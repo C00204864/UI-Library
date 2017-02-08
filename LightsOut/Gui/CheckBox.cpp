@@ -1,6 +1,6 @@
 #include "CheckBox.h"
  
-CheckBox::CheckBox() : Label("", nullptr) {}
+CheckBox::CheckBox() : Label("", nullptr), selectSound(sf::Sound()) {}
 
 /// <summary>
 /// Constructor function for the CheckBox class
@@ -11,9 +11,10 @@ CheckBox::CheckBox() : Label("", nullptr) {}
 /// <param name="characterSize">Size of the Characters to be used by the font when drawing text</param>
 /// <param name="boxWidth">Width of the Check Box</param>
 /// <param name="boxHeight">Height of the Chec Box</param>
-CheckBox::CheckBox(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize, 
+CheckBox::CheckBox(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize,
 		float boxWidth, float boxHeight, sf::Vector2f &startPos, sf::Vector2f &endPos) 
-	: Label(textIn, parent, characterSize)
+	: Label(textIn, parent, characterSize),
+	selectSound(selectSoundIn)
 {
 	widgetPos = positionIn; // Set the position in the base class
 	widgetStartPos = startPos;
@@ -59,6 +60,7 @@ bool CheckBox::processInput(XboxController & controller)
 		{
 			if (m_up != nullptr)
 			{
+				selectSound.play();
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the check box to be out of focus
 				try
@@ -77,6 +79,7 @@ bool CheckBox::processInput(XboxController & controller)
 		{
 			if (m_down != nullptr)
 			{
+				selectSound.play();
 				m_down->promoteFocus();
 				demoteFocus();
 				try
@@ -95,6 +98,7 @@ bool CheckBox::processInput(XboxController & controller)
 		{
 			if (m_left != nullptr)
 			{
+				selectSound.play();
 				m_left->promoteFocus();
 				demoteFocus();
 				try
@@ -113,6 +117,7 @@ bool CheckBox::processInput(XboxController & controller)
 		{
 			if (m_right != nullptr)
 			{
+				selectSound.play();
 				m_right->promoteFocus();
 				demoteFocus();
 				try
@@ -129,6 +134,7 @@ bool CheckBox::processInput(XboxController & controller)
 		else if (controller.isButtonPressed(XBOX360_A) // A input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
+			selectSound.play();
 			switchState();
 			try
 			{

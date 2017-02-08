@@ -21,6 +21,10 @@ ResourceManager::ResourceManager()
 	{
 		std::cout << "ResourceManager:: backingSoundBuffer failed to load!" << std::endl;
 	}
+	if (!selectSoundBuffer.loadFromFile("Assets/Sounds/Select.wav"))
+	{
+		std::cout << "ResourceManager:: selectSoundBuffer failed to load!" << std::endl;
+	}
 }
 
 /// <summary>
@@ -48,4 +52,13 @@ sf::Texture* ResourceManager::getStudioTexture()
 sf::SoundBuffer* ResourceManager::getBackingTrackBuffer()
 {
 	return &backingSoundBuffer;
+}
+
+/// <summary>
+/// Gets the select sound buffer loaded in memory
+/// </summary>
+/// <returns>Returns a pointer to the loaded sound buffer in memory</returns>
+sf::SoundBuffer* ResourceManager::getSelectSoundBuffer()
+{
+	return &selectSoundBuffer;
 }

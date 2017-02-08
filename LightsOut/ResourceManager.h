@@ -18,16 +18,14 @@ public:
 	sf::Font* getGameFont();
 	sf::Texture* getStudioTexture();
 	sf::SoundBuffer* getBackingTrackBuffer();
+	sf::SoundBuffer* getSelectSoundBuffer();
 
 private:
 	// The font used in our game Lights Out.
 	sf::Font m_gameFont;
 	sf::Texture m_studioLogo;
-
-private:
-	// The font used in our game Lights Out.
-	sf::Font gameFont;
 	sf::SoundBuffer backingSoundBuffer;
+	sf::SoundBuffer selectSoundBuffer;
 };
 
 extern ResourceManager g_resourceMgr;

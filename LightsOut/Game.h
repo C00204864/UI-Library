@@ -48,6 +48,7 @@ protected:
 	GamePlay gamePlayScreen;
 
 	sf::Sound m_backingTrack;
+	sf::Sound m_selectSound;
 };
 
 #endif

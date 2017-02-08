@@ -3,33 +3,34 @@
 /// <summary>
 /// 
 /// </summary>
-OptionsScreen::OptionsScreen(sf::Sound &backingTrackIn)
+OptionsScreen::OptionsScreen(sf::Sound &backingTrackIn, sf::Sound &selectSoundIn)
 	: transitionIn(true),
-	backingTrack(backingTrackIn)
+	backingTrack(backingTrackIn),
+	selectSound(selectSoundIn)
 {
 	// TODO(Darren): Rename these variables
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
 	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	volume = new Slider("Music Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	volume = new Slider(selectSound, std::string("Music Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 180.0f), sf::Vector2f(400.0f, 900.0f));
-	effects = new Slider("Effects Volume", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	effects = new Slider(selectSound, std::string("Effects Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
-	checkBox = new CheckBox("Mute", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f,
+	checkBox = new CheckBox(selectSound, "Mute", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f,
 		sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
 	m_difficultyTitle = new Label("Difficulty", nullptr, 35, sf::Vector2f(400.0f, 370.0f), sf::Vector2f(400.0f, 900.0f));
-	radioButtons.push_back(new RadioButton("3 x 3", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+	radioButtons.push_back(new RadioButton(selectSound, "3 x 3", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
 		sf::Vector2f(300.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	radioButtons.push_back(new RadioButton("4 x 4", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons, 
+	radioButtons.push_back(new RadioButton(selectSound, "4 x 4", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	radioButtons.push_back(new RadioButton("7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
+	radioButtons.push_back(new RadioButton(selectSound, "7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
 		sf::Vector2f(500.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	m_redSlider = new Slider("Red", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	m_redSlider = new Slider(selectSound, std::string("Red"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 540.0f), sf::Vector2f(400.0f, 900.0f));
-	m_greenSlider = new Slider("Green", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	m_greenSlider = new Slider(selectSound, std::string("Green"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 610.0f), sf::Vector2f(400.0f, 900.0f));
-	m_blueSlider = new Slider("Blue", nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	m_blueSlider = new Slider(selectSound, std::string("Blue"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 680.0f), sf::Vector2f(400.0f, 900.0f));
-	applyButton = new Button("Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
+	applyButton = new Button(selectSound, "Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
 		sf::Vector2f(400.0f, 750.0f), sf::Vector2f(400.0f, 900.0f));
 
 	volume->m_up = applyButton;
@@ -66,6 +67,7 @@ OptionsScreen::OptionsScreen(sf::Sound &backingTrackIn)
 	volume->decrease = std::bind(&OptionsScreen::volumeDownSliderMusic, this);
 	effects->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
 	effects->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
+	checkBox->select = std::bind(&OptionsScreen::checkBoxSwitched, this);
 
 	// NOTE(Darren): Again, all for testing
 	m_redSlider->increase = std::bind(&OptionsScreen::volumeUpSliderMusic, this);
@@ -157,30 +159,58 @@ void OptionsScreen::update(XboxController &controller)
 
 void OptionsScreen::volumeUpSliderMusic()
 {
-	std::cout << "volumeUpMusic callback" << std::endl;
-	backingTrack.setVolume(100 * volume->getPercentageFull());
+	if (!checkBox->getState())
+	{
+		std::cout << "volumeUpMusic callback" << std::endl;
+		backingTrack.setVolume(100 * volume->getPercentageFull());
+	}
 }
 
 void OptionsScreen::volumeDownSliderMusic()
 {
-	std::cout << "volumeDownMusic callback" << std::endl;
-	backingTrack.setVolume(100 * (volume->getPercentageFull()));
+	if (!checkBox->getState())
+	{
+		std::cout << "volumeDownMusic callback" << std::endl;
+		backingTrack.setVolume(100 * volume->getPercentageFull());
+	}
 }
 
 void OptionsScreen::volumeUpSliderEffects()
 {
-	std::cout << "volumeUpEffects callback" << std::endl;
+	if (!checkBox->getState())
+	{
+		std::cout << "volumeUpEffects callback" << std::endl;
+		selectSound.setVolume(100 * (effects->getPercentageFull()));
+	}	
 }
 
 void OptionsScreen::volumeDownSliderEffects()
 {
-	std::cout << "volumeDownEffects callback" << std::endl;
+	if (!checkBox->getState())
+	{
+		std::cout << "volumeDownEffects callback" << std::endl;
+		selectSound.setVolume(100 * (effects->getPercentageFull()));
+	}
 }
 
 void OptionsScreen::applyButtonSelected()
 {
 	m_applyButtonPressed = true;
 	applyButton->demoteFocus();
+}
+
+void OptionsScreen::checkBoxSwitched()
+{
+	if (checkBox->getState())
+	{
+		backingTrack.setVolume(0);
+		selectSound.setVolume(0);
+	}
+	else
+	{
+		backingTrack.setVolume(100 * (volume->getPercentageFull()));
+		selectSound.setVolume(100 * (effects->getPercentageFull()));
+	}
 }
 
 bool OptionsScreen::getChangeStateMenu()

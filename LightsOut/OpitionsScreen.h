@@ -22,7 +22,7 @@
 class OptionsScreen
 {
 public:
-	OptionsScreen(sf::Sound &backingTrackIn);
+	OptionsScreen(sf::Sound &backingTrackIn, sf::Sound &selectSound);
 	~OptionsScreen();
 
 	void initialise();
@@ -37,6 +37,7 @@ private:
 	void volumeUpSliderEffects();
 	void volumeDownSliderEffects();
 	void applyButtonSelected();
+	void checkBoxSwitched();
 
 	Gui m_gui;
 	Label *m_optionsTitle;
@@ -52,13 +53,17 @@ private:
 	std::vector<RadioButton*> radioButtons;
 	CheckBox *checkBox;
 
-	sf::Sound &backingTrack;
+	
 
 	bool m_applyButtonPressed;
 	bool m_backToMenu;
 
 	bool transitionIn;
 	float interpolation;
+
+	sf::Sound &backingTrack;
+	sf::Sound &selectSound;
+
 };
 
 #endif

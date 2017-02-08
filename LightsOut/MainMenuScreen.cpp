@@ -1,15 +1,16 @@
 #include "MainMenuScreen.h"
 
-MainMenuScreen::MainMenuScreen()
+MainMenuScreen::MainMenuScreen(sf::Sound &selectSoundIn) : 
+	selectSound(selectSoundIn)
 {
 	m_gameTitle = new Label("Lights Out!", nullptr, 80, sf::Vector2f(400.0f, 80.0f), sf::Vector2f(400.0f, 900.0f));
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 80.0f));
 
-	m_playButton = new Button("Play", nullptr, sf::Vector2f(400.0f, 250.0f), 50, 500.0f, 60.0f, 
+	m_playButton = new Button(selectSound, "Play", nullptr, sf::Vector2f(400.0f, 250.0f), 50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
-	m_optionsButton = new Button("Options", nullptr, sf::Vector2f(400.0f, 450.0f),50, 500.0f, 60.0f,
+	m_optionsButton = new Button(selectSound, "Options", nullptr, sf::Vector2f(400.0f, 450.0f),50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
-	m_quitButton = new Button("Quit", nullptr, sf::Vector2f(400.0f, 650.0f), 50, 500.0f, 60.0f,
+	m_quitButton = new Button(selectSound, "Quit", nullptr, sf::Vector2f(400.0f, 650.0f), 50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 650.0f), sf::Vector2f(400.0f, 900.0f));
 
 	m_playButton->promoteFocus();

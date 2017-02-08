@@ -16,7 +16,7 @@
 class QuitScreen
 {
 public:
-	QuitScreen();
+	QuitScreen(sf::Sound &selectSound);
 
 	void initialise();
 	void update(XboxController& controller);
@@ -41,6 +41,8 @@ private:
 
 	bool transitionIn;
 	float interpolation;
+
+	sf::Sound &selectSound;
 };
 
 #endif

@@ -16,7 +16,7 @@
 /// </summary>
 class RadioButton : public Label {
 public:
-	RadioButton(const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, std::vector<RadioButton *> & radGroup,
+	RadioButton(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, std::vector<RadioButton *> & radGroup,
 		sf::Vector2f &startPos = sf::Vector2f(), sf::Vector2f &endPos = sf::Vector2f(), 
 		int characterSize = 22.f, float boxWidth = 40.f, float boxHeight = 40.f);
 	bool processInput(XboxController & controller);
@@ -29,6 +29,7 @@ private:
 	bool m_state = false;
 	sf::RectangleShape m_radioButtonRect;
 	std::vector<RadioButton *> & m_otherButtons;
+	sf::Sound &selectSound;
 };
 
 #endif

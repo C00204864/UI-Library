@@ -9,9 +9,9 @@
 /// <param name="characterSize">Size of the font used for drawing the text</param>
 /// <param name="sliderWidth">Width of the slider</param>
 /// <param name="sliderHeight">Height of the slider</param>
-Slider::Slider(const std::string& text, Widget* parent, sf::Vector2f &position, int characterSize, 
-	float sliderWidth, float sliderHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
-	: Label(text, parent, characterSize), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight)
+Slider::Slider(sf::Sound &selectSoundIn, std::string& text, Widget* parent, sf::Vector2f &position, int characterSize, float sliderWidth,
+	float sliderHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
+	: Label(text, parent, characterSize), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight), selectSound(selectSoundIn)
 {
 	widgetPos = position;
 	widgetStartPos = startPos;
@@ -94,6 +94,7 @@ bool Slider::processInput(XboxController &controller)
 		{
 			if (m_up != nullptr)
 			{
+				selectSound.play();
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the slider to be out of focus
 				return true;
@@ -104,6 +105,7 @@ bool Slider::processInput(XboxController &controller)
 		{
 			if (m_down != nullptr)
 			{
+				selectSound.play();
 				m_down->promoteFocus();
 				demoteFocus();
 				return true;

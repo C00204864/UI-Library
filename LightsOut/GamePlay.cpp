@@ -3,8 +3,9 @@
 /// <summary>
 /// Default constructor function for the GamePlay class
 /// </summary>
-GamePlay::GamePlay()
-	: transitionIn(true) 
+GamePlay::GamePlay(sf::Sound &selectSoundIn)
+	: transitionIn(true),
+	selectSound(selectSoundIn)
 {}
 
 /// <summary>
@@ -43,7 +44,7 @@ void GamePlay::initArray(int gridSize)
 	m_pcheckBoxArray = new CheckBox*[arrayLength];
 	for (int i = 0; i < arrayLength; i++)
 	{
-		m_pcheckBoxArray[i] = new CheckBox("", nullptr, sf::Vector2f(400.0f - rand() % 1400, 900.0f + rand() % 1900),
+		m_pcheckBoxArray[i] = new CheckBox(selectSound, "", nullptr, sf::Vector2f(400.0f - rand() % 1400, 900.0f + rand() % 1900),
 			10, buttonSize, buttonSize, posCalc(gridSize, i), sf::Vector2f(400.0f - rand() % 1400, 900.0f + rand() % 1900)); // Create the check box
 		// Bind callback functions
 		m_pcheckBoxArray[i]->select = std::bind(&GamePlay::switchArea, this);
