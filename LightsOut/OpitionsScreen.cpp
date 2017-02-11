@@ -132,6 +132,11 @@ void OptionsScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
 
+	if (controller.isButtonPressed(XBOX360_BACK))
+	{
+		m_applyButtonPressed = true;
+	}
+
 	if (m_applyButtonPressed)
 	{
 		m_gui.transitionOut(0.05f, interpolation);

@@ -45,6 +45,7 @@ void MainMenuScreen::reset()
 
 	changeToOptionsState = false;
 	changeToQuitState = false;
+	m_changeToGamePlayState = false;
 	optionsButtonPressed = false;
 	quitButtonPressed = false;
 	playButtonPressed = false;

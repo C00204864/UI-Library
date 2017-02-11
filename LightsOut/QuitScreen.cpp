@@ -29,6 +29,11 @@ void QuitScreen::update(XboxController &controller)
 {
 	m_gui.processInput(controller);
 
+	if (controller.isButtonPressed(XBOX360_BACK))
+	{
+		m_noButtonSelected = true;
+	}
+
 	if (m_noButtonSelected)
 	{
 		m_gui.transitionOut(0.05f, interpolation);
