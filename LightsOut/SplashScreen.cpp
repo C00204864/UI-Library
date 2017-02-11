@@ -36,23 +36,29 @@ bool SplashScreen::splashOverState()
 /// The update method for the splash screen
 /// </summary>
 /// <param name="dt">Delta time</param>
-void SplashScreen::update(float dt)
+void SplashScreen::update(float dt, XboxController &xboxController)
 {
 	timer += dt;
 
 	m_fadeCover.setFillColor(sf::Color(0, 0, 0, m_fadeCoverAlpha));
 
-	if (timer < 8000.0f)
+	if (timer < 6000.0f)
 	{
-		if(m_fadeCoverAlpha >= 0)
-			m_fadeCoverAlpha -= 0.5f;
+		if(m_fadeCoverAlpha >= FADE_RATE)
+			m_fadeCoverAlpha -= FADE_RATE;
 	}
 	else
 	{
 		if (m_fadeCoverAlpha <= 255)
-			m_fadeCoverAlpha += 0.5f;
+			m_fadeCoverAlpha += FADE_RATE;
 		else
 			isSplashOver = true;
+	}
+
+	// Skip the splash screen is the player presses start on the controller
+	if (xboxController.isButtonPressed(XBOX360_START))
+	{
+		isSplashOver = true;
 	}
 }
 

@@ -8,6 +8,7 @@
 
 #include <SFML\Graphics.hpp>
 #include "ResourceManager.h"
+#include "Input\XboxController.h"
 
 /// <summary>
 /// Handles all the functionality of the splash screen
@@ -20,7 +21,7 @@ class SplashScreen
 public:
 	SplashScreen();
 
-	void update(float dt);
+	void update(float dt, XboxController &xboxController);
 	void render(sf::RenderWindow &window);
 	bool splashOverState();
 
@@ -32,6 +33,7 @@ private:
 	float m_fadeCoverAlpha;
 	bool isSplashOver;
 	float timer;
+	const float FADE_RATE = 1.5f;
 };
 
 #endif // !SPLASH_SCREEN_H

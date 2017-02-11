@@ -1,7 +1,7 @@
 #include "MainMenuScreen.h"
 
-MainMenuScreen::MainMenuScreen(sf::Sound &selectSoundIn) : 
-	selectSound(selectSoundIn)
+MainMenuScreen::MainMenuScreen(sf::Sound &selectSoundIn) :
+	selectSound(selectSoundIn), m_alphaFadeValue(255)
 {
 	m_gameTitle = new Label("Lights Out!", nullptr, 80, sf::Vector2f(400.0f, 80.0f), sf::Vector2f(400.0f, 900.0f));
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 80.0f));
@@ -23,6 +23,9 @@ MainMenuScreen::MainMenuScreen(sf::Sound &selectSoundIn) :
 	m_playButton->select = std::bind(&MainMenuScreen::playButtonSelected, this);
 	m_optionsButton->select = std::bind(&MainMenuScreen::optionsButtonSelected, this);
 	m_quitButton->select = std::bind(&MainMenuScreen::quitButtonSelected, this);
+
+	m_fadeRectangle.setSize(sf::Vector2f(800.0f, 800.0f));
+	m_fadeRectangle.setFillColor(sf::Color(0.0f, 0.0f, 0.0f, m_alphaFadeValue));
 }
 
 void MainMenuScreen::initialise()
@@ -51,6 +54,11 @@ void MainMenuScreen::reset()
 
 void MainMenuScreen::update(XboxController &controller)
 {
+	m_fadeRectangle.setFillColor(sf::Color(0.0f, 0.0f, 0.0f, m_alphaFadeValue));
+
+	if (m_alphaFadeValue >= FADE_RATE)
+		m_alphaFadeValue -= FADE_RATE;
+
 	m_gui.processInput(controller);
 
 	if (playButtonPressed)
@@ -114,6 +122,7 @@ bool MainMenuScreen::getChangeStateQuit()
 void MainMenuScreen::render(sf::RenderWindow &window)
 {
 	window.draw(m_gui);
+	window.draw(m_fadeRectangle);
 }
 
 void MainMenuScreen::playButtonSelected()

@@ -86,7 +86,7 @@ void Game::update(double dt)
 	{
 		case GameState::SplashScreen:
 		{
-			splashScreen.update(dt);
+			splashScreen.update(dt, xboxController);
 
 			if (splashScreen.splashOverState())
 			{

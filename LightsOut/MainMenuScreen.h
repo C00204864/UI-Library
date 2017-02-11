@@ -36,6 +36,9 @@ private:
 	Button *m_playButton;
 	Button *m_optionsButton;
 	Button *m_quitButton;
+	sf::RectangleShape m_fadeRectangle;
+	float m_alphaFadeValue;
+	const float FADE_RATE = 1.5f;
 
 	bool playButtonPressed;
 	bool optionsButtonPressed;
