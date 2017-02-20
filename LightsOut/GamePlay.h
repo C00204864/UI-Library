@@ -18,7 +18,7 @@
 
 class GamePlay {
 public:
-	GamePlay(sf::Sound &selectSound);
+	GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
 	~GamePlay();
 	void init(int gridSize);
 	void update(XboxController& controller);
@@ -55,6 +55,9 @@ private:
 	bool transitionIn;
 
 	sf::Sound &selectSound;
+	sf::Color &focusColor;
+	sf::Color &noFocusColor;
+	sf::Color &fillColor;
 };
 
 #endif

@@ -9,20 +9,19 @@
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
-/// <param name="startPos">The start position of the transition</param>
-/// <param name="endPos">The end position of the transition</param>
-Button::Button(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
+Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
 	: Label(textIn, parent, characterSize),
-	selectSound(selectSoundIn)
+	selectSound(selectSoundIn),
+	focusColor(focusColorIn),
+	noFocusColor(noFocusColorIn),
+	fillColor(fillColorIn)
 {
 	widgetPos = positionIn; // Set the position in the base class
 	widgetStartPos = startPos;
 	widgetEndPos = endPos;
 	m_buttonRect.setFillColor(sf::Color::Blue);
-	/* 
-		Set the position of the inherited label which must be moved slightly 
-		due to the variance in size of the text object with respect to the button rectangle 
-	*/
+	/* Set the position of the inherited label which must be moved slightly 
+	   due to the variance in size of the text object with respect to the button rectangle */
 	m_buttonRect.setPosition(getPosition()); // Set the position now as the base widgets position will be reset by setting the Label position <---> (LIAM) - Might want to give this a dirty refactor
 	Label::setPosition(sf::Vector2f(getPosition().x - characterSize / 12.f, getPosition().y - characterSize / 3.5f));
 	sf::Vector2f textSize(Label::getText().getGlobalBounds().width + BUTTON_BUFFER, Label::getTextHeight() + BUTTON_BUFFER); // Get the size of the Text bounding Box
@@ -49,12 +48,12 @@ bool Button::processInput(XboxController & controller)
 {
 	if (!m_hasFocus)
 	{
-		m_buttonRect.setFillColor(sf::Color::Cyan); // Set the Button Rectangle Color to Cyan if not in focus
+		m_buttonRect.setFillColor(noFocusColor); // Set the Button Rectangle Color to Cyan if not in focus
 		return false;
 	}
 	else
 	{
-		m_buttonRect.setFillColor(sf::Color::Magenta); //  Otherwise set it to Magenta
+		m_buttonRect.setFillColor(focusColor); //  Otherwise set it to Magenta
 		// Check inputs
 		if (controller.isButtonPressed(XBOX360_UP) // Up input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
@@ -118,10 +117,6 @@ bool Button::processInput(XboxController & controller)
 	}
 }
 
-/// <summary>
-/// Sets the position of the button at it's origin
-/// </summary>
-/// <param name="position">The position origin of the button</param>
 void Button::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
@@ -139,4 +134,16 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
 	target.draw(m_buttonRect); // Draw the button rectangle
 	Label::draw(target, states); // Draw the inherited Label
+}
+
+void Button::setColors()
+{
+	if (m_hasFocus)
+	{
+		m_buttonRect.setFillColor(focusColor);
+	}
+	else
+	{
+		m_buttonRect.setFillColor(noFocusColor);
+	}
 }

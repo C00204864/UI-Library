@@ -1,13 +1,16 @@
 #include "QuitScreen.h"
 
-QuitScreen::QuitScreen(sf::Sound &selectSoundIn)
+QuitScreen::QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn)
 	: transitionIn(true), 
-	selectSound(selectSoundIn)
+	selectSound(selectSoundIn),
+	focusColor(focusColorIn),
+	noFocusColor(noFocusColorIn),
+	fillColor(fillColorIn)
 {
 	m_quitTitle = new Label("Are you sure?", nullptr, 80, sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
 	m_quitTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_yesButton = new Button(selectSound, "Yes", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
-	m_noButton = new Button(selectSound, "No", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
+	m_yesButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Yes", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
+	m_noButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "No", nullptr, sf::Vector2f(400.0f, 900.0f), 40, 180.0f, 60.0f, sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
 
 	m_noButton->promoteFocus();
 

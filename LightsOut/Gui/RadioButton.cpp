@@ -10,13 +10,14 @@
 /// <param name="characterSize">Size of the Font used for drawing the text in the Label</param>
 /// <param name="boxWidth">Width of the RadioButton Box</param>
 /// <param name="boxHeight">Height of the RadioButton box</param>
-/// <param name="startPos">The start position of the transition</param>
-/// <param name="endPos">The end position of the transition</param>
-RadioButton::RadioButton(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
+RadioButton::RadioButton(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
 	std::vector<RadioButton *> & radGroup, sf::Vector2f &startPos, sf::Vector2f &endPos, 
 	int characterSize, float boxWidth, float boxHeight)
 		: Label(textIn, parent, characterSize), m_otherButtons(radGroup),
-	selectSound(selectSoundIn)
+	selectSound(selectSoundIn),
+	focusColor(focusColorIn),
+	noFocusColor(noFocusColorIn),
+	fillColor(fillColorIn)
 {
 	widgetPos = positionIn; // Set the position of the inherited Widget
 	widgetStartPos = startPos;
@@ -33,10 +34,6 @@ RadioButton::RadioButton(sf::Sound &selectSoundIn, const std::string & textIn, W
 	Label::setPosition(textOffset);
 }
 
-/// <summary>
-/// Sets the position of the button at it's origin
-/// </summary>
-/// <param name="position">The position origin of the button</param>
 void RadioButton::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
@@ -55,12 +52,12 @@ bool RadioButton::processInput(XboxController & controller)
 {
 	if (!m_hasFocus)
 	{
-		m_radioButtonRect.setOutlineColor(sf::Color::Cyan); // If the RadioButton is out of focus then set the color to Cyan
+		m_radioButtonRect.setOutlineColor(noFocusColor); // If the RadioButton is out of focus then set the color to Cyan
 		return false;
 	}
 	else
 	{
-		m_radioButtonRect.setOutlineColor(sf::Color::Magenta); // Otherwise set it to Magenta
+		m_radioButtonRect.setOutlineColor(focusColor); // Otherwise set it to Magenta
 		if (controller.isButtonPressed(XBOX360_UP) // Up input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 		{
@@ -114,7 +111,7 @@ bool RadioButton::processInput(XboxController & controller)
 				radioButton->deActivate();
 			}
 			m_state = true;
-			m_radioButtonRect.setFillColor(sf::Color::Blue);
+			m_radioButtonRect.setFillColor(fillColor);
 		}
 	}
 }
@@ -129,6 +126,11 @@ void RadioButton::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(m_radioButtonRect); // Draw the adioButton Rectangle
 	Label::draw(target, states); // Draw the inherited Label
 }
+
+//void RadioButton::add(RadioButton * radioButtonIn) <---> NOTE <---> SEE HEADER
+//{
+//	m_otherButtons.push_back(radioButtonIn);
+//}
 
 /// <summary>
 /// Function simply sets the m_state bolean to false and changes the fillcolor
@@ -146,4 +148,24 @@ void RadioButton::deActivate()
 bool RadioButton::getState()
 {
 	return m_state;
+}
+
+void RadioButton::setColors()
+{
+	if (m_hasFocus)
+	{
+		m_radioButtonRect.setOutlineColor(focusColor);
+	}
+	else
+	{
+		m_radioButtonRect.setOutlineColor(noFocusColor);
+	}
+	if (m_state)
+	{
+		m_radioButtonRect.setFillColor(fillColor);
+	}
+	else
+	{
+		m_radioButtonRect.setFillColor(sf::Color::White);
+	}
 }

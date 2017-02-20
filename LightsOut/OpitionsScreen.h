@@ -22,7 +22,7 @@
 class OptionsScreen
 {
 public:
-	OptionsScreen(sf::Sound &backingTrackIn, sf::Sound &selectSound);
+	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound);
 	~OptionsScreen();
 
 	void initialise();
@@ -50,7 +50,8 @@ private:
 	Label *m_difficultyTitle;
 	RadioButton *radioButton;
 	RadioButton *radioButton_2;
-	std::vector<RadioButton*> radioButtons;
+	std::vector<RadioButton*> difficultyRadioButtons;
+	std::vector<RadioButton*> colorRadioButtons;
 	CheckBox *checkBox;
 
 	
@@ -63,7 +64,9 @@ private:
 
 	sf::Sound &backingTrack;
 	sf::Sound &selectSound;
-
+	sf::Color &focusColor;
+	sf::Color &noFocusColor;
+	sf::Color &fillColor;
 };
 
 #endif

@@ -3,54 +3,65 @@
 /// <summary>
 /// 
 /// </summary>
-OptionsScreen::OptionsScreen(sf::Sound &backingTrackIn, sf::Sound &selectSoundIn)
+OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSoundIn)
 	: transitionIn(true),
 	backingTrack(backingTrackIn),
-	selectSound(selectSoundIn)
+	selectSound(selectSoundIn),
+	focusColor(focusColorIn),
+	noFocusColor(noFocusColorIn),
+	fillColor(fillColorIn)
 {
 	// TODO(Darren): Rename these variables
-	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 50.0f), sf::Vector2f(400.0f, 900.0f));
+	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 30.0f), sf::Vector2f(400.0f, 900.0f));
 	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	volume = new Slider(selectSound, std::string("Music Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(400.0f, 180.0f), sf::Vector2f(400.0f, 900.0f));
-	effects = new Slider(selectSound, std::string("Effects Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
-	checkBox = new CheckBox(selectSound, "Mute", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f,
-		sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
-	m_difficultyTitle = new Label("Difficulty", nullptr, 35, sf::Vector2f(400.0f, 370.0f), sf::Vector2f(400.0f, 900.0f));
-	radioButtons.push_back(new RadioButton(selectSound, "3 x 3", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
-		sf::Vector2f(300.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	radioButtons.push_back(new RadioButton(selectSound, "4 x 4", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
+	volume = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Music Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 140.0f), sf::Vector2f(400.0f, 900.0f));
+	effects = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Effects Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 190.0f), sf::Vector2f(400.0f, 900.0f));
+	checkBox = new CheckBox(focusColor, noFocusColor, fillColor, selectSound, "Mute", nullptr, sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f,
+		sf::Vector2f(400.0f, 260.0f), sf::Vector2f(400.0f, 900.0f));
+	m_difficultyTitle = new Label("Difficulty", nullptr, 35, sf::Vector2f(400.0f, 300.0f), sf::Vector2f(400.0f, 900.0f));
+	difficultyRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "3 x 3", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+		sf::Vector2f(250.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	difficultyRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "5 x 5", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+		sf::Vector2f(400.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	difficultyRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+		sf::Vector2f(550.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Fill", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+		sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Selected", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	radioButtons.push_back(new RadioButton(selectSound, "7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), radioButtons,
-		sf::Vector2f(500.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	m_redSlider = new Slider(selectSound, std::string("Red"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(400.0f, 540.0f), sf::Vector2f(400.0f, 900.0f));
-	m_greenSlider = new Slider(selectSound, std::string("Green"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
-		sf::Vector2f(400.0f, 610.0f), sf::Vector2f(400.0f, 900.0f));
-	m_blueSlider = new Slider(selectSound, std::string("Blue"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "de-Selected", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+		sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	
+	m_redSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Red"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 580.0f), sf::Vector2f(400.0f, 900.0f));
+	m_greenSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Green"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
+		sf::Vector2f(400.0f, 630.0f), sf::Vector2f(400.0f, 900.0f));
+	m_blueSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Blue"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 680.0f), sf::Vector2f(400.0f, 900.0f));
-	applyButton = new Button(selectSound, "Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
-		sf::Vector2f(400.0f, 750.0f), sf::Vector2f(400.0f, 900.0f));
+	applyButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
+		sf::Vector2f(400.0f, 740.0f), sf::Vector2f(400.0f, 900.0f));
 
 	volume->m_up = applyButton;
 	volume->m_down = effects;
 	effects->m_up = volume;
 	effects->m_down = checkBox;
-	checkBox->m_down = radioButtons.at(0);
+	checkBox->m_down = difficultyRadioButtons.at(0);
 	checkBox->m_up = effects;
-	radioButtons.at(0)->m_right = radioButtons.at(1);
-	radioButtons.at(1)->m_left = radioButtons.at(0);
-	radioButtons.at(1)->m_right = radioButtons.at(2);
-	radioButtons.at(2)->m_left = radioButtons.at(1);
-	radioButtons.at(0)->m_up = checkBox;
-	radioButtons.at(1)->m_up = checkBox;
-	radioButtons.at(2)->m_up = checkBox;
-	radioButtons.at(0)->m_down = m_redSlider;
-	radioButtons.at(1)->m_down = m_redSlider;
-	radioButtons.at(2)->m_down = m_redSlider;
+	difficultyRadioButtons.at(0)->m_right = difficultyRadioButtons.at(1);
+	difficultyRadioButtons.at(1)->m_left = difficultyRadioButtons.at(0);
+	difficultyRadioButtons.at(1)->m_right = difficultyRadioButtons.at(2);
+	difficultyRadioButtons.at(2)->m_left = difficultyRadioButtons.at(1);
+	difficultyRadioButtons.at(0)->m_up = checkBox;
+	difficultyRadioButtons.at(1)->m_up = checkBox;
+	difficultyRadioButtons.at(2)->m_up = checkBox;
+	difficultyRadioButtons.at(0)->m_down = m_redSlider;
+	difficultyRadioButtons.at(1)->m_down = m_redSlider;
+	difficultyRadioButtons.at(2)->m_down = m_redSlider;
 
-	m_redSlider->m_up = radioButtons.at(0);
+	m_redSlider->m_up = difficultyRadioButtons.at(0);
 	m_redSlider->m_down = m_greenSlider;
 	m_greenSlider->m_up = m_redSlider;
 	m_greenSlider->m_down = m_blueSlider;
@@ -93,7 +104,11 @@ void OptionsScreen::initialise()
 	m_gui.add(effects);
 	m_gui.add(checkBox);
 	m_gui.add(m_difficultyTitle);
-	for (RadioButton * radioButton : radioButtons)
+	for (RadioButton * radioButton : difficultyRadioButtons)
+	{
+		m_gui.add(radioButton);
+	}
+	for (RadioButton * radioButton : colorRadioButtons)
 	{
 		m_gui.add(radioButton);
 	}
@@ -114,8 +129,8 @@ void OptionsScreen::reset()
 	m_redSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
 	m_greenSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
 	applyButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-	radioButtons.at(0)->setPosition(sf::Vector2f(400.0f, 900.0f));
-	radioButtons.at(1)->setPosition(sf::Vector2f(400.0f, 900.0f));
+	difficultyRadioButtons.at(0)->setPosition(sf::Vector2f(400.0f, 900.0f));
+	difficultyRadioButtons.at(1)->setPosition(sf::Vector2f(400.0f, 900.0f));
 	checkBox->setPosition(sf::Vector2f(400.0f, 900.0f));
 
 	m_backToMenu = false;
@@ -168,6 +183,10 @@ void OptionsScreen::volumeUpSliderMusic()
 	{
 		std::cout << "volumeUpMusic callback" << std::endl;
 		backingTrack.setVolume(100 * volume->getPercentageFull());
+		fillColor.r--;
+		focusColor.r--;
+		noFocusColor.r--;
+		m_gui.setColors();
 	}
 }
 

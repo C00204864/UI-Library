@@ -41,6 +41,11 @@ protected:
 
 	XboxController xboxController;
 	
+
+	sf::Color m_focusColor;
+	sf::Color m_noFocusColor;
+	sf::Color m_fillColor;
+
 	SplashScreen splashScreen;
 	MainMenuScreen mainMenuScreen;
 	OptionsScreen optionsScreen;

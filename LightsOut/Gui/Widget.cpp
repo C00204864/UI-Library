@@ -67,7 +67,7 @@ sf::Vector2f Widget::getEndPos()
 }
 
 /// <summary>
-/// Updates the parent update metod.
+/// Updates the parent update method.
 /// </summary>
 void Widget::update(int numFrames)
 {
@@ -92,3 +92,5 @@ void Widget::updateShape()
 /// A virtual function that the sub class can implement.
 /// </summary>
 void Widget::draw(sf::RenderTarget & target, sf::RenderStates states) const { }
+
+void Widget::setColors() {}
