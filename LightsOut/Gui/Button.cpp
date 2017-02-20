@@ -9,6 +9,8 @@
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
+/// /// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
 	: Label(textIn, parent, characterSize),
 	selectSound(selectSoundIn),
@@ -20,8 +22,10 @@ Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &f
 	widgetStartPos = startPos;
 	widgetEndPos = endPos;
 	m_buttonRect.setFillColor(sf::Color::Blue);
-	/* Set the position of the inherited label which must be moved slightly 
-	   due to the variance in size of the text object with respect to the button rectangle */
+	/* 
+		Set the position of the inherited label which must be moved slightly 
+	    due to the variance in size of the text object with respect to the button rectangle 
+	*/
 	m_buttonRect.setPosition(getPosition()); // Set the position now as the base widgets position will be reset by setting the Label position <---> (LIAM) - Might want to give this a dirty refactor
 	Label::setPosition(sf::Vector2f(getPosition().x - characterSize / 12.f, getPosition().y - characterSize / 3.5f));
 	sf::Vector2f textSize(Label::getText().getGlobalBounds().width + BUTTON_BUFFER, Label::getTextHeight() + BUTTON_BUFFER); // Get the size of the Text bounding Box
@@ -117,6 +121,10 @@ bool Button::processInput(XboxController & controller)
 	}
 }
 
+/// <summary>
+/// Sets the position of the button at it's origin
+/// </summary>
+/// <param name="position">The position origin of the button</param>
 void Button::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;

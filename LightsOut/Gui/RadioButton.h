@@ -22,7 +22,6 @@ public:
 	bool processInput(XboxController & controller);
 	virtual void setPosition(sf::Vector2f &position) override;
 	void draw(sf::RenderTarget & target, sf::RenderStates states) const;
-	//void add(RadioButton * radioButtonIn); <---> NOTE <---> IM LEAVING THIS FUNCTION FOR NOW BUT TAKE IT OUT(!!!)
 	void deActivate();
 	bool getState();
 	void setColors() override;

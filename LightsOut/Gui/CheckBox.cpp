@@ -11,6 +11,8 @@ CheckBox::CheckBox() : Label("", nullptr), selectSound(sf::Sound()) , focusColor
 /// <param name="characterSize">Size of the Characters to be used by the font when drawing text</param>
 /// <param name="boxWidth">Width of the Check Box</param>
 /// <param name="boxHeight">Height of the Chec Box</param>
+/// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 CheckBox::CheckBox(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize,
 		float boxWidth, float boxHeight, sf::Vector2f &startPos, sf::Vector2f &endPos) 
 	: Label(textIn, parent, characterSize),
@@ -32,6 +34,10 @@ CheckBox::CheckBox(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Colo
 	Label::setPosition(textOffset);
 }
 
+/// <summary>
+/// Sets the position of the button at it's origin
+/// </summary>
+/// <param name="position">The position origin of the button</param>
 void CheckBox::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
@@ -160,11 +166,19 @@ void CheckBox::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	Label::draw(target, states); // Draw the inherited Label
 }
 
+/// <summary>
+/// Gets the state of the focus, if the check is currently
+/// been focused on by the player
+/// </summary>
+/// <returns>The state of m_hasFocus</returns>
 bool CheckBox::getFocus()
 {
 	return m_hasFocus;
 }
 
+/// <summary>
+/// Switches the state of the current check box
+/// </summary>
 void CheckBox::switchState()
 {
 	m_state = !m_state; // Flip the state of the bool
@@ -178,6 +192,10 @@ void CheckBox::switchState()
 	}
 }
 
+/// <summary>
+/// Sets the state of the checkbox
+/// </summary>
+/// <param name="stateIn">The state of the checkbox</param>
 void CheckBox::setState(bool stateIn)
 {
 	if (stateIn)
@@ -186,6 +204,10 @@ void CheckBox::setState(bool stateIn)
 	}
 }
 
+/// <summary>
+/// Returns the current state of the checkbox
+/// </summary>
+/// <returns>The current state of the checkbox</returns>
 bool CheckBox::getState()
 {
 	return m_state;

@@ -10,6 +10,11 @@
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
 
+/// Loads all game assets
+/// 
+/// Loads game assets that are used in the game and provides
+/// a method to return a pointer to the location in memory 
+/// it's loaded
 class ResourceManager
 {
 public:

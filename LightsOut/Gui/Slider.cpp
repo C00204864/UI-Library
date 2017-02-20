@@ -9,6 +9,8 @@
 /// <param name="characterSize">Size of the font used for drawing the text</param>
 /// <param name="sliderWidth">Width of the slider</param>
 /// <param name="sliderHeight">Height of the slider</param>
+/// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 Slider::Slider(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, std::string& text, Widget* parent, sf::Vector2f &position, int characterSize, float sliderWidth,
 	float sliderHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
 	: Label(text, parent, characterSize), m_barBaseWidth(sliderWidth), m_barSize(m_barBaseWidth), m_barBaseHeight(sliderHeight), 
@@ -36,6 +38,10 @@ Slider::Slider(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &f
 	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
 }
 
+/// <summary>
+/// Sets the position of the button at it's origin
+/// </summary>
+/// <param name="position">The position origin of the button</param>
 void Slider::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;

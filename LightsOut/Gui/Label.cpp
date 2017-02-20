@@ -6,6 +6,8 @@
 /// <param name="text">Text to be displayed by the Label</param>
 /// <param name="parent">parent widget to the label</param>
 /// <param name="size">Font size of the Label</param>
+/// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 Label::Label(const std::string& text, Widget* parent, unsigned int size, sf::Vector2f &startPos, sf::Vector2f &endPos) 
 	: Widget(parent)
 {
@@ -21,9 +23,11 @@ Label::Label(const std::string& text, Widget* parent, unsigned int size, sf::Vec
 	updateShape();
 
 	sf::Text fontCheck;
-	/* We use this to make sure the heigh of the buttons is constant as the 
-	   bounding box IS affected by ascenders and descenders in strings so
-	   the true text height is the maximum height possible*/
+	/* 
+		We use this to make sure the heigh of the buttons is constant as the 
+	    bounding box IS affected by ascenders and descenders in strings so
+	    the true text height is the maximum height possible
+	*/
 	fontCheck.setFont(*m_text.getFont());
 	fontCheck.setCharacterSize(size);
 	fontCheck.setString("ph|");
