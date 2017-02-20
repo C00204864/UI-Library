@@ -27,14 +27,12 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 		sf::Vector2f(400.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	difficultyRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
 		sf::Vector2f(550.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	
-	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Fill", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Fill", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
 		sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Selected", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Selected", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "de-Selected", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
+	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "de-Selected", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
 		sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
-	
 	m_redSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Red"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 580.0f), sf::Vector2f(400.0f, 900.0f));
 	m_greenSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Green"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
@@ -44,6 +42,7 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	applyButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Apply", nullptr, sf::Vector2f(400.0f, 900.0f), 30, 100, 40.0f,
 		sf::Vector2f(400.0f, 740.0f), sf::Vector2f(400.0f, 900.0f));
 
+	// Directional Changes
 	volume->m_up = applyButton;
 	volume->m_down = effects;
 	effects->m_up = volume;
@@ -57,10 +56,19 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	difficultyRadioButtons.at(0)->m_up = checkBox;
 	difficultyRadioButtons.at(1)->m_up = checkBox;
 	difficultyRadioButtons.at(2)->m_up = checkBox;
-	difficultyRadioButtons.at(0)->m_down = m_redSlider;
-	difficultyRadioButtons.at(1)->m_down = m_redSlider;
-	difficultyRadioButtons.at(2)->m_down = m_redSlider;
-
+	difficultyRadioButtons.at(0)->m_down = colorRadioButtons.at(0);
+	difficultyRadioButtons.at(1)->m_down = colorRadioButtons.at(1);
+	difficultyRadioButtons.at(2)->m_down = colorRadioButtons.at(2);
+	colorRadioButtons.at(0)->m_right = colorRadioButtons.at(1);
+	colorRadioButtons.at(1)->m_left = colorRadioButtons.at(0);
+	colorRadioButtons.at(1)->m_right = colorRadioButtons.at(2);
+	colorRadioButtons.at(2)->m_left = colorRadioButtons.at(1);
+	colorRadioButtons.at(0)->m_up = difficultyRadioButtons.at(0);
+	colorRadioButtons.at(1)->m_up = difficultyRadioButtons.at(1);
+	colorRadioButtons.at(2)->m_up = difficultyRadioButtons.at(2);
+	colorRadioButtons.at(0)->m_down = m_redSlider;
+	colorRadioButtons.at(1)->m_down = m_redSlider;
+	colorRadioButtons.at(2)->m_down = m_redSlider;
 	m_redSlider->m_up = difficultyRadioButtons.at(0);
 	m_redSlider->m_down = m_greenSlider;
 	m_greenSlider->m_up = m_redSlider;
@@ -85,7 +93,6 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	m_redSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderMusic, this);
 	m_greenSlider->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
 	m_greenSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
-	// NOTE(Darren): Testing apply button callback
 	applyButton->select = std::bind(&OptionsScreen::applyButtonSelected, this);
 }
 
