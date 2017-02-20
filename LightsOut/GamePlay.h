@@ -15,7 +15,9 @@
 #include "Gui\RadioButton.h"
 #include "Gui\CheckBox.h"
 
-
+/// Handles the game play screen
+/// 
+/// Provides the update and render for the lights out game.
 class GamePlay {
 public:
 	GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);

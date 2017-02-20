@@ -80,7 +80,7 @@ void Game::processGameEvents(sf::Event& event)
 }
 
 /// <summary>
-/// 
+/// Updates the screen state bassed on the current game state
 /// </summary>
 /// <param name="dt"></param>
 void Game::update(double dt)
@@ -170,7 +170,7 @@ void Game::update(double dt)
 }
 
 /// <summary>
-/// 
+/// Renders the current game screen based on the current game state
 /// </summary>
 void Game::render()
 {
