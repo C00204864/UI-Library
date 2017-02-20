@@ -7,10 +7,13 @@
 Game::Game()
 	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close),
 	xboxController(CONTROLLER_ONE),
-	mainMenuScreen(m_selectSound),
-	optionsScreen(m_backingTrack, m_selectSound),
-	quiteScreen(m_selectSound),
-	gamePlayScreen(m_selectSound)
+	m_focusColor(sf::Color::Red),
+	m_noFocusColor(sf::Color::Blue),
+	m_fillColor(sf::Color::Green),
+	mainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
+	optionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound),
+	quiteScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
+	gamePlayScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)
 
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
@@ -19,7 +22,7 @@ Game::Game()
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
 	quiteScreen.initialise();
-	gamePlayScreen.init(3);
+	gamePlayScreen.init(10);
 	m_backingTrack.setLoop(true);
 	m_backingTrack.play();
 }

@@ -16,7 +16,7 @@
 class MainMenuScreen
 {
 public:
-	MainMenuScreen(sf::Sound &selectSound);
+	MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
 
 	void initialise();
 	void update(XboxController& controller);
@@ -51,6 +51,9 @@ private:
 	float interpolation;
 
 	sf::Sound &selectSound;
+	sf::Color &focusColor;
+	sf::Color &noFocusColor;
+	sf::Color &fillColor;
 };
 
 #endif

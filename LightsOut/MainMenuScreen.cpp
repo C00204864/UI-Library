@@ -1,16 +1,19 @@
 #include "MainMenuScreen.h"
 
-MainMenuScreen::MainMenuScreen(sf::Sound &selectSoundIn) :
-	selectSound(selectSoundIn), m_alphaFadeValue(255)
+MainMenuScreen::MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn) :
+	selectSound(selectSoundIn), m_alphaFadeValue(255),
+	focusColor(focusColorIn),
+	noFocusColor(noFocusColorIn),
+	fillColor(fillColorIn)
 {
 	m_gameTitle = new Label("Lights Out!", nullptr, 80, sf::Vector2f(400.0f, 80.0f), sf::Vector2f(400.0f, 900.0f));
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 80.0f));
 
-	m_playButton = new Button(selectSound, "Play", nullptr, sf::Vector2f(400.0f, 250.0f), 50, 500.0f, 60.0f,
+	m_playButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Play", nullptr, sf::Vector2f(400.0f, 250.0f), 50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));
-	m_optionsButton = new Button(selectSound, "Options", nullptr, sf::Vector2f(400.0f, 450.0f),50, 500.0f, 60.0f,
+	m_optionsButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Options", nullptr, sf::Vector2f(400.0f, 450.0f),50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f));
-	m_quitButton = new Button(selectSound, "Quit", nullptr, sf::Vector2f(400.0f, 650.0f), 50, 500.0f, 60.0f,
+	m_quitButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Quit", nullptr, sf::Vector2f(400.0f, 650.0f), 50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 650.0f), sf::Vector2f(400.0f, 900.0f));
 
 	m_playButton->promoteFocus();
