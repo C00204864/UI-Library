@@ -24,7 +24,9 @@ public:
 	Callback increase, decrease;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	float getPercentageFull();
+	void setPercentageFull(float percentageIn);
 	void setColors() override;
+	bool getFocus();
 
 private:
 	sf::RectangleShape m_bar, m_base;

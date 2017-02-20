@@ -118,6 +118,14 @@ bool RadioButton::processInput(XboxController & controller)
 			}
 			m_state = true;
 			m_radioButtonRect.setFillColor(fillColor);
+			try
+			{
+				select();
+			}
+			catch (std::bad_function_call)
+			{
+				std::cout << "RADIOBUTTON:: Bad function call" << std::endl;
+			}
 		}
 	}
 }

@@ -38,6 +38,15 @@ private:
 	void volumeDownSliderEffects();
 	void applyButtonSelected();
 	void checkBoxSwitched();
+	void setColorSliders();
+	void redSliderUp();
+	void redSliderDown();
+	void greenSliderUp();
+	void greenSliderDown();
+	void blueSliderUp();
+	void blueSliderDown();
+
+	void setColor();
 
 	Gui m_gui;
 	Label *m_optionsTitle;

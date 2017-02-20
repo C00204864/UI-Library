@@ -25,14 +25,13 @@ Slider::Slider(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &f
 
 	// Base under the moving slider bar
 	m_base.setSize(sf::Vector2f(m_barBaseWidth, m_barBaseHeight));
-	m_base.setFillColor(fillColor);
 	m_base.setOutlineThickness(2);
 	m_base.setPosition(widgetPos);
 
 	// The slider bar the player changes
+	m_bar.setFillColor(fillColor);
 	m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight));
 	m_bar.setPosition(widgetPos);
-
 	m_base.setOrigin(m_base.getLocalBounds().width / 2.0f, m_base.getLocalBounds().height / 2.0f);
 	m_bar.setOrigin(m_base.getLocalBounds().width / 2.0f, m_base.getLocalBounds().height / 2.0f);
 	Label::setPosition(position - sf::Vector2f(0.0f, 30.0f));
@@ -147,6 +146,16 @@ float Slider::getPercentageFull()
 	return (m_barSize / m_barBaseWidth); // Simple conversion to a percentage
 }
 
+/// <summary>
+/// Function allows the sliders bar size to be set
+/// </summary>
+/// <param name="percentageIn">A value between zero and one representing how full the slider is</param>
+void Slider::setPercentageFull(float percentageIn)
+{
+	m_barSize = percentageIn * m_barBaseWidth;
+	m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight));
+}
+
 void Slider::setColors()
 {
 	if (m_hasFocus)
@@ -157,5 +166,10 @@ void Slider::setColors()
 	{
 		m_base.setOutlineColor(noFocusColor);
 	}
-	m_base.setFillColor(fillColor);
+	m_bar.setFillColor(fillColor);
+}
+
+bool Slider::getFocus()
+{
+	return m_hasFocus;
 }

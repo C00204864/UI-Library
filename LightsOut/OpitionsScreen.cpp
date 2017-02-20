@@ -89,11 +89,17 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	checkBox->select = std::bind(&OptionsScreen::checkBoxSwitched, this);
 
 	// NOTE(Darren): Again, all for testing
-	m_redSlider->increase = std::bind(&OptionsScreen::volumeUpSliderMusic, this);
-	m_redSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderMusic, this);
-	m_greenSlider->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
-	m_greenSlider->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
+	m_redSlider->increase = std::bind(&OptionsScreen::setColor, this);
+	m_redSlider->decrease = std::bind(&OptionsScreen::setColor, this);
+	m_greenSlider->increase = std::bind(&OptionsScreen::setColor, this);
+	m_greenSlider->decrease = std::bind(&OptionsScreen::setColor, this);
+	m_blueSlider->increase = std::bind(&OptionsScreen::setColor, this);
+	m_blueSlider->decrease = std::bind(&OptionsScreen::setColor, this);
 	applyButton->select = std::bind(&OptionsScreen::applyButtonSelected, this);
+
+	colorRadioButtons.at(0)->select = std::bind(&OptionsScreen::setColorSliders, this);
+	colorRadioButtons.at(1)->select = std::bind(&OptionsScreen::setColorSliders, this);
+	colorRadioButtons.at(2)->select = std::bind(&OptionsScreen::setColorSliders, this);
 }
 
 /// <summary>
@@ -190,10 +196,6 @@ void OptionsScreen::volumeUpSliderMusic()
 	{
 		std::cout << "volumeUpMusic callback" << std::endl;
 		backingTrack.setVolume(100 * volume->getPercentageFull());
-		fillColor.r--;
-		focusColor.r--;
-		noFocusColor.r--;
-		m_gui.setColors();
 	}
 }
 
@@ -242,6 +244,61 @@ void OptionsScreen::checkBoxSwitched()
 		backingTrack.setVolume(100 * (volume->getPercentageFull()));
 		selectSound.setVolume(100 * (effects->getPercentageFull()));
 	}
+}
+
+void OptionsScreen::setColorSliders()
+{
+	if (colorRadioButtons.at(0)->getState())
+	{
+		std::cout << "-1-" << std::endl;
+		m_redSlider->setPercentageFull(fillColor.r / 255.f);
+		m_greenSlider->setPercentageFull(fillColor.g / 255.f);
+		m_blueSlider->setPercentageFull(fillColor.b / 255.f);
+	}
+	else if (colorRadioButtons.at(1)->getState())
+	{
+		std::cout << "-2-" << std::endl;
+		m_redSlider->setPercentageFull(focusColor.r / 255.f);
+		m_greenSlider->setPercentageFull(focusColor.g / 255.f);
+		m_blueSlider->setPercentageFull(focusColor.b / 255.f);
+	}
+	else
+	{
+		std::cout << "-3-" << std::endl;
+		m_redSlider->setPercentageFull(noFocusColor.r / 255.f);
+		m_greenSlider->setPercentageFull(noFocusColor.g / 255.f);
+		m_blueSlider->setPercentageFull(noFocusColor.b / 255.f);
+	}
+}
+
+void OptionsScreen::setColor()
+{
+	sf::Color *color;
+	if (colorRadioButtons.at(0)->getState())
+	{
+		color  = &fillColor;
+	}
+	else if (colorRadioButtons.at(1)->getState())
+	{
+		color = &focusColor;
+	}
+	else
+	{
+		color = &noFocusColor;
+	}
+	if (m_redSlider->getFocus())
+	{
+		color->r = m_redSlider->getPercentageFull() * 255.f;
+	}
+	else if (m_greenSlider->getFocus())
+	{
+		color->g = m_greenSlider->getPercentageFull() * 255.f;
+	}
+	else
+	{
+		color->b = m_blueSlider->getPercentageFull() * 255.f;
+	}
+	m_gui.setColors();
 }
 
 bool OptionsScreen::getChangeStateMenu()

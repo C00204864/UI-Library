@@ -25,6 +25,8 @@ public:
 	void deActivate();
 	bool getState();
 	void setColors() override;
+	typedef std::function<void()> Callback;
+	Callback select;
 private:
 	bool m_state = false;
 	sf::RectangleShape m_radioButtonRect;
