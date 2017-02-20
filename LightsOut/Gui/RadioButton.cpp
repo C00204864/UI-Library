@@ -10,6 +10,8 @@
 /// <param name="characterSize">Size of the Font used for drawing the text in the Label</param>
 /// <param name="boxWidth">Width of the RadioButton Box</param>
 /// <param name="boxHeight">Height of the RadioButton box</param>
+/// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 RadioButton::RadioButton(sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
 	std::vector<RadioButton *> & radGroup, sf::Vector2f &startPos, sf::Vector2f &endPos, 
 	int characterSize, float boxWidth, float boxHeight)
@@ -31,6 +33,10 @@ RadioButton::RadioButton(sf::Sound &selectSoundIn, const std::string & textIn, W
 	Label::setPosition(textOffset);
 }
 
+/// <summary>
+/// Sets the position of the button at it's origin
+/// </summary>
+/// <param name="position">The position origin of the button</param>
 void RadioButton::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
@@ -123,11 +129,6 @@ void RadioButton::draw(sf::RenderTarget & target, sf::RenderStates states) const
 	target.draw(m_radioButtonRect); // Draw the adioButton Rectangle
 	Label::draw(target, states); // Draw the inherited Label
 }
-
-//void RadioButton::add(RadioButton * radioButtonIn) <---> NOTE <---> SEE HEADER
-//{
-//	m_otherButtons.push_back(radioButtonIn);
-//}
 
 /// <summary>
 /// Function simply sets the m_state bolean to false and changes the fillcolor

@@ -51,6 +51,11 @@ void Gui::add(Widget* widget)
 	updateShape();
 }
 
+/// <summary>
+/// Transition the Gui element from the end position to it's start position
+/// </summary>
+/// <param name="transitionSpeed">The speed of the transition</param>
+/// <param name="interpolation">Number from [0, 1] of far along the transition is</param>
 void Gui::transitionOut(float transitionSpeed, float &interpolation)
 {
 	if (interpolation < 1.0f)
@@ -65,6 +70,11 @@ void Gui::transitionOut(float transitionSpeed, float &interpolation)
 	}
 }
 
+/// <summary>
+/// Transition the Gui element from the start position to it's end position
+/// </summary>
+/// <param name="transitionSpeed">The speed of the transition</param>
+/// <param name="interpolation">Number from [0, 1] of far along the transition is</param>
 void Gui::transitionIn(float transitionSpeed, float &interpolation)
 {
 	if (interpolation < 1.0f)
