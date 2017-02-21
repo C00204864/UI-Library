@@ -38,7 +38,8 @@ protected:
 		MainMenu,
 		Options,
 		Quit,
-		GamePlay
+		GamePlay,
+		EndGameState;
 	};
 	GameState currentGameState = GameState::SplashScreen;
 

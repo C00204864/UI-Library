@@ -26,6 +26,8 @@ public:
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
 	void reset(int gridSize);
+	bool hasPlayerWon();
+
 	Gui m_gui;
 	Label *m_timeLabel;
 	Label *m_movesLabel;
@@ -40,6 +42,7 @@ private:
 	void selectedRight();
 	sf::Vector2f posCalc(float gridSize, int i);
 	bool checkWin();
+
 	// Constants and Variables
 	const std::string MOVES = "Moves: ";
 	const std::string TIME = "Time: ";
@@ -53,6 +56,7 @@ private:
 	int m_moves;
 	int m_timeInSeconds;
 	sf::Clock timeTotal;
+	bool m_playerWon;
 
 	float interpolation;
 	bool transitionIn;

@@ -163,6 +163,16 @@ void Game::update(double dt)
 
 			gamePlayScreen.update(xboxController);
 
+			if (gamePlayScreen.hasPlayerWon())
+			{
+				currentGameState = GameState::EndGameState;
+			}
+
+			break;
+		}
+
+		case GameState::EndGameState:
+		{
 			break;
 		}
 
@@ -212,6 +222,11 @@ void Game::render()
 		{
 			gamePlayScreen.render(m_window);
 
+			break;
+		}
+
+		case GameState::EndGameState:
+		{
 			break;
 		}
 

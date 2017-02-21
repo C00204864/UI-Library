@@ -163,6 +163,7 @@ void GamePlay::switchArea()
 	if (checkWin())
 	{
 		std::cout << "winner winner chicken dinner"; // Do Nothing... Insert code for switching Game state here (Liam wuz here 2k17) <--->
+		m_playerWon = true;
 	}
 }
 
@@ -180,6 +181,11 @@ bool GamePlay::checkWin()
 		}
 	}
 	return true; // Otherwise return true;
+}
+
+bool GamePlay::hasPlayerWon()
+{
+	return m_playerWon;
 }
 
 /// <summary>
@@ -218,4 +224,5 @@ void GamePlay::reset(int gridSize)
 {
 	transitionIn = true;
 	interpolation = 0.0f;
+	m_playerWon = false;
 }
