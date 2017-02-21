@@ -52,7 +52,7 @@ protected:
 	SplashScreen splashScreen;
 	MainMenuScreen mainMenuScreen;
 	OptionsScreen optionsScreen;
-	QuitScreen quiteScreen;
+	QuitScreen quitScreen;
 	GamePlay gamePlayScreen;
 
 	sf::Sound m_backingTrack;

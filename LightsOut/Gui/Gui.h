@@ -24,6 +24,7 @@ public:
 	void transitionOut(float transitionSpeed, float &interpolation);
 	void transitionIn(float transitionSpeed, float &interpolation);
 	void setColors() override;
+	void clear();
 	
 	// A vector of all the widgets this Gui handles
 	std::vector<Widget*> m_widgets;

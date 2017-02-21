@@ -111,3 +111,12 @@ void Gui::setColors()
 		widget->setColors();
 	}
 }
+
+void Gui::clear()
+{
+	for (Widget* widget : m_widgets)
+	{
+		delete widget;
+	}
+	m_widgets.clear();
+}

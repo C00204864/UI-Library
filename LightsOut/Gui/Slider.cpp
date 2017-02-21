@@ -68,8 +68,8 @@ bool Slider::processInput(XboxController &controller)
 		if (controller.isButtonHeldDown(XBOX360_RIGHT) // Right input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			if(m_barSize < m_barBaseWidth)
-				m_barSize += 1.0f; // Increase the bar size
+			if(m_barSize < m_barBaseWidth - 2)
+				m_barSize += 2.0f; // Increase the bar size
 			try 
 			{
 				increase(); // Call the associated callback function
@@ -84,8 +84,8 @@ bool Slider::processInput(XboxController &controller)
 		else if (controller.isButtonHeldDown(XBOX360_LEFT) // Left input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			if (m_barSize > 0)
-				m_barSize -= 1.0f; // Decrease the bar size
+			if (m_barSize > 2)
+				m_barSize -= 2.0f; // Decrease the bar size
 			try
 			{
 				decrease(); // Call the associtaed callback function

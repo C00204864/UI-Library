@@ -137,7 +137,7 @@ bool RadioButton::processInput(XboxController & controller)
 /// <param name="states">States used for drawing</param>
 void RadioButton::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-	target.draw(m_radioButtonRect); // Draw the adioButton Rectangle
+	target.draw(m_radioButtonRect); // Draw the radioButton Rectangle
 	Label::draw(target, states); // Draw the inherited Label
 }
 
@@ -154,11 +154,31 @@ void RadioButton::deActivate()
 /// Simple getter method for the m_state member variable
 /// </summary>
 /// <returns>The state of the RadioButton</returns>
-bool RadioButton::getState()
+bool RadioButton::getState() const
 {
 	return m_state;
 }
 
+/// <summary>
+/// Function used to set the state of a radiobutton
+/// </summary>
+/// <param name="stateIn">The state you want to set the radioButton to</param>
+void RadioButton::activate()
+{
+	m_radioButtonRect.setFillColor(fillColor);
+	m_state = true;
+	for (auto & otherRadioButton : m_otherButtons)
+	{
+		if (otherRadioButton != this)
+		{
+			otherRadioButton->deActivate(); // This is done so as to ensure that no two radio buttons in a set are ever on similtaneously
+		}
+	}
+}
+
+/// <summary>
+/// Function used to reset all of the colours used by the radio button if those colours are changed
+/// </summary>
 void RadioButton::setColors()
 {
 	if (m_hasFocus)

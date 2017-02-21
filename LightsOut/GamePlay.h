@@ -25,6 +25,7 @@ public:
 	void init(int gridSize);
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
+	void reset(int gridSize);
 	Gui m_gui;
 	Label *m_timeLabel;
 	Label *m_movesLabel;

@@ -215,3 +215,12 @@ void GamePlay::selectedRight()
 {
 	selectedIndex++;
 }
+
+void GamePlay::reset(int gridSize)
+{
+	transitionIn = true;
+	m_gui.clear();
+	m_gui.setColors();
+	init(gridSize);
+	
+}

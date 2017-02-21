@@ -69,7 +69,7 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	colorRadioButtons.at(0)->m_down = m_redSlider;
 	colorRadioButtons.at(1)->m_down = m_redSlider;
 	colorRadioButtons.at(2)->m_down = m_redSlider;
-	m_redSlider->m_up = difficultyRadioButtons.at(0);
+	m_redSlider->m_up = colorRadioButtons.at(0);
 	m_redSlider->m_down = m_greenSlider;
 	m_greenSlider->m_up = m_redSlider;
 	m_greenSlider->m_down = m_blueSlider;
@@ -100,6 +100,26 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	colorRadioButtons.at(0)->select = std::bind(&OptionsScreen::setColorSliders, this);
 	colorRadioButtons.at(1)->select = std::bind(&OptionsScreen::setColorSliders, this);
 	colorRadioButtons.at(2)->select = std::bind(&OptionsScreen::setColorSliders, this);
+
+	difficultyRadioButtons.at(0)->select = std::bind(&OptionsScreen::changeDifficulty, this);
+	difficultyRadioButtons.at(1)->select = std::bind(&OptionsScreen::changeDifficulty, this);
+	difficultyRadioButtons.at(2)->select = std::bind(&OptionsScreen::changeDifficulty, this);
+	
+	// Set one of the radio buttons to be true in the radio button set
+	colorRadioButtons.at(0)->activate();
+	if (m_difficulty == 3)
+	{
+		difficultyRadioButtons.at(0)->activate();
+	}
+	else if (m_difficulty == 5)
+	{
+		difficultyRadioButtons.at(1)->activate();
+	}
+	else
+	{
+		difficultyRadioButtons.at(2)->activate();
+	}
+	setColorSliders();
 }
 
 /// <summary>
@@ -246,31 +266,35 @@ void OptionsScreen::checkBoxSwitched()
 	}
 }
 
+/// <summary>
+/// Function used for determining the starting positions for each RGB
+/// when the colour radio buttons are interacted with
+/// </summary>
 void OptionsScreen::setColorSliders()
 {
 	if (colorRadioButtons.at(0)->getState())
 	{
-		std::cout << "-1-" << std::endl;
 		m_redSlider->setPercentageFull(fillColor.r / 255.f);
 		m_greenSlider->setPercentageFull(fillColor.g / 255.f);
 		m_blueSlider->setPercentageFull(fillColor.b / 255.f);
 	}
 	else if (colorRadioButtons.at(1)->getState())
 	{
-		std::cout << "-2-" << std::endl;
 		m_redSlider->setPercentageFull(focusColor.r / 255.f);
 		m_greenSlider->setPercentageFull(focusColor.g / 255.f);
 		m_blueSlider->setPercentageFull(focusColor.b / 255.f);
 	}
 	else
 	{
-		std::cout << "-3-" << std::endl;
 		m_redSlider->setPercentageFull(noFocusColor.r / 255.f);
 		m_greenSlider->setPercentageFull(noFocusColor.g / 255.f);
 		m_blueSlider->setPercentageFull(noFocusColor.b / 255.f);
 	}
 }
 
+/// <summary>
+/// Function determines which RGB value of which colour should be changed
+/// </summary>
 void OptionsScreen::setColor()
 {
 	sf::Color *color;
@@ -304,6 +328,30 @@ void OptionsScreen::setColor()
 bool OptionsScreen::getChangeStateMenu()
 {
 	return m_backToMenu;
+}
+
+int OptionsScreen::getDifficulty() const
+{
+	return m_difficulty;
+}
+
+void OptionsScreen::changeDifficulty()
+{
+	if (difficultyRadioButtons.at(0)->getState())
+	{
+		m_difficulty = 3;
+		return;
+	}
+	else if (difficultyRadioButtons.at(1)->getState())
+	{
+		m_difficulty = 5;
+		return;
+	}
+	else
+	{
+		m_difficulty = 7;
+		return;
+	}
 }
 
 /// <summary>

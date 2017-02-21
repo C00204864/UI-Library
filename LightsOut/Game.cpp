@@ -12,7 +12,7 @@ Game::Game()
 	m_fillColor(sf::Color::Green),
 	mainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
 	optionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound),
-	quiteScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
+	quitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
 	gamePlayScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)
 
 {
@@ -21,7 +21,7 @@ Game::Game()
 
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
-	quiteScreen.initialise();
+	quitScreen.initialise();
 	gamePlayScreen.init(3);
 	m_backingTrack.setLoop(true);
 	m_backingTrack.play();
@@ -106,6 +106,7 @@ void Game::update(double dt)
 			if (mainMenuScreen.getChangeStateGamePlay())
 			{
 				currentGameState = GameState::GamePlay;
+				gamePlayScreen.reset(optionsScreen.getDifficulty());
 				mainMenuScreen.reset();
 			}
 			else if (mainMenuScreen.getChangeStateOptions())
@@ -137,14 +138,14 @@ void Game::update(double dt)
 
 		case GameState::Quit:
 		{
-			quiteScreen.update(xboxController);
+			quitScreen.update(xboxController);
 
-			if (quiteScreen.getChangeStateMenu())
+			if (quitScreen.getChangeStateMenu())
 			{
 				currentGameState = GameState::MainMenu;
-				quiteScreen.reset();
+				quitScreen.reset();
 			}
-			else if (quiteScreen.getExitGameState())
+			else if (quitScreen.getExitGameState())
 			{
 				m_window.close();
 			}
@@ -160,7 +161,6 @@ void Game::update(double dt)
 			{
 				currentGameState = GameState::MainMenu;
 			}
-
 			break;
 		}
 
@@ -201,7 +201,7 @@ void Game::render()
 
 		case GameState::Quit:
 		{
-			quiteScreen.render(m_window);
+			quitScreen.render(m_window);
 
 			break;
 		}

@@ -24,13 +24,12 @@ class OptionsScreen
 public:
 	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound);
 	~OptionsScreen();
-
 	void initialise();
 	void update(XboxController& controller);
 	void render(sf::RenderWindow& window);
 	bool getChangeStateMenu();
 	void reset();
-
+	int getDifficulty() const;
 private:
 	void volumeUpSliderMusic();
 	void volumeDownSliderMusic();
@@ -39,14 +38,8 @@ private:
 	void applyButtonSelected();
 	void checkBoxSwitched();
 	void setColorSliders();
-	void redSliderUp();
-	void redSliderDown();
-	void greenSliderUp();
-	void greenSliderDown();
-	void blueSliderUp();
-	void blueSliderDown();
-
 	void setColor();
+	void changeDifficulty();
 
 	Gui m_gui;
 	Label *m_optionsTitle;
@@ -63,8 +56,6 @@ private:
 	std::vector<RadioButton*> colorRadioButtons;
 	CheckBox *checkBox;
 
-	
-
 	bool m_applyButtonPressed;
 	bool m_backToMenu;
 
@@ -76,6 +67,8 @@ private:
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
+
+	int m_difficulty = 3;
 };
 
 #endif
