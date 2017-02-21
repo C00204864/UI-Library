@@ -89,10 +89,6 @@ void QuitScreen::reset()
 	m_noButton->promoteFocus();
 	transitionIn = true;
 	interpolation = 0.0f;
-
-	m_quitTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_yesButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_noButton->setPosition(sf::Vector2f(400.0f, 900.0f));
 }
 
 void QuitScreen::noButtonSelected()

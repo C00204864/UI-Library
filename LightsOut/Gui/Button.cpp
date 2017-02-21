@@ -9,7 +9,7 @@
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
-/// /// <param name="startPos">The start position of the transition</param>
+/// <param name="startPos">The start position of the transition</param>
 /// <param name="endPos">The end position of the transition</param>
 Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
 	: Label(textIn, parent, characterSize),

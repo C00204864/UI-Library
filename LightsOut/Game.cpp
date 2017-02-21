@@ -155,12 +155,14 @@ void Game::update(double dt)
 
 		case GameState::GamePlay:
 		{
-			gamePlayScreen.update(xboxController);
-
 			if(xboxController.isButtonPressed(XBOX360_BACK))
 			{
 				currentGameState = GameState::MainMenu;
+				gamePlayScreen.reset(optionsScreen.getDifficulty());
 			}
+
+			gamePlayScreen.update(xboxController);
+
 			break;
 		}
 

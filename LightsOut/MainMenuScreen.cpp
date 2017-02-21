@@ -41,11 +41,6 @@ void MainMenuScreen::initialise()
 
 void MainMenuScreen::reset()
 {
-	m_gameTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_playButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_optionsButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_quitButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-
 	changeToOptionsState = false;
 	changeToQuitState = false;
 	m_changeToGamePlayState = false;

@@ -182,8 +182,6 @@ bool GamePlay::checkWin()
 	return true; // Otherwise return true;
 }
 
-// Functions below are simply included for efficiency and not necessarily needed(requires refactoring to exclude these functions)
-
 /// <summary>
 /// changes the selected index to the index of the check box above it
 /// </summary>
@@ -219,8 +217,5 @@ void GamePlay::selectedRight()
 void GamePlay::reset(int gridSize)
 {
 	transitionIn = true;
-	m_gui.clear();
-	m_gui.setColors();
-	init(gridSize);
-	
+	interpolation = 0.0f;
 }

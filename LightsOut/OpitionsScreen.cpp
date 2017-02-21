@@ -156,16 +156,6 @@ void OptionsScreen::reset()
 	// Reset the top Gui elements to be in focus
 	volume->promoteFocus();
 
-	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
-	volume->setPosition(sf::Vector2f(400.0f, 900.0f));
-	effects->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_redSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
-	m_greenSlider->setPosition(sf::Vector2f(400.0f, 900.0f));
-	applyButton->setPosition(sf::Vector2f(400.0f, 900.0f));
-	difficultyRadioButtons.at(0)->setPosition(sf::Vector2f(400.0f, 900.0f));
-	difficultyRadioButtons.at(1)->setPosition(sf::Vector2f(400.0f, 900.0f));
-	checkBox->setPosition(sf::Vector2f(400.0f, 900.0f));
-
 	m_backToMenu = false;
 	transitionIn = true;
 	interpolation = 0.0f;
