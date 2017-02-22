@@ -50,8 +50,7 @@ private:
 	Slider *m_greenSlider;
 	Slider *m_blueSlider;
 	Label *m_difficultyTitle;
-	RadioButton *radioButton;
-	RadioButton *radioButton_2;
+	Label *m_colorTitle;
 	std::vector<RadioButton*> difficultyRadioButtons;
 	std::vector<RadioButton*> colorRadioButtons;
 	CheckBox *checkBox;

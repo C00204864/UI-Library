@@ -27,12 +27,13 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 		sf::Vector2f(400.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	difficultyRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "7 x 7", nullptr, sf::Vector2f(400.0f, 900.0f), difficultyRadioButtons,
 		sf::Vector2f(550.0f, 380.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+	m_colorTitle = new Label("Colors", nullptr, 35, sf::Vector2f(400.0f, 430.0f), sf::Vector2f(400.0f, 900.0f));
 	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Fill", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
-		sf::Vector2f(250.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+		sf::Vector2f(250.0f, 520.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "Selected", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
-		sf::Vector2f(400.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+		sf::Vector2f(400.0f, 520.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	colorRadioButtons.push_back(new RadioButton(focusColor, noFocusColor, fillColor, selectSound, "de-Selected", nullptr, sf::Vector2f(400.0f, 900.0f), colorRadioButtons,
-		sf::Vector2f(550.0f, 450.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
+		sf::Vector2f(550.0f, 520.0f), sf::Vector2f(400.0f, 900.0f), 22, 30.0f, 30.0f));
 	m_redSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Red"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
 		sf::Vector2f(400.0f, 580.0f), sf::Vector2f(400.0f, 900.0f));
 	m_greenSlider = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Green"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
@@ -137,6 +138,7 @@ void OptionsScreen::initialise()
 	m_gui.add(effects);
 	m_gui.add(checkBox);
 	m_gui.add(m_difficultyTitle);
+	m_gui.add(m_colorTitle);
 	for (RadioButton * radioButton : difficultyRadioButtons)
 	{
 		m_gui.add(radioButton);
