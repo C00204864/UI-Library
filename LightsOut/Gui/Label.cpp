@@ -17,7 +17,7 @@ Label::Label(const std::string& text, Widget* parent, unsigned int size, sf::Vec
 	m_text.setFont(*g_resourceMgr.getGameFont()); // Set the font
 	//Set the text attributes
 	setText(text);
-	setTextColor(sf::Color(180, 93, 23));
+	setTextColor(sf::Color::White);
 	m_text.setCharacterSize(size);
 	textRect = m_text.getGlobalBounds();
 	updateShape();

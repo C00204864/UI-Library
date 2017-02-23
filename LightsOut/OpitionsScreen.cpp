@@ -11,7 +11,6 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	noFocusColor(noFocusColorIn),
 	fillColor(fillColorIn)
 {
-	// TODO(Darren): Rename these variables
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 30.0f), sf::Vector2f(400.0f, 900.0f));
 	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
 	volume = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Music Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,

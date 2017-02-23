@@ -39,7 +39,7 @@ protected:
 		Options,
 		Quit,
 		GamePlay,
-		EndGameState;
+		EndGameState
 	};
 	GameState currentGameState = GameState::SplashScreen;
 
@@ -58,6 +58,7 @@ protected:
 
 	sf::Sound m_backingTrack;
 	sf::Sound m_selectSound;
+	sf::Sprite m_backgroundSprite;
 };
 
 #endif

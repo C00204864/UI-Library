@@ -25,6 +25,10 @@ ResourceManager::ResourceManager()
 	{
 		std::cout << "ResourceManager:: selectSoundBuffer failed to load!" << std::endl;
 	}
+	if (!m_backgroundTexture.loadFromFile("Assets/Background/LightsOut_Background.png"))
+	{
+		std::cout << "ResourceManager:: LightsOut_Background.png failed to load!" << std::endl;
+	}
 }
 
 /// <summary>
@@ -43,6 +47,15 @@ sf::Font* ResourceManager::getGameFont()
 sf::Texture* ResourceManager::getStudioTexture()
 {
 	return &m_studioLogo;
+}
+
+/// <summary>
+/// Gets the background image loaded in memory
+/// </summary>
+/// <returns>Returns a pointer to the loaded image in memory</returns>
+sf::Texture* ResourceManager::getBackgroundTexture()
+{
+	return &m_backgroundTexture;
 }
 
 /// <summary>

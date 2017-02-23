@@ -8,6 +8,7 @@ MainMenuScreen::MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColor
 {
 	m_gameTitle = new Label("Lights Out!", nullptr, 80, sf::Vector2f(400.0f, 80.0f), sf::Vector2f(400.0f, 900.0f));
 	m_gameTitle->setPosition(sf::Vector2f(400.0f, 80.0f));
+	m_gameTitle->setTextColor(sf::Color(255, 255, 255, 255));
 
 	m_playButton = new Button(focusColor, noFocusColor, fillColor, selectSound, "Play", nullptr, sf::Vector2f(400.0f, 250.0f), 50, 500.0f, 60.0f,
 		sf::Vector2f(400.0f, 250.0f), sf::Vector2f(400.0f, 900.0f));

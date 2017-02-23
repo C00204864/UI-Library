@@ -22,6 +22,7 @@ public:
 
 	sf::Font* getGameFont();
 	sf::Texture* getStudioTexture();
+	sf::Texture* getBackgroundTexture();
 	sf::SoundBuffer* getBackingTrackBuffer();
 	sf::SoundBuffer* getSelectSoundBuffer();
 
@@ -29,6 +30,7 @@ private:
 	// The font used in our game Lights Out.
 	sf::Font m_gameFont;
 	sf::Texture m_studioLogo;
+	sf::Texture m_backgroundTexture;
 	sf::SoundBuffer backingSoundBuffer;
 	sf::SoundBuffer selectSoundBuffer;
 };

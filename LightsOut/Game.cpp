@@ -7,9 +7,9 @@
 Game::Game()
 	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close),
 	xboxController(CONTROLLER_ONE),
-	m_focusColor(sf::Color::Red),
-	m_noFocusColor(sf::Color::Blue),
-	m_fillColor(sf::Color::Green),
+	m_focusColor(sf::Color(166, 98, 75, 255)),
+	m_noFocusColor(sf::Color(114, 53, 68, 255)),
+	m_fillColor(sf::Color(65, 138, 108, 155)),
 	mainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
 	optionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound),
 	quitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
@@ -18,6 +18,7 @@ Game::Game()
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
 	m_selectSound.setBuffer(*g_resourceMgr.getSelectSoundBuffer());
+	m_backgroundSprite.setTexture(*g_resourceMgr.getBackgroundTexture());
 
 	mainMenuScreen.initialise();
 	optionsScreen.initialise();
@@ -199,6 +200,7 @@ void Game::render()
 
 		case GameState::MainMenu:
 		{
+			m_window.draw(m_backgroundSprite);
 			mainMenuScreen.render(m_window);
 
 			break;
@@ -206,6 +208,7 @@ void Game::render()
 
 		case GameState::Options:
 		{
+			m_window.draw(m_backgroundSprite);
 			optionsScreen.render(m_window);
 
 			break;
@@ -213,6 +216,7 @@ void Game::render()
 
 		case GameState::Quit:
 		{
+			m_window.draw(m_backgroundSprite);
 			quitScreen.render(m_window);
 
 			break;
@@ -220,6 +224,7 @@ void Game::render()
 
 		case GameState::GamePlay:
 		{
+			m_window.draw(m_backgroundSprite);
 			gamePlayScreen.render(m_window);
 
 			break;
