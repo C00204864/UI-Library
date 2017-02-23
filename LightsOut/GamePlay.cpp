@@ -225,4 +225,6 @@ void GamePlay::reset(int gridSize)
 	transitionIn = true;
 	interpolation = 0.0f;
 	m_playerWon = false;
+	m_gui.clear();
+	init(gridSize);
 }

@@ -106,6 +106,7 @@ void Game::update(double dt)
 			if (mainMenuScreen.getChangeStateGamePlay())
 			{
 				currentGameState = GameState::GamePlay;
+				std::cout << optionsScreen.getDifficulty();
 				gamePlayScreen.reset(optionsScreen.getDifficulty());
 				mainMenuScreen.reset();
 			}
