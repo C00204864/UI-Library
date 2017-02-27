@@ -9,6 +9,7 @@
 #include <SFML\Graphics.hpp>
 #include "ResourceManager.h"
 #include "Input\XboxController.h"
+#include "Screen.h"
 
 /// <summary>
 /// Handles all the functionality of the splash screen
@@ -16,14 +17,15 @@
 /// Updates the fade in and out of the splash screen and renders
 /// the assets. When the fade is finished the state is changed
 /// </summary>
-class SplashScreen
+class SplashScreen : public Screen
 {
 public:
 	SplashScreen();
 
-	void update(float dt, XboxController &xboxController);
-	void render(sf::RenderWindow &window);
+	void update(XboxController &xboxController) override;
+	void render(sf::RenderWindow &window) override;
 	bool splashOverState();
+	void reset() override;
 
 private:
 	sf::Sprite m_studioLogoSprite;

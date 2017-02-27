@@ -1,7 +1,8 @@
 #include "QuitScreen.h"
 
 QuitScreen::QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn)
-	: transitionIn(true), 
+	: Screen(GameState::Quit),
+	transitionIn(true), 
 	selectSound(selectSoundIn),
 	focusColor(focusColorIn),
 	noFocusColor(noFocusColorIn),
@@ -44,11 +45,13 @@ void QuitScreen::update(XboxController &controller)
 		if (interpolation >= 1.0f)
 		{
 			std::cout << "Transition play finished" << std::endl;
-			m_changeToMenuState = true;
+			m_changeToMenuState = true; // TODO : GET RID
+			m_nextGameState = GameState::MainMenu;
+			reset();
 			interpolation = 0.0f;
 		}
 	}
-	else if (m_yesButtonSelected)
+	else if (m_yesButtonSelected) // NOTE : (Liam) Pretty sure we dont need this else if here at all, correct me if I'm wrong
 	{
 		m_exitGame = true;
 	}
@@ -64,11 +67,6 @@ void QuitScreen::update(XboxController &controller)
 			transitionIn = false;
 		}
 	}
-}
-
-void QuitScreen::render(sf::RenderWindow &window)
-{
-	window.draw(m_gui);
 }
 
 bool QuitScreen::getChangeStateMenu()

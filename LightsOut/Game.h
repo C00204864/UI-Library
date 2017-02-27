@@ -14,6 +14,7 @@
 #include "QuitScreen.h"
 #include "GamePlay.h"
 #include "SplashScreen.h"
+#include "ScreenManager.h"
 
 /// 
 /// 
@@ -23,7 +24,6 @@ class Game
 public:
 	Game();
 	void run();
-
 protected:
 	void update(double dt);
 	void render();
@@ -42,7 +42,7 @@ protected:
 		EndGameState
 	};
 	GameState currentGameState = GameState::SplashScreen;
-
+	
 	XboxController xboxController;
 	
 
@@ -50,11 +50,14 @@ protected:
 	sf::Color m_noFocusColor;
 	sf::Color m_fillColor;
 
-	SplashScreen splashScreen;
-	MainMenuScreen mainMenuScreen;
-	OptionsScreen optionsScreen;
-	QuitScreen quitScreen;
-	GamePlay gamePlayScreen;
+	int m_difficulty;
+
+	SplashScreen  * splashScreen;
+	MainMenuScreen * mainMenuScreen;
+	OptionsScreen * optionsScreen;
+	QuitScreen * quitScreen;
+	GamePlay * gamePlayScreen;
+	ScreenManager m_screenManager;
 
 	sf::Sound m_backingTrack;
 	sf::Sound m_selectSound;

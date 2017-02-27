@@ -1,6 +1,7 @@
 #include "MainMenuScreen.h"
 
-MainMenuScreen::MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn) :
+MainMenuScreen::MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn) 
+	: Screen(GameState::MainMenu),
 	selectSound(selectSoundIn), m_alphaFadeValue(255),
 	focusColor(focusColorIn),
 	noFocusColor(noFocusColorIn),
@@ -67,8 +68,10 @@ void MainMenuScreen::update(XboxController &controller)
 
 		if (interpolation >= 1.0f)
 		{
-			m_changeToGamePlayState = true;
+			m_changeToGamePlayState = true; // TODO : GET RID
+			m_nextGameState = GameState::GamePlay;
 			interpolation = 0.0f;
+			reset();
 		}
 	}
 	else if (optionsButtonPressed)
@@ -77,8 +80,10 @@ void MainMenuScreen::update(XboxController &controller)
 
 		if (interpolation >= 1.0f)
 		{
-			changeToOptionsState = true;
+			changeToOptionsState = true; // TODO : GET RID
+			m_nextGameState = GameState::Options;
 			interpolation = 0.0f;
+			reset();
 		}
 	}
 	else if (quitButtonPressed)
@@ -87,8 +92,10 @@ void MainMenuScreen::update(XboxController &controller)
 
 		if (interpolation >= 1.0f)
 		{
-			changeToQuitState = true;
+			changeToQuitState = true; // TODO : GET RID
+			m_nextGameState = GameState::Quit;
 			interpolation = 0.0f;
+			reset();
 		}
 	}
 
@@ -104,6 +111,12 @@ void MainMenuScreen::update(XboxController &controller)
 	}
 }
 
+void MainMenuScreen::render(sf::RenderWindow & window)
+{
+	window.draw(m_gui);
+	window.draw(m_fadeRectangle);
+}
+
 bool MainMenuScreen::getChangeStateGamePlay()
 {
 	return m_changeToGamePlayState;
@@ -117,12 +130,6 @@ bool MainMenuScreen::getChangeStateOptions()
 bool MainMenuScreen::getChangeStateQuit()
 {
 	return changeToQuitState;
-}
-
-void MainMenuScreen::render(sf::RenderWindow &window)
-{
-	window.draw(m_gui);
-	window.draw(m_fadeRectangle);
 }
 
 void MainMenuScreen::playButtonSelected()

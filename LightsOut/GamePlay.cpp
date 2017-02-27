@@ -3,12 +3,14 @@
 /// <summary>
 /// Default constructor function for the GamePlay class
 /// </summary>
-GamePlay::GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn)
-	: transitionIn(true),
+GamePlay::GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, int &difficultyIn)
+	: Screen(GameState::GamePlay),
+	transitionIn(true),
 	selectSound(selectSoundIn),
 	focusColor(focusColorIn),
 	noFocusColor(noFocusColorIn),
-	fillColor(fillColorIn)
+	fillColor(fillColorIn),
+	m_difficulty(difficultyIn)
 {}
 
 /// <summary>
@@ -24,7 +26,7 @@ void GamePlay::init(int gridSizeIn)
 {
 	// Initialise member variables and objects
 	gridSize = gridSizeIn;
-	initArray(gridSizeIn); // Initials=ise the array of checkboxes
+	initArray(gridSizeIn); // Initialsise the array of checkboxes
 	selectedIndex = 0;
 	m_moves = 0;
 	m_timeInSeconds = 0;
@@ -57,6 +59,7 @@ void GamePlay::initArray(int gridSize)
 		m_pcheckBoxArray[i]->right = std::bind(&GamePlay::selectedRight, this);
 		m_pcheckBoxArray[i]->setState(rand() % 2); // Randomise the state, Booleans will accept 1's or 0's as values
 		m_gui.add(m_pcheckBoxArray[i]); // Add the check box to the GUI object
+		
 	}
 	// Assign the directional counterparts of the relevant check box
 	for (int i = 0; i < arrayLength; i++)
@@ -86,6 +89,11 @@ void GamePlay::initArray(int gridSize)
 /// <param name="controller">XboxController object used for cheecking the controller input</param>
 void GamePlay::update(XboxController & controller)
 {
+	if (controller.isButtonPressed(XBOX360_BACK))
+	{
+		m_nextGameState = GameState::MainMenu;
+		reset(); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
 	m_gui.processInput(controller); // Update the GUI based on controller input
 	// Update the texts of the Labels
 	m_timeInSeconds = timeTotal.getElapsedTime().asSeconds();
@@ -107,15 +115,11 @@ void GamePlay::update(XboxController & controller)
 
 		m_gui.transitionIn(0.010f, interpolation);
 	}
-}
-
-/// <summary>
-/// Draw the GamePlay Screen
-/// </summary>
-/// <param name="window">window used for drawing the GUI</param>
-void GamePlay::render(sf::RenderWindow &window)
-{
-	window.draw(m_gui);
+	if (controller.isButtonPressed(XBOX360_BACK))
+	{
+		m_nextGameState = GameState::MainMenu;
+		reset(); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	}
 }
 
 /// <summary>
@@ -163,7 +167,8 @@ void GamePlay::switchArea()
 	if (checkWin())
 	{
 		std::cout << "winner winner chicken dinner"; // Do Nothing... Insert code for switching Game state here (Liam wuz here 2k17) <--->
-		m_playerWon = true;
+		m_playerWon = true; // TODO : GET RID
+		m_nextGameState = GameState::EndGameState;
 	}
 }
 
@@ -220,11 +225,11 @@ void GamePlay::selectedRight()
 	selectedIndex++;
 }
 
-void GamePlay::reset(int gridSize)
+void GamePlay::reset()
 {
 	transitionIn = true;
 	interpolation = 0.0f;
 	m_playerWon = false;
 	m_gui.clear();
-	init(gridSize);
+	init(m_difficulty);
 }

@@ -217,11 +217,11 @@ void CheckBox::setColors()
 {
 	if (m_state)
 	{
-		m_checkBoxRect.setFillColor(sf::Color::White); // Otherwise set the color White
+		m_checkBoxRect.setFillColor(fillColor); // Otherwise set the color White
 	}
 	else
 	{
-		m_checkBoxRect.setFillColor(fillColor); // Set the fill color to Blue if the box is checked
+		m_checkBoxRect.setFillColor(sf::Color::White); // Set the fill color to Blue if the box is checked
 	}
 	if (m_hasFocus)
 	{

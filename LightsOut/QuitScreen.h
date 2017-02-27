@@ -11,25 +11,24 @@
 #include "Gui\Gui.h"
 #include "Gui\Button.h"
 #include "Gui\Label.h"
+#include "Screen.h"
 #include <iostream>
 
-class QuitScreen
+class QuitScreen : public Screen
 {
 public:
 	QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
 
 	void initialise();
-	void update(XboxController& controller);
-	void render(sf::RenderWindow& window);
+	void update(XboxController& controller) override;
 	bool getChangeStateMenu();
 	bool getExitGameState();
-	void reset();
+	void reset() override;
 
 private:
 	void noButtonSelected();
 	void yesButtonSelected();
 
-	Gui m_gui;
 	Label *m_quitTitle;
 	Button *m_yesButton;
 	Button *m_noButton;

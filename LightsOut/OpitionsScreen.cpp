@@ -3,13 +3,15 @@
 /// <summary>
 /// 
 /// </summary>
-OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSoundIn)
-	: transitionIn(true),
+OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSoundIn, int &difficultyIn)
+	: Screen(GameState::Options),
+	transitionIn(true),
 	backingTrack(backingTrackIn),
 	selectSound(selectSoundIn),
 	focusColor(focusColorIn),
 	noFocusColor(noFocusColorIn),
-	fillColor(fillColorIn)
+	fillColor(fillColorIn),
+	m_difficulty(difficultyIn)
 {
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 30.0f), sf::Vector2f(400.0f, 900.0f));
 	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
@@ -183,8 +185,10 @@ void OptionsScreen::update(XboxController &controller)
 		if (interpolation >= 1.0f)
 		{
 			std::cout << "Transition play finished" << std::endl;
-			m_backToMenu = true;
+			m_backToMenu = true; // TODO : GET RID
+			m_nextGameState = GameState::MainMenu;
 			interpolation = 0.0f;
+			reset();
 		}
 	}
 
@@ -343,13 +347,4 @@ void OptionsScreen::changeDifficulty()
 		m_difficulty = 7;
 		return;
 	}
-}
-
-/// <summary>
-/// Draws everything in the opitions menu
-/// </summary>
-/// <param name="window">A reference to an instacne of RenderWindow</param>
-void OptionsScreen::render(sf::RenderWindow& window)
-{
-	window.draw(m_gui);
 }

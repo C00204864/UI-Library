@@ -5,7 +5,8 @@
 /// both along with the fade rectangle
 /// </summary>
 SplashScreen::SplashScreen()
-	: m_fadeCoverAlpha(255)
+	: Screen(GameState::SplashScreen),
+	m_fadeCoverAlpha(255)
 {
 	sf::Texture *studioTexture = g_resourceMgr.getStudioTexture();
 
@@ -36,29 +37,41 @@ bool SplashScreen::splashOverState()
 /// The update method for the splash screen
 /// </summary>
 /// <param name="dt">Delta time</param>
-void SplashScreen::update(float dt, XboxController &xboxController)
+void SplashScreen::update(XboxController &xboxController)
 {
-	timer += dt;
+	timer += 10;
 
 	m_fadeCover.setFillColor(sf::Color(0, 0, 0, m_fadeCoverAlpha));
 
 	if (timer < 6000.0f)
 	{
-		if(m_fadeCoverAlpha >= FADE_RATE)
+		if (m_fadeCoverAlpha >= FADE_RATE)
+		{
 			m_fadeCoverAlpha -= FADE_RATE;
+			if (m_fadeCoverAlpha < 0)
+			{
+				m_fadeCoverAlpha = 0;
+			}
+		}
 	}
 	else
 	{
-		if (m_fadeCoverAlpha <= 255)
+		if (m_fadeCoverAlpha < 255)
+		{
 			m_fadeCoverAlpha += FADE_RATE;
+			if (m_fadeCoverAlpha > 255)
+			{
+				m_fadeCoverAlpha = 255;
+			}
+		}
 		else
-			isSplashOver = true;
+			m_nextGameState = GameState::MainMenu;
 	}
 
 	// Skip the splash screen is the player presses start on the controller
 	if (xboxController.isButtonPressed(XBOX360_START))
 	{
-		isSplashOver = true;
+		m_nextGameState = GameState::MainMenu;
 	}
 }
 
@@ -71,4 +84,9 @@ void SplashScreen::render(sf::RenderWindow &window)
 	window.draw(m_studioLogoSprite);
 	window.draw(m_legalText);
 	window.draw(m_fadeCover);
+}
+
+void SplashScreen::reset()
+{
+	// Do nothing
 }

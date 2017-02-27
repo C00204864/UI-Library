@@ -11,27 +11,27 @@
 #include "Gui\Gui.h"
 #include "Gui\Button.h"
 #include "Gui\Label.h"
+#include "Screen.h"
 #include <iostream>
 
-class MainMenuScreen
+class MainMenuScreen : public Screen
 {
 public:
 	MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
 
 	void initialise();
-	void update(XboxController& controller);
-	void render(sf::RenderWindow& window);
+	void update(XboxController& controller) override;
+	void render(sf::RenderWindow & window) override;
 	bool getChangeStateGamePlay();
 	bool getChangeStateOptions();
 	bool getChangeStateQuit();
-	void reset();
+	void reset() override;
 
 private:
 	void playButtonSelected();
 	void optionsButtonSelected();
 	void quitButtonSelected();
 
-	Gui m_gui;
 	Label *m_gameTitle;
 	Button *m_playButton;
 	Button *m_optionsButton;

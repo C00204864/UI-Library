@@ -14,21 +14,21 @@
 #include "Gui\Button.h"
 #include "Gui\RadioButton.h"
 #include "Gui\CheckBox.h"
+#include "Screen.h"
 
 /// Handles the game play screen
 /// 
 /// Provides the update and render for the lights out game.
-class GamePlay {
+class GamePlay : public Screen
+{
 public:
-	GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
+	GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound, int &difficultyIn);
 	~GamePlay();
 	void init(int gridSize);
-	void update(XboxController& controller);
-	void render(sf::RenderWindow& window);
-	void reset(int gridSize);
+	void update(XboxController& controller) override;
+	void reset();
 	bool hasPlayerWon();
 
-	Gui m_gui;
 	Label *m_timeLabel;
 	Label *m_movesLabel;
 	CheckBox **m_pcheckBoxArray;
@@ -65,6 +65,7 @@ private:
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
+	int &m_difficulty;
 };
 
 #endif

@@ -10,22 +10,29 @@ Game::Game()
 	m_focusColor(sf::Color(166, 98, 75, 255)),
 	m_noFocusColor(sf::Color(114, 53, 68, 255)),
 	m_fillColor(sf::Color(65, 138, 108, 155)),
-	mainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
-	optionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound),
-	quitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound),
-	gamePlayScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)
+	m_difficulty(3),
+	mainMenuScreen(new MainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)),
+	optionsScreen(new OptionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound, m_difficulty)),
+	quitScreen(new QuitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)),
+	gamePlayScreen(new GamePlay(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound, m_difficulty)),
+	splashScreen(new SplashScreen())
 
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
 	m_selectSound.setBuffer(*g_resourceMgr.getSelectSoundBuffer());
 	m_backgroundSprite.setTexture(*g_resourceMgr.getBackgroundTexture());
 
-	mainMenuScreen.initialise();
-	optionsScreen.initialise();
-	quitScreen.initialise();
-	gamePlayScreen.init(3);
+	mainMenuScreen->initialise();
+	optionsScreen->initialise();
+	quitScreen->initialise();
+	gamePlayScreen->init(3);
 	m_backingTrack.setLoop(true);
 	m_backingTrack.play();
+	m_screenManager.add(mainMenuScreen);
+	m_screenManager.add(optionsScreen);
+	m_screenManager.add(gamePlayScreen);
+	m_screenManager.add(quitScreen);
+	m_screenManager.add(splashScreen);
 }
 
 /// <summary>
@@ -86,101 +93,7 @@ void Game::processGameEvents(sf::Event& event)
 /// <param name="dt"></param>
 void Game::update(double dt)
 {
-	switch (currentGameState)
-	{
-		case GameState::SplashScreen:
-		{
-			splashScreen.update(dt, xboxController);
-
-			if (splashScreen.splashOverState())
-			{
-				currentGameState = GameState::MainMenu;
-			}
-
-			break;
-		}
-
-		case GameState::MainMenu:
-		{
-			mainMenuScreen.update(xboxController);
-
-			if (mainMenuScreen.getChangeStateGamePlay())
-			{
-				currentGameState = GameState::GamePlay;
-				std::cout << optionsScreen.getDifficulty();
-				gamePlayScreen.reset(optionsScreen.getDifficulty());
-				mainMenuScreen.reset();
-			}
-			else if (mainMenuScreen.getChangeStateOptions())
-			{
-				currentGameState = GameState::Options;
-				mainMenuScreen.reset();
-			}
-			else if (mainMenuScreen.getChangeStateQuit())
-			{
-				currentGameState = GameState::Quit;
-				mainMenuScreen.reset();
-			}
-
-			break;
-		}
-
-		case GameState::Options:
-		{
-			optionsScreen.update(xboxController);
-
-			if (optionsScreen.getChangeStateMenu())
-			{
-				currentGameState = GameState::MainMenu;
-				optionsScreen.reset();
-			}
-
-			break;
-		}
-
-		case GameState::Quit:
-		{
-			quitScreen.update(xboxController);
-
-			if (quitScreen.getChangeStateMenu())
-			{
-				currentGameState = GameState::MainMenu;
-				quitScreen.reset();
-			}
-			else if (quitScreen.getExitGameState())
-			{
-				m_window.close();
-			}
-
-			break;
-		}
-
-		case GameState::GamePlay:
-		{
-			if(xboxController.isButtonPressed(XBOX360_BACK))
-			{
-				currentGameState = GameState::MainMenu;
-				gamePlayScreen.reset(optionsScreen.getDifficulty());
-			}
-
-			gamePlayScreen.update(xboxController);
-
-			if (gamePlayScreen.hasPlayerWon())
-			{
-				currentGameState = GameState::EndGameState;
-			}
-
-			break;
-		}
-
-		case GameState::EndGameState:
-		{
-			break;
-		}
-
-		default:
-			break;
-	}
+	m_screenManager.update(xboxController);
 }
 
 /// <summary>
@@ -189,56 +102,6 @@ void Game::update(double dt)
 void Game::render()
 {
 	m_window.clear(sf::Color(0, 0, 0, 0));
-
-	switch (currentGameState)
-	{
-		case GameState::SplashScreen:
-		{
-			splashScreen.render(m_window);
-
-			break;
-		}
-
-		case GameState::MainMenu:
-		{
-			m_window.draw(m_backgroundSprite);
-			mainMenuScreen.render(m_window);
-
-			break;
-		}
-
-		case GameState::Options:
-		{
-			m_window.draw(m_backgroundSprite);
-			optionsScreen.render(m_window);
-
-			break;
-		}
-
-		case GameState::Quit:
-		{
-			m_window.draw(m_backgroundSprite);
-			quitScreen.render(m_window);
-
-			break;
-		}
-
-		case GameState::GamePlay:
-		{
-			m_window.draw(m_backgroundSprite);
-			gamePlayScreen.render(m_window);
-
-			break;
-		}
-
-		case GameState::EndGameState:
-		{
-			break;
-		}
-
-		default:
-			break;
-	}
-
+	m_screenManager.render(m_window);
 	m_window.display();
 }

@@ -49,6 +49,7 @@ void Gui::add(Widget* widget)
 	widget->m_parent = this;
 	m_widgets.emplace_back(widget);
 	updateShape();
+	std::cout << m_widgets.size() << std::endl;
 }
 
 /// <summary>

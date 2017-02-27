@@ -14,21 +14,21 @@
 #include "Gui\Button.h"
 #include "Gui\RadioButton.h"
 #include "Gui\CheckBox.h"
+#include "Screen.h"
 
 /// The Opitions screen that will be displayed in game
 /// 
 /// Handles all functionality of the opitions menu, Gui elements, 
 /// updating and rendering.
-class OptionsScreen
+class OptionsScreen : public Screen
 {
 public:
-	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound);
+	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound, int &difficultyIn);
 	~OptionsScreen();
 	void initialise();
-	void update(XboxController& controller);
-	void render(sf::RenderWindow& window);
+	void update(XboxController& controller) override;
 	bool getChangeStateMenu();
-	void reset();
+	void reset() override;
 	int getDifficulty() const;
 private:
 	void volumeUpSliderMusic();
@@ -41,7 +41,6 @@ private:
 	void setColor();
 	void changeDifficulty();
 
-	Gui m_gui;
 	Label *m_optionsTitle;
 	Slider *volume;
 	Slider *effects;
@@ -67,7 +66,7 @@ private:
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
 
-	int m_difficulty = 3;
+	int & m_difficulty;
 };
 
 #endif
