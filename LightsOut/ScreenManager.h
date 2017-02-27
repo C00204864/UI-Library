@@ -16,6 +16,7 @@ private:
 	GameState m_gameState;
 	int m_currentScreen;
 	int gamePlayScreen;
+	sf::Sprite m_backgroundSprite;
 };
 
 #endif

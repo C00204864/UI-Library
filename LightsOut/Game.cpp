@@ -20,7 +20,6 @@ Game::Game()
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
 	m_selectSound.setBuffer(*g_resourceMgr.getSelectSoundBuffer());
-	m_backgroundSprite.setTexture(*g_resourceMgr.getBackgroundTexture());
 
 	mainMenuScreen->initialise();
 	optionsScreen->initialise();

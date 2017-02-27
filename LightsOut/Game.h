@@ -61,7 +61,6 @@ protected:
 
 	sf::Sound m_backingTrack;
 	sf::Sound m_selectSound;
-	sf::Sprite m_backgroundSprite;
 };
 
 #endif
