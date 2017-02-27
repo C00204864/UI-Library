@@ -10,8 +10,9 @@
 #include <functional>
 
 /// <summary>
-/// Button Class used for creating buttons onscreen.
-/// Class inherits from Label and thus is a widget.
+/// Brief: Button Class used for creating buttons onscreen.
+/// 
+/// Detail: Class inherits from Label and thus is a widget.
 /// </summary>
 class Button : public Label 
 {

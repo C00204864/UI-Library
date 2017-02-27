@@ -1,3 +1,8 @@
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
 #ifndef ENDGAMESCREEN_H
 #define ENDGAMESCREEN_H
 
@@ -8,7 +13,10 @@
 #include "Screen.h"
 
 /// <summary>
-/// EndGameScreen class represents the screen for the win state of the game
+/// Brief: class represents the screen for the win state of the game
+/// 
+/// Detail: class used to decide what happens after the game has been
+/// beaten
 /// </summary>
 class EndGameScreen : public Screen
 {

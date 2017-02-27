@@ -16,9 +16,9 @@
 #include "Gui\CheckBox.h"
 #include "Screen.h"
 
-/// Handles the game play screen
+/// Brief: Class represents the Game Play Screen
 /// 
-/// Provides the update and render for the lights out game.
+/// Detail: Class provides an update and a render for the Lights Out(tm) game
 class GamePlay : public Screen
 {
 public:
@@ -56,10 +56,10 @@ private:
 	int m_timeInSeconds;
 	sf::Clock timeTotal;
 	bool m_playerWon;
-
-	float interpolation;
 	bool transitionIn;
+	float interpolation;
 
+	// References to sounds, colors and game difficulty
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;

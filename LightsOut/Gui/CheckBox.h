@@ -4,6 +4,11 @@
 /// </summary>
 
 
+/// <summary>
+/// @author Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// </summary>
+
 #ifndef CHECKBOX_H
 #define CHECKBOX_H
 
@@ -11,8 +16,9 @@
 #include <functional>
 
 /// <summary>
-/// CheckBox Class used for creating Check Boxes onscreen
-/// Class inherits from Label and thus is a widget
+/// Brief: CheckBox Class used for creating Check Boxes onscreen
+/// 
+/// Detail: Class inherits from Label and thus is a widget
 /// </summary>
 class CheckBox : public Label {
 public:
