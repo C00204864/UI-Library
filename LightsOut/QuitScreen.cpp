@@ -1,12 +1,13 @@
 #include "QuitScreen.h"
 
-QuitScreen::QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn)
+QuitScreen::QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, sf::RenderWindow &windowIn)
 	: Screen(GameState::Quit),
 	transitionIn(true), 
 	selectSound(selectSoundIn),
 	focusColor(focusColorIn),
 	noFocusColor(noFocusColorIn),
-	fillColor(fillColorIn)
+	fillColor(fillColorIn),
+	window(windowIn)
 {
 	m_quitTitle = new Label("Are you sure?", nullptr, 80, sf::Vector2f(400.0f, 320.0f), sf::Vector2f(400.0f, 900.0f));
 	m_quitTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
@@ -51,11 +52,6 @@ void QuitScreen::update(XboxController &controller)
 			interpolation = 0.0f;
 		}
 	}
-	else if (m_yesButtonSelected) // NOTE : (Liam) Pretty sure we dont need this else if here at all, correct me if I'm wrong
-	{
-		m_exitGame = true;
-	}
-
 	if (transitionIn)
 	{
 		m_gui.transitionIn(0.05f, interpolation);
@@ -96,5 +92,5 @@ void QuitScreen::noButtonSelected()
 
 void QuitScreen::yesButtonSelected()
 {
-	m_exitGame = true;
+	window.close();
 }

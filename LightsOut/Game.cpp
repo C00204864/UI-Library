@@ -13,7 +13,7 @@ Game::Game()
 	m_difficulty(3),
 	mainMenuScreen(new MainMenuScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)),
 	optionsScreen(new OptionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound, m_difficulty)),
-	quitScreen(new QuitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)),
+	quitScreen(new QuitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound, m_window)),
 	gamePlayScreen(new GamePlay(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound, m_difficulty)),
 	splashScreen(new SplashScreen())
 

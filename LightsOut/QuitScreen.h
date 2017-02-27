@@ -17,7 +17,7 @@
 class QuitScreen : public Screen
 {
 public:
-	QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
+	QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound, sf::RenderWindow &windowIn);
 
 	void initialise();
 	void update(XboxController& controller) override;
@@ -45,6 +45,8 @@ private:
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
+
+	sf::RenderWindow &window;
 };
 
 #endif
