@@ -89,36 +89,48 @@ void GamePlay::initArray(int gridSize)
 /// <param name="controller">XboxController object used for cheecking the controller input</param>
 void GamePlay::update(XboxController & controller)
 {
-	if (controller.isButtonPressed(XBOX360_BACK))
-	{
-		m_nextGameState = GameState::MainMenu;
-		reset(); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	}
-	m_gui.processInput(controller); // Update the GUI based on controller input
-	// Update the texts of the Labels
-	m_timeInSeconds = timeTotal.getElapsedTime().asSeconds();
-	std::stringstream ss;
-	ss << MOVES << m_moves;
-	m_movesLabel->setText(ss.str());
-	ss.str(std::string());
-	ss << TIME << m_timeInSeconds;
-	m_timeLabel->setText(ss.str());
-
-	if (transitionIn)
-	{
+	
+	if (m_playerWon)
+	{	
 		if (interpolation >= 1.0f)
 		{
 			interpolation = 1.0f;
-			transitionIn = false;
-			timeTotal.restart(); // Start the clock
+			m_nextGameState = GameState::EndGameState;
 		}
-
-		m_gui.transitionIn(0.010f, interpolation);
+		m_gui.transitionOut(0.01f, interpolation);
 	}
-	if (controller.isButtonPressed(XBOX360_BACK))
+	else
 	{
-		m_nextGameState = GameState::MainMenu;
-		reset(); ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if (controller.isButtonPressed(XBOX360_BACK))
+		{
+			m_nextGameState = GameState::MainMenu;
+		}
+		else
+		{
+			m_gui.processInput(controller); // Update the GUI based on controller input
+			// Update the texts of the Labels
+			m_timeInSeconds = timeTotal.getElapsedTime().asSeconds();
+			std::stringstream ss;
+			ss << MOVES << m_moves;
+			m_movesLabel->setText(ss.str());
+			ss.str(std::string());
+			ss << TIME << m_timeInSeconds;
+			m_timeLabel->setText(ss.str());
+			if (transitionIn)
+			{
+				if (interpolation >= 1.0f)
+				{
+					interpolation = 1.0f;
+					transitionIn = false;
+					timeTotal.restart(); // Start the clock
+				}
+				m_gui.transitionIn(0.010f, interpolation);
+				if (!transitionIn)
+				{
+					interpolation = 0.f;
+				}
+			}
+		}
 	}
 }
 
@@ -164,12 +176,7 @@ void GamePlay::switchArea()
 	{
 		down->switchState();
 	}
-	if (checkWin())
-	{
-		std::cout << "winner winner chicken dinner"; // Do Nothing... Insert code for switching Game state here (Liam wuz here 2k17) <--->
-		m_playerWon = true; // TODO : GET RID
-		m_nextGameState = GameState::EndGameState;
-	}
+	m_playerWon = checkWin();
 }
 
 /// <summary>
@@ -186,11 +193,6 @@ bool GamePlay::checkWin()
 		}
 	}
 	return true; // Otherwise return true;
-}
-
-bool GamePlay::hasPlayerWon()
-{
-	return m_playerWon;
 }
 
 /// <summary>

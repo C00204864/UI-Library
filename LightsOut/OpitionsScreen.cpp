@@ -122,6 +122,7 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 		difficultyRadioButtons.at(2)->activate();
 	}
 	setColorSliders();
+	initialise();
 }
 
 /// <summary>

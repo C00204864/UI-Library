@@ -18,8 +18,6 @@ class MainMenuScreen : public Screen
 {
 public:
 	MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound);
-
-	void initialise();
 	void update(XboxController& controller) override;
 	void render(sf::RenderWindow & window) override;
 	bool getChangeStateGamePlay();

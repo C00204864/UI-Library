@@ -31,10 +31,7 @@ MainMenuScreen::MainMenuScreen(sf::Color & focusColorIn, sf::Color &noFocusColor
 
 	m_fadeRectangle.setSize(sf::Vector2f(800.0f, 800.0f));
 	m_fadeRectangle.setFillColor(sf::Color(0.0f, 0.0f, 0.0f, m_alphaFadeValue));
-}
-
-void MainMenuScreen::initialise()
-{
+	
 	m_gui.add(m_gameTitle);
 	m_gui.add(m_playButton);
 	m_gui.add(m_optionsButton);

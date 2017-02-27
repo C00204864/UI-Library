@@ -39,7 +39,7 @@ bool SplashScreen::splashOverState()
 /// <param name="dt">Delta time</param>
 void SplashScreen::update(XboxController &xboxController)
 {
-	timer += 10;
+	timer += 10;//-----------------------------------------------------------------------------------------------------------------------
 
 	m_fadeCover.setFillColor(sf::Color(0, 0, 0, m_fadeCoverAlpha));
 
@@ -88,5 +88,5 @@ void SplashScreen::render(sf::RenderWindow &window)
 
 void SplashScreen::reset()
 {
-	// Do nothing
+	m_fadeCoverAlpha = 255;
 }

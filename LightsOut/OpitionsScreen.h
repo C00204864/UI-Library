@@ -25,12 +25,12 @@ class OptionsScreen : public Screen
 public:
 	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound, int &difficultyIn);
 	~OptionsScreen();
-	void initialise();
 	void update(XboxController& controller) override;
 	bool getChangeStateMenu();
 	void reset() override;
 	int getDifficulty() const;
 private:
+	void initialise();
 	void volumeUpSliderMusic();
 	void volumeDownSliderMusic();
 	void volumeUpSliderEffects();

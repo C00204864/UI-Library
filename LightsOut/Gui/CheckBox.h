@@ -34,6 +34,7 @@ public:
 private:
 	bool m_state = false;
 	sf::RectangleShape m_checkBoxRect;
+	// Assets
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;

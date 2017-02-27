@@ -6,7 +6,6 @@
 #ifndef QUIT_SCREEN_H
 #define QUIT_SCREEN_H
 
-#include <SFML\Graphics.hpp>
 #include "Input\XboxController.h"
 #include "Gui\Gui.h"
 #include "Gui\Button.h"
@@ -18,11 +17,7 @@ class QuitScreen : public Screen
 {
 public:
 	QuitScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSound, sf::RenderWindow &windowIn);
-
-	void initialise();
 	void update(XboxController& controller) override;
-	bool getChangeStateMenu();
-	bool getExitGameState();
 	void reset() override;
 
 private:
@@ -35,8 +30,6 @@ private:
 
 	bool m_noButtonSelected;
 	bool m_yesButtonSelected;
-	bool m_changeToMenuState;
-	bool m_exitGame;
 
 	bool transitionIn;
 	float interpolation;

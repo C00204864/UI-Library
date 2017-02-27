@@ -27,7 +27,6 @@ public:
 	void init(int gridSize);
 	void update(XboxController& controller) override;
 	void reset();
-	bool hasPlayerWon();
 
 	Label *m_timeLabel;
 	Label *m_movesLabel;

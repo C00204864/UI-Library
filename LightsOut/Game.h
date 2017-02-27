@@ -13,6 +13,7 @@
 #include "OpitionsScreen.h"
 #include "QuitScreen.h"
 #include "GamePlay.h"
+#include "EndGameScreen.h"
 #include "SplashScreen.h"
 #include "ScreenManager.h"
 
@@ -57,6 +58,7 @@ protected:
 	OptionsScreen * optionsScreen;
 	QuitScreen * quitScreen;
 	GamePlay * gamePlayScreen;
+	EndGameScreen * endScreen;
 	ScreenManager m_screenManager;
 
 	sf::Sound m_backingTrack;

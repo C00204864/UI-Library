@@ -15,15 +15,13 @@ Game::Game()
 	optionsScreen(new OptionsScreen(m_focusColor, m_noFocusColor, m_fillColor, m_backingTrack, m_selectSound, m_difficulty)),
 	quitScreen(new QuitScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound, m_window)),
 	gamePlayScreen(new GamePlay(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound, m_difficulty)),
+	endScreen(new EndGameScreen(m_focusColor, m_noFocusColor, m_fillColor, m_selectSound)),
 	splashScreen(new SplashScreen())
 
 {
 	m_backingTrack.setBuffer(*g_resourceMgr.getBackingTrackBuffer());
 	m_selectSound.setBuffer(*g_resourceMgr.getSelectSoundBuffer());
 
-	mainMenuScreen->initialise();
-	optionsScreen->initialise();
-	quitScreen->initialise();
 	gamePlayScreen->init(3);
 	m_backingTrack.setLoop(true);
 	m_backingTrack.play();
@@ -32,6 +30,7 @@ Game::Game()
 	m_screenManager.add(gamePlayScreen);
 	m_screenManager.add(quitScreen);
 	m_screenManager.add(splashScreen);
+	m_screenManager.add(endScreen);
 }
 
 /// <summary>

@@ -60,11 +60,10 @@ void ScreenManager::update(XboxController &controller)
 /// <param name="window">The render window used for drawing the screens</param>
 void ScreenManager::render(sf::RenderWindow& window)
 {
-	if (m_gameState != GameState::SplashScreen)
+	if (screens.at(m_currentScreen)->getGameState() != GameState::SplashScreen)
 	{
 		window.draw(m_backgroundSprite);
 	}
-
 	if (m_currentScreen < screens.size())
 	{
 		screens.at(m_currentScreen)->render(window); // Draw the current screen

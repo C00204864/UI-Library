@@ -39,6 +39,7 @@ GameState Screen::getNextGameState()
 void Screen::resetNextGameState()
 {
 	m_nextGameState = m_gameState;
+	reset();
 }
 
 /// <summary>
