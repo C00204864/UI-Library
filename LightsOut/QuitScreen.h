@@ -13,6 +13,12 @@
 #include "Screen.h"
 #include <iostream>
 
+/// <summary>
+/// Brief: Class represents the quit screen for the game
+/// 
+/// Detail: Class determines what happens within the Quit 
+/// game state of the game
+/// </summary>
 class QuitScreen : public Screen
 {
 public:
@@ -21,24 +27,26 @@ public:
 	void reset() override;
 
 private:
+	// Linked to Callbacks
 	void noButtonSelected();
 	void yesButtonSelected();
 
+	// GUI elements
 	Label *m_quitTitle;
 	Button *m_yesButton;
 	Button *m_noButton;
 
+	//Transition variables
 	bool m_noButtonSelected;
 	bool m_yesButtonSelected;
-
 	bool transitionIn;
 	float interpolation;
 
+	// Sound, Color and Window references
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
-
 	sf::RenderWindow &window;
 };
 

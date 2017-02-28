@@ -9,12 +9,13 @@
 #include <iostream>
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
-
-/// Loads all game assets
+/// <summary>
+/// Brief: Loads all game assets
 /// 
-/// Loads game assets that are used in the game and provides
+/// Detail: Loads game assets that are used in the game and provides
 /// a method to return a pointer to the location in memory 
 /// it's loaded
+/// </summary>
 class ResourceManager
 {
 public:
@@ -27,12 +28,11 @@ public:
 	sf::SoundBuffer* getSelectSoundBuffer();
 
 private:
-	// The font used in our game Lights Out.
-	sf::Font m_gameFont;
-	sf::Texture m_studioLogo;
-	sf::Texture m_backgroundTexture;
-	sf::SoundBuffer backingSoundBuffer;
-	sf::SoundBuffer selectSoundBuffer;
+	sf::Font m_gameFont; // The font used in our game Lights Out
+	sf::Texture m_studioLogo; // The logo used by the splash screen
+	sf::Texture m_backgroundTexture; // The background texture of the game
+	sf::SoundBuffer backingSoundBuffer; // The backing track used in the game
+	sf::SoundBuffer selectSoundBuffer; // The button sound used in the game
 };
 
 extern ResourceManager g_resourceMgr;

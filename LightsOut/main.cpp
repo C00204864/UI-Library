@@ -18,8 +18,8 @@
 
 int main()
 {
-	Game game;
-	game.run();
+	Game game; // Create the game
+	game.run(); // Run the game
 
 	return 0;
 }

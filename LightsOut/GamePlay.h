@@ -16,9 +16,11 @@
 #include "Gui\CheckBox.h"
 #include "Screen.h"
 
+/// <summary>
 /// Brief: Class represents the Game Play Screen
 /// 
 /// Detail: Class provides an update and a render for the Lights Out(tm) game
+/// </summary>
 class GamePlay : public Screen
 {
 public:

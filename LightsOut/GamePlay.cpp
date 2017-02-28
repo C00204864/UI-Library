@@ -1,8 +1,13 @@
 #include "GamePlay.h"
 
 /// <summary>
-/// Default constructor function for the GamePlay class
+/// Constructor function for the gameplay class
 /// </summary>
+/// <param name="focusColorIn">The focus color for GUI elements</param>
+/// <param name="noFocusColorIn">The no focus color for GUI elements</param>
+/// <param name="fillColorIn">The fill color for GUI elements</param>
+/// <param name="selectSoundIn">The sound to be played by GUI elements</param>
+/// <param name="difficultyIn">The difficulty of the game</param>
 GamePlay::GamePlay(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, int &difficultyIn)
 	: Screen(GameState::GamePlay),
 	transitionIn(true),
@@ -30,10 +35,16 @@ void GamePlay::init(int gridSizeIn)
 	selectedIndex = 0;
 	m_moves = 0;
 	m_timeInSeconds = 0;
+
+	//Initialise the labels
 	m_movesLabel = new Label("", nullptr, 30, sf::Vector2f(sf::Vector2f(260, 650)), sf::Vector2f(400.0f, 900.0f));
 	m_timeLabel = new Label("", nullptr, 30, sf::Vector2f(sf::Vector2f(460, 650)), sf::Vector2f(400.0f, 900.0f));
+
+	// Add the labels to the GUI object
 	m_gui.add(m_movesLabel);
 	m_gui.add(m_timeLabel);
+
+	// Set one GUI element to have focus
 	m_pcheckBoxArray[0]->promoteFocus();
 }
 
@@ -43,8 +54,8 @@ void GamePlay::init(int gridSizeIn)
 /// <param name="gridSize">The width / length of the grid used for the play field</param>
 void GamePlay::initArray(int gridSize)
 {
-	srand(time(NULL));
-	arrayLength = gridSize * gridSize;
+	srand(time(NULL)); // Setting up a random generator
+	arrayLength = gridSize * gridSize; // Set up the length of the array
 	float buttonSize = BUTTON_SIZE_NUMERATOR / (gridSize - 1);
 	m_pcheckBoxArray = new CheckBox*[arrayLength];
 	for (int i = 0; i < arrayLength; i++)
@@ -90,14 +101,14 @@ void GamePlay::initArray(int gridSize)
 void GamePlay::update(XboxController & controller)
 {
 	
-	if (m_playerWon)
+	if (m_playerWon) // If the player has beaten the game
 	{	
 		if (interpolation >= 1.0f)
 		{
 			interpolation = 1.0f;
-			m_nextGameState = GameState::EndGameState;
+			m_nextGameState = GameState::EndGameState; // Change the game state
 		}
-		m_gui.transitionOut(0.01f, interpolation);
+		m_gui.transitionOut(0.01f, interpolation); // cycle transition out
 	}
 	else
 	{
@@ -227,11 +238,14 @@ void GamePlay::selectedRight()
 	selectedIndex++;
 }
 
+/// <summary>
+/// Reset function used to reset the game after the Game State has been changed
+/// </summary>
 void GamePlay::reset()
 {
 	transitionIn = true;
 	interpolation = 0.0f;
 	m_playerWon = false;
-	m_gui.clear();
-	init(m_difficulty);
+	m_gui.clear();// Clear the GUI object
+	init(m_difficulty); // Reset the Game
 }

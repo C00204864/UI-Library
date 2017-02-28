@@ -3,15 +3,19 @@
 /// <summary>
 /// Constructor function for the RadioButton class
 /// </summary>
+/// <param name="focusColorIn">Focus color used for the radio button</param>
+/// <param name="noFocusColorIn">No focus color used by the radio button</param>
+/// <param name="fillColorIn">Fill color used by the radio button</param>
+/// <param name="selectSoundIn">Sound used by the radio button</param>
 /// <param name="textIn">Text to be displayed by the RadioButton object's inherited Label</param>
 /// <param name="parent">Parent widget to the RadioButton object</param>
 /// <param name="positionIn">Position of the RdaioButton</param>
 /// <param name="radGroup">A vector containing radio buttons, considered the radio button group and switching one radio button willaffect them all</param>
+/// <param name="startPos">The start position of the transition</param>
+/// <param name="endPos">The end position of the transition</param>
 /// <param name="characterSize">Size of the Font used for drawing the text in the Label</param>
 /// <param name="boxWidth">Width of the RadioButton Box</param>
 /// <param name="boxHeight">Height of the RadioButton box</param>
-/// <param name="startPos">The start position of the transition</param>
-/// <param name="endPos">The end position of the transition</param>
 RadioButton::RadioButton(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn,
 	std::vector<RadioButton *> & radGroup, sf::Vector2f &startPos, sf::Vector2f &endPos, 
 	int characterSize, float boxWidth, float boxHeight)
@@ -114,13 +118,13 @@ bool RadioButton::processInput(XboxController & controller)
 			selectSound.play();
 			for (RadioButton * radioButton : m_otherButtons)
 			{
-				radioButton->deActivate();
+				radioButton->deActivate(); // De-activate all other radio buttons in a group
 			}
-			m_state = true;
-			m_radioButtonRect.setFillColor(fillColor);
+			m_state = true; // Set this radio button on
+			m_radioButtonRect.setFillColor(fillColor); // Change the color of the radio button
 			try
 			{
-				select();
+				select(); // Callback function
 			}
 			catch (std::bad_function_call)
 			{

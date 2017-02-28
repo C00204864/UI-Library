@@ -3,6 +3,10 @@
 /// <summary>
 /// Constructor function for the slider class
 /// </summary>
+/// <param name="focusColorIn">Focus color used by the slider</param>
+/// <param name="noFocusColorIn">No focus color used by the slider</param>
+/// <param name="fillColorIn">Fill color used by the slider</param>
+/// <param name="selectSoundIn">Sound used by the slider</param>
 /// <param name="text">Text to be displayed by the inherited Label</param>
 /// <param name="parent">parent widget for the class</param>
 /// <param name="position">position of the slider</param>
@@ -68,8 +72,14 @@ bool Slider::processInput(XboxController &controller)
 		if (controller.isButtonHeldDown(XBOX360_RIGHT) // Right input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 		{
-			if(m_barSize < m_barBaseWidth - 2)
+			if (m_barSize < m_barBaseWidth - 2)
+			{
 				m_barSize += 2.0f; // Increase the bar size
+			}
+			else
+			{
+				m_barSize = m_barBaseWidth;
+			}
 			try 
 			{
 				increase(); // Call the associated callback function
@@ -84,8 +94,14 @@ bool Slider::processInput(XboxController &controller)
 		else if (controller.isButtonHeldDown(XBOX360_LEFT) // Left input
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 		{
-			if (m_barSize > 2)
+			if (m_barSize >= 2)
+			{
 				m_barSize -= 2.0f; // Decrease the bar size
+			}
+			else
+			{
+				m_barSize = 0.f;
+			}
 			try
 			{
 				decrease(); // Call the associtaed callback function
@@ -156,19 +172,26 @@ void Slider::setPercentageFull(float percentageIn)
 	m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight));
 }
 
+/// <summary>
+/// Set the colors of the Slider
+/// </summary>
 void Slider::setColors()
 {
 	if (m_hasFocus)
 	{
-		m_base.setOutlineColor(focusColor);
+		m_base.setOutlineColor(focusColor); // If the slider is in focus set the outline to focus color
 	}
 	else
 	{
-		m_base.setOutlineColor(noFocusColor);
+		m_base.setOutlineColor(noFocusColor); // otherwise set it to no focus color
 	}
-	m_bar.setFillColor(fillColor);
+	m_bar.setFillColor(fillColor); // Set the fill color
 }
 
+/// <summary>
+/// Simple getter function for m_hasFocus
+/// </summary>
+/// <returns>the focus state of the slider</returns>
 bool Slider::getFocus()
 {
 	return m_hasFocus;

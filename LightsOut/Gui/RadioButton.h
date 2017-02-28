@@ -11,8 +11,9 @@
 #include <functional>
 
 /// <summary>
-/// RadioButton class used for creating radioButtons (similar to CheckBox class)
-/// Class inherits from Label and thus is a widget.
+/// Brief: RadioButton class used for creating radioButtons (similar to CheckBox class)
+/// 
+/// Detail: Class inherits from Label and thus is a widget.
 /// </summary>
 class RadioButton : public Label {
 public:
@@ -28,12 +29,16 @@ public:
 	bool getState() const;
 	void activate();
 	void setColors() override;
+
+	// Callback function to link to external functions
 	typedef std::function<void()> Callback;
 	Callback select;
 private:
-	bool m_state = false;
-	sf::RectangleShape m_radioButtonRect;
-	std::vector<RadioButton *> & m_otherButtons;
+	bool m_state = false; // State of the radio button
+	sf::RectangleShape m_radioButtonRect; // Rectangle displayed by the radio button
+	std::vector<RadioButton *> & m_otherButtons; // A reference to a vector containing the radio button group (used to interact with all radio buttons at once)
+
+	// Sound and Color references
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;

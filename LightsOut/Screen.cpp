@@ -12,7 +12,7 @@ Screen::Screen(GameState gameStateIn) : m_gameState(gameStateIn), m_nextGameStat
 /// <param name="window">The render window used to draw the game</param>
 void Screen::render(sf::RenderWindow& window) 
 {
-	window.draw(m_gui);
+	window.draw(m_gui); // Draw the GUI object
 }
 
 /// <summary>
@@ -39,7 +39,7 @@ GameState Screen::getNextGameState()
 void Screen::resetNextGameState()
 {
 	m_nextGameState = m_gameState;
-	reset();
+	reset(); // Reset this screen so it will be ready to run from the start again
 }
 
 /// <summary>
@@ -47,5 +47,5 @@ void Screen::resetNextGameState()
 /// </summary>
 void Screen::setColors()
 {
-	m_gui.setColors();
+	m_gui.setColors(); // Set the colors of the GUI
 }

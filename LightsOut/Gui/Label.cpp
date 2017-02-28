@@ -81,13 +81,7 @@ void Label::setTextColor(const sf::Color& color)
 /// <param name="states">States used for drawing</param>
 void Label::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	//sf::RectangleShape s(sf::Vector2f(textRect.width, textRect.height));
-	//s.setFillColor(sf::Color::White);
-	//s.setOrigin(sf::Vector2f(textRect.width / 2.f, textRect.height / 2.f));
-	//s.setPosition(m_text.getPosition());
-	//target.draw(s, states);
 	target.draw(m_text, states);
-	
 }
 
 /// <summary>

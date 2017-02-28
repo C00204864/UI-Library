@@ -10,8 +10,9 @@
 #include <functional>
 
 /// <summary>
-/// Slider class used for creating Sliders onscreen
-/// Class inherits from Label and thus is a widget.
+/// Brief: Slider class used for creating Sliders onscreen
+/// 
+/// Detail: Class inherits from Label and thus is a widget
 /// </summary>
 class Slider : public Label
 {
@@ -20,19 +21,26 @@ public:
 		float sliderHeight = 15.0f, sf::Vector2f &startPos = sf::Vector2f(), sf::Vector2f &endPos = sf::Vector2f());
 	bool processInput(XboxController & controller);
 	virtual void setPosition(sf::Vector2f &position) override;
-	typedef std::function<void()> Callback;
-	Callback increase, decrease;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	float getPercentageFull();
 	void setPercentageFull(float percentageIn);
 	void setColors() override;
 	bool getFocus();
 
+	// Callback function to link to external functions
+	typedef std::function<void()> Callback;
+	Callback increase, decrease;
+
 private:
+	// Rectangles ot draw
 	sf::RectangleShape m_bar, m_base;
+
+	//Rectangle attributes
 	float m_barBaseWidth;
 	float m_barBaseHeight;
 	float m_barSize;
+
+	//Sound and cColor references
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;

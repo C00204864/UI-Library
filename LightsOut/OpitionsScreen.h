@@ -15,22 +15,25 @@
 #include "Gui\RadioButton.h"
 #include "Gui\CheckBox.h"
 #include "Screen.h"
-
-/// The Opitions screen that will be displayed in game
+/// <summary>
+/// Brief: The Opitions screen that will be displayed in game
 /// 
-/// Handles all functionality of the opitions menu, Gui elements, 
+/// Detail: Handles all functionality of the opitions menu, Gui elements, 
 /// updating and rendering.
+/// </summary>
 class OptionsScreen : public Screen
 {
 public:
-	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSound, int &difficultyIn);
+	OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, 
+		sf::Sound &backingTrackIn, sf::Sound &selectSound, int &difficultyIn);
 	~OptionsScreen();
 	void update(XboxController& controller) override;
 	bool getChangeStateMenu();
 	void reset() override;
-	int getDifficulty() const;
 private:
 	void initialise();
+
+	// Linked to Callbacks
 	void volumeUpSliderMusic();
 	void volumeDownSliderMusic();
 	void volumeUpSliderEffects();
@@ -41,6 +44,7 @@ private:
 	void setColor();
 	void changeDifficulty();
 
+	// GUI elements
 	Label *m_optionsTitle;
 	Slider *volume;
 	Slider *effects;
@@ -54,18 +58,17 @@ private:
 	std::vector<RadioButton*> colorRadioButtons;
 	CheckBox *checkBox;
 
+	// Transition variables
 	bool m_applyButtonPressed;
-	bool m_backToMenu;
-
 	bool transitionIn;
 	float interpolation;
 
+	// Sound, Color and Difficulty references
 	sf::Sound &backingTrack;
 	sf::Sound &selectSound;
 	sf::Color &focusColor;
 	sf::Color &noFocusColor;
 	sf::Color &fillColor;
-
 	int & m_difficulty;
 };
 

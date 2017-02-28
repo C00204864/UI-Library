@@ -10,10 +10,12 @@
 #include "Widget.h"
 #include "..\MathUtility.h"
 
-/// Handles all Gui elements added to it
+/// <summary>
+/// Brief: Handles all Gui elements added to it
 ///
-/// Updates and renders all Gui elements that was added to it 
-/// through the use of the add(...) method
+/// Detail: Updates and renders all Gui elements that was added to it 
+/// through the use of the add(...) function
+/// </summary>
 class Gui : public Widget
 {
 public:
@@ -28,13 +30,8 @@ public:
 	
 	// A vector of all the widgets this Gui handles
 	std::vector<Widget*> m_widgets;
-
 private:
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-
-	// NOTE(Darren): This if for testing, remove it
-	bool do_transition;
-	float speed;
 };
 
 #endif

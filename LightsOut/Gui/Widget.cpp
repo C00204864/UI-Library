@@ -56,11 +56,19 @@ sf::Vector2f Widget::getPosition()
 	return widgetPos;
 }
 
+/// <summary>
+/// Getter function for the widget start position
+/// </summary>
+/// <returns>The start position before a transition</returns>
 sf::Vector2f Widget::getStartPos()
 {
 	return widgetStartPos;
 }
 
+/// <summary>
+/// Getter function for the widget end position
+/// </summary>
+/// <returns>The end position after a transition</returns>
 sf::Vector2f Widget::getEndPos()
 {
 	return widgetEndPos;
@@ -93,4 +101,7 @@ void Widget::updateShape()
 /// </summary>
 void Widget::draw(sf::RenderTarget & target, sf::RenderStates states) const { }
 
+/// <summary>
+/// Empty set colors method as not every screen actually needs that method
+/// </summary>
 void Widget::setColors() {}

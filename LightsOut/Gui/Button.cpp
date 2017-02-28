@@ -1,14 +1,29 @@
 #include "Button.h"
 
 /// <summary>
+/// 
+/// </summary>
+/// <param name="textIn"></param>
+/// <param name="parent"></param>
+/// <param name="positionIn"></param>
+/// <param name="characterSize"></param>
+/// <param name="buttonWidth"></param>
+/// <param name="buttonHeight"></param>
+
+
+/// <summary>
 /// Constructor function for the Button Class
 /// </summary>
+/// <param name="focusColorIn">The colour of the button when in focus</param>
+/// <param name="noFocusColorIn">The colour of the button when not in focus</param>
+/// <param name="fillColorIn">not currently used</param>
+/// <param name="selectSoundIn">The sound played by the button</param>
 /// <param name="textIn">Text to be displayed by the button object's inherited label</param>
 /// <param name="parent">parent widget of the button</param>
 /// <param name="positionIn">Position of the Button</param>
 /// <param name="characterSize">Size of the font used for the text</param>
 /// <param name="buttonWidth">Width of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
-/// <param name="buttonHeight">Hidth of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
+/// <param name="buttonHeight">Height of the button rectangle (Maybe overrided in contructor of unsuitable)</param>
 /// <param name="startPos">The start position of the transition</param>
 /// <param name="endPos">The end position of the transition</param>
 Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f &positionIn, int characterSize, float buttonWidth, float buttonHeight, sf::Vector2f &startPos, sf::Vector2f &endPos)
@@ -26,7 +41,7 @@ Button::Button(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &f
 		Set the position of the inherited label which must be moved slightly 
 	    due to the variance in size of the text object with respect to the button rectangle 
 	*/
-	m_buttonRect.setPosition(getPosition()); // Set the position now as the base widgets position will be reset by setting the Label position <---> (LIAM) - Might want to give this a dirty refactor
+	m_buttonRect.setPosition(widgetPos); // Set the position now as the base widgets position will be reset by setting the Label position
 	Label::setPosition(sf::Vector2f(getPosition().x - characterSize / 12.f, getPosition().y - characterSize / 3.5f));
 	sf::Vector2f textSize(Label::getText().getGlobalBounds().width + BUTTON_BUFFER, Label::getTextHeight() + BUTTON_BUFFER); // Get the size of the Text bounding Box
 	if (buttonWidth < textSize.x)
@@ -128,9 +143,9 @@ bool Button::processInput(XboxController & controller)
 void Button::setPosition(sf::Vector2f &position)
 {
 	widgetPos = position;
-	m_buttonRect.setPosition(getPosition());
+	m_buttonRect.setPosition(widgetPos); // Set the rectangle
 	Label::setPosition(sf::Vector2f(getPosition().x - Label::getCharacterSize() / 12.f,
-		getPosition().y - Label::getCharacterSize() / 3.5f));
+		getPosition().y - Label::getCharacterSize() / 3.5f)); // Set the label
 }
 
 /// <summary>
@@ -144,6 +159,10 @@ void Button::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	Label::draw(target, states); // Draw the inherited Label
 }
 
+/// <summary>
+/// Function used to set the colors of the button depending on whether 
+/// it is in focus or not (buttons only use two colors)
+/// </summary>
 void Button::setColors()
 {
 	if (m_hasFocus)

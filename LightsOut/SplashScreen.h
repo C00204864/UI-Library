@@ -1,5 +1,5 @@
 /// <summary>
-/// @author Darren Sweeney
+/// @author Darren Sweeney and Liam Hickey
 /// @version 1.0
 /// </summary>
 
@@ -12,10 +12,11 @@
 #include "Screen.h"
 
 /// <summary>
-/// Handles all the functionality of the splash screen
+/// Brief: Handles all the functionality of the splash screen
 /// 
-/// Updates the fade in and out of the splash screen and renders
-/// the assets. When the fade is finished the state is changed
+/// Detail: Updates the fade in and out of the splash screen and
+/// renders the assets. When the fade is finished the state is 
+/// changed
 /// </summary>
 class SplashScreen : public Screen
 {
@@ -28,14 +29,14 @@ public:
 	void reset() override;
 
 private:
-	sf::Sprite m_studioLogoSprite;
-	sf::Font *m_splashScreenFont;
-	sf::Text m_legalText;
-	sf::RectangleShape m_fadeCover;
-	float m_fadeCoverAlpha;
-	bool isSplashOver;
+	sf::Sprite m_studioLogoSprite; // Logo sprite
+	sf::Font *m_splashScreenFont; // Font used by the splash screen
+	sf::Text m_legalText; // Text drawn by the splash screen
+	sf::RectangleShape m_fadeCover; // Rectangle drawn and used for fading
+	float m_fadeCoverAlpha; // Alpha value of the fade rectangle
 	float timer;
 	const float FADE_RATE = 1.5f;
+	bool isSplashOver; // bool determines if the splash animation has ben completed
 };
 
 #endif // !SPLASH_SCREEN_H

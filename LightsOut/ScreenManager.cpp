@@ -62,7 +62,7 @@ void ScreenManager::render(sf::RenderWindow& window)
 {
 	if (screens.at(m_currentScreen)->getGameState() != GameState::SplashScreen)
 	{
-		window.draw(m_backgroundSprite);
+		window.draw(m_backgroundSprite); // Only draw the background sprite if the screen currently beinng drawn is not the splash screen
 	}
 	if (m_currentScreen < screens.size())
 	{

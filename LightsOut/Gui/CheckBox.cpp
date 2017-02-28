@@ -1,16 +1,23 @@
 #include "CheckBox.h"
  
+/// <summary>
+/// Empty Default Constructor function
+/// </summary>
 CheckBox::CheckBox() : Label("", nullptr), selectSound(sf::Sound()) , focusColor(sf::Color()), noFocusColor(sf::Color()), fillColor(sf::Color()) {}
 
 /// <summary>
 /// Constructor function for the CheckBox class
 /// </summary>
+/// <param name="focusColorIn">The colour of the outline of the checkbox when in focus</param>
+/// <param name="noFocusColorIn">The colour of the outline of the checkbox when not in focus</param>
+/// <param name="fillColorIn">The fill color of the check box when selected</param>
+/// <param name="selectSoundIn">Sound played by the check box</param>
 /// <param name="textIn">Text to be displayed by the check Box object's inherited label</param>
 /// <param name="parent">parent widget to the CheckBox object</param>
 /// <param name="positionIn">position of the Check Box</param>
 /// <param name="characterSize">Size of the Characters to be used by the font when drawing text</param>
 /// <param name="boxWidth">Width of the Check Box</param>
-/// <param name="boxHeight">Height of the Chec Box</param>
+/// <param name="boxHeight">Height of the Check Box</param>
 /// <param name="startPos">The start position of the transition</param>
 /// <param name="endPos">The end position of the transition</param>
 CheckBox::CheckBox(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &selectSoundIn, const std::string & textIn, Widget * parent, sf::Vector2f & positionIn, int characterSize,
@@ -67,10 +74,10 @@ bool CheckBox::processInput(XboxController & controller)
 		{
 			if (m_up != nullptr)
 			{
-				selectSound.play();
+				selectSound.play(); // Play the sound when this event occurs
 				m_up->promoteFocus(); // Set the button above *this to be in focus
 				demoteFocus(); // Set the check box to be out of focus
-				try
+				try // Try-catch used to stop a crash when the callback hasn't been bound
 				{
 					up();
 				}
@@ -142,7 +149,7 @@ bool CheckBox::processInput(XboxController & controller)
 			|| sf::Keyboard::isKeyPressed(sf::Keyboard::Return))
 		{
 			selectSound.play();
-			switchState();
+			switchState(); // Change the state of the checkbox
 			try
 			{
 				select();
@@ -213,6 +220,10 @@ bool CheckBox::getState()
 	return m_state;
 }
 
+/// <summary>
+/// Function used to set the colors of the button depending on whether 
+/// it is in focus or not (buttons only use two colors)
+/// </summary>
 void CheckBox::setColors()
 {
 	if (m_state)

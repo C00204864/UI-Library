@@ -11,8 +11,9 @@
 #include "../ResourceManager.h"
 
 /// <summary>
-/// Label class used to draw Labels (Text) to the screen
-/// Class inherits from Widget and thus is a widget.
+/// Brief: Label class used to draw Labels (Text) to the screen
+///
+/// Detail: Class inherits from Widget and thus is a widget.
 /// </summary>
 class Label : public Widget
 {

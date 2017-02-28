@@ -7,16 +7,15 @@ ResourceManager g_resourceMgr;
 /// </summary>
 ResourceManager::ResourceManager()
 {
+	// Load Files
 	if (!m_gameFont.loadFromFile("Assets/Fonts/arial.ttf"))
 	{
 		std::cout << "ResourceManager:: gameFont failed to load!" << std::endl;
 	}
-
 	if (!m_studioLogo.loadFromFile("Assets/StudioLogo/StudioLogo.png"))
 	{
 		std::cout << "ResourceManager:: StudioLogo.png failed to load!" << std::endl;
 	}
-
 	if (!backingSoundBuffer.loadFromFile("Assets/Sounds/BackingTrack.wav"))
 	{
 		std::cout << "ResourceManager:: backingSoundBuffer failed to load!" << std::endl;

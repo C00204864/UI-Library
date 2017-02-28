@@ -1,11 +1,10 @@
 #include "Gui.h"
 
 /// <summary>
-/// 
+/// Constructor for the Gui class
 /// </summary>
-/// <param name="parent"></param>
-Gui::Gui(Widget *parent) 
-	: speed(0.0f) { }
+/// <param name="parent">parent widget(defaults to nullptr)</param>
+Gui::Gui(Widget *parent) { }
 
 /// <summary>
 /// Delets all widgets added to the widgets vector
@@ -36,20 +35,18 @@ bool Gui::processInput(XboxController &controller)
 			continue;
 		}
 	}
-
 	return true;
 }
 
 /// <summary>
 /// Adds a widget to the vector for widgets
 /// </summary>
-/// <param name="widget"></param>
+/// <param name="widget">widget to be added to this</param>
 void Gui::add(Widget* widget)
 {
 	widget->m_parent = this;
 	m_widgets.emplace_back(widget);
 	updateShape();
-	std::cout << m_widgets.size() << std::endl;
 }
 
 /// <summary>
@@ -66,7 +63,7 @@ void Gui::transitionOut(float transitionSpeed, float &interpolation)
 
 	for (Widget* widget : m_widgets)
 	{
-		sf::Vector2f transitionPos = lerp(widget->getStartPos(), widget->getEndPos(), interpolation);
+		sf::Vector2f transitionPos = lerp(widget->getStartPos(), widget->getEndPos(), interpolation); // Transition from end to start using lerp
 		widget->setPosition(transitionPos);
 	}
 }
@@ -85,9 +82,11 @@ void Gui::transitionIn(float transitionSpeed, float &interpolation)
 
 	for (Widget* widget : m_widgets)
 	{
+		// Get the start and end positions of the widget
 		sf::Vector2f startPos = widget->getStartPos();
 		sf::Vector2f endPos = widget->getEndPos();
-		sf::Vector2f transitionPos = lerp(widget->getEndPos(), widget->getStartPos(), interpolation);
+
+		sf::Vector2f transitionPos = lerp(widget->getEndPos(), widget->getStartPos(), interpolation); // Transition from start to end using lerp
 		widget->setPosition(transitionPos);
 	}
 }
@@ -105,19 +104,25 @@ void Gui::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	}
 }
 
+/// <summary>
+/// Set the colors of every widget stored in this
+/// </summary>
 void Gui::setColors()
 {
 	for (Widget* widget : m_widgets)
 	{
-		widget->setColors();
+		widget->setColors(); // Set the colour of an individual widget
 	}
 }
 
+/// <summary>
+/// Clear 
+/// </summary>
 void Gui::clear()
 {
 	for (Widget* widget : m_widgets)
 	{
-		delete widget;
+		delete widget; // Delete all widgets
 	}
-	m_widgets.clear();
+	m_widgets.clear(); // Clear the vector full of widget pointers
 }

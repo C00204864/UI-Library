@@ -9,11 +9,13 @@
 #include <SFML\Graphics.hpp>
 #include "..\Input\XboxController.h"
 
-/// Provides a base class for objects that are a widget.
+/// <summary>
+/// Brief: Provides a base class for objects that are a widget
 ///
-/// Allows the subclasses to overload the how the player will control a
+/// Detail: Allows the subclasses to overload the how the player will control a
 /// widget, render it and how it's updated. Provides pointers to other widgets
-/// which hold the relative location of the next gui the player can move to.
+/// which hold the relative location of the next gui the player can move to
+/// </summary>
 class Widget : public sf::Drawable
 {
 public:
@@ -24,8 +26,10 @@ public:
 	virtual void updateShape();
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
+	// Parent widget
 	Widget *m_parent;
 
+	// Pointers to adjacent widgets
 	Widget *m_left;
 	Widget *m_right;
 	Widget *m_up;
@@ -41,8 +45,7 @@ public:
 
 protected:
 	sf::Vector2f widgetPos;
-	// The widget the player is currenly on and can interact with.
-	bool m_hasFocus;
+	bool m_hasFocus; // The widget the player is currenly on and can interact with
 	sf::Vector2f widgetStartPos, widgetEndPos;
 };
 

@@ -39,18 +39,18 @@ bool SplashScreen::splashOverState()
 /// <param name="dt">Delta time</param>
 void SplashScreen::update(XboxController &xboxController)
 {
-	timer += 10;//-----------------------------------------------------------------------------------------------------------------------------------------------------
+	timer += 20; // Increment the timer
 
-	m_fadeCover.setFillColor(sf::Color(0, 0, 0, m_fadeCoverAlpha));
+	m_fadeCover.setFillColor(sf::Color(0, 0, 0, m_fadeCoverAlpha)); // Set the fade cover's alpha value
 
 	if (timer < 6000.0f)
 	{
 		if (m_fadeCoverAlpha >= FADE_RATE)
 		{
-			m_fadeCoverAlpha -= FADE_RATE;
+			m_fadeCoverAlpha -= FADE_RATE; // Decrementing thye fade alpha
 			if (m_fadeCoverAlpha < 0)
 			{
-				m_fadeCoverAlpha = 0;
+				m_fadeCoverAlpha = 0; // We do not want this value to go under 0
 			}
 		}
 	}
@@ -58,14 +58,16 @@ void SplashScreen::update(XboxController &xboxController)
 	{
 		if (m_fadeCoverAlpha < 255)
 		{
-			m_fadeCoverAlpha += FADE_RATE;
+			m_fadeCoverAlpha += FADE_RATE; // Incrementing the fade alpha
 			if (m_fadeCoverAlpha > 255)
 			{
-				m_fadeCoverAlpha = 255;
+				m_fadeCoverAlpha = 255; // We do not want this value to go over 255
 			}
 		}
 		else
-			m_nextGameState = GameState::MainMenu;
+		{
+			m_nextGameState = GameState::MainMenu; // Change the game state
+		}
 	}
 
 	// Skip the splash screen is the player presses start on the controller
@@ -81,12 +83,15 @@ void SplashScreen::update(XboxController &xboxController)
 /// <param name="window">The window to render all splash screen objects</param>
 void SplashScreen::render(sf::RenderWindow &window)
 {
-	window.draw(m_studioLogoSprite);
-	window.draw(m_legalText);
-	window.draw(m_fadeCover);
+	window.draw(m_studioLogoSprite); // Draw the logo sprite
+	window.draw(m_legalText); // Draw the legal Text
+	window.draw(m_fadeCover); // Draw the alpha fade cover
 }
 
+/// <summary>
+/// Function used to reset the screen if it to be used again after the game state has been changed
+/// </summary>
 void SplashScreen::reset()
 {
-	m_fadeCoverAlpha = 255;
+	m_fadeCoverAlpha = 255; // Reset the fade cover
 }

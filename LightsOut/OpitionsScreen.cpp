@@ -3,6 +3,12 @@
 /// <summary>
 /// 
 /// </summary>
+/// <param name="focusColorIn">Focus color of the GUI elements</param>
+/// <param name="noFocusColorIn">No focus color of the GUI elements</param>
+/// <param name="fillColorIn">Fill color of the GUI elements</param>
+/// <param name="backingTrackIn">The backing music for the game</param>
+/// <param name="selectSoundIn">The sound for the GUI elements</param>
+/// <param name="difficultyIn">The game's difficulty</param>
 OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn, sf::Color &fillColorIn, sf::Sound &backingTrackIn, sf::Sound &selectSoundIn, int &difficultyIn)
 	: Screen(GameState::Options),
 	transitionIn(true),
@@ -13,6 +19,7 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	fillColor(fillColorIn),
 	m_difficulty(difficultyIn)
 {
+	// Initiaise the GUI elements
 	m_optionsTitle = new Label("Options", nullptr, 80, sf::Vector2f(400.0f, 30.0f), sf::Vector2f(400.0f, 900.0f));
 	m_optionsTitle->setPosition(sf::Vector2f(400.0f, 900.0f));
 	volume = new Slider(focusColor, noFocusColor, fillColor, selectSound, std::string("Music Volume"), nullptr, sf::Vector2f(400.0f, 900.0f), 18, 200.0f, 15.0f,
@@ -89,8 +96,6 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	effects->increase = std::bind(&OptionsScreen::volumeUpSliderEffects, this);
 	effects->decrease = std::bind(&OptionsScreen::volumeDownSliderEffects, this);
 	checkBox->select = std::bind(&OptionsScreen::checkBoxSwitched, this);
-
-	// NOTE(Darren): Again, all for testing
 	m_redSlider->increase = std::bind(&OptionsScreen::setColor, this);
 	m_redSlider->decrease = std::bind(&OptionsScreen::setColor, this);
 	m_greenSlider->increase = std::bind(&OptionsScreen::setColor, this);
@@ -98,11 +103,9 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 	m_blueSlider->increase = std::bind(&OptionsScreen::setColor, this);
 	m_blueSlider->decrease = std::bind(&OptionsScreen::setColor, this);
 	applyButton->select = std::bind(&OptionsScreen::applyButtonSelected, this);
-
 	colorRadioButtons.at(0)->select = std::bind(&OptionsScreen::setColorSliders, this);
 	colorRadioButtons.at(1)->select = std::bind(&OptionsScreen::setColorSliders, this);
 	colorRadioButtons.at(2)->select = std::bind(&OptionsScreen::setColorSliders, this);
-
 	difficultyRadioButtons.at(0)->select = std::bind(&OptionsScreen::changeDifficulty, this);
 	difficultyRadioButtons.at(1)->select = std::bind(&OptionsScreen::changeDifficulty, this);
 	difficultyRadioButtons.at(2)->select = std::bind(&OptionsScreen::changeDifficulty, this);
@@ -122,11 +125,11 @@ OptionsScreen::OptionsScreen(sf::Color & focusColorIn, sf::Color &noFocusColorIn
 		difficultyRadioButtons.at(2)->activate();
 	}
 	setColorSliders();
-	initialise();
+	initialise(); // Used to add elements to the GUI object
 }
 
 /// <summary>
-/// 
+/// Delete function for the Options Screen class
 /// </summary>
 OptionsScreen::~OptionsScreen() { }
 
@@ -135,6 +138,7 @@ OptionsScreen::~OptionsScreen() { }
 /// </summary>
 void OptionsScreen::initialise()
 {
+	// Add all of the GUI elements to the GUI objects
 	m_gui.add(m_optionsTitle);
 	m_gui.add(volume);
 	m_gui.add(effects);
@@ -155,24 +159,25 @@ void OptionsScreen::initialise()
 	m_gui.add(applyButton);
 }
 
+/// <summary>
+/// function resets the Options Screen after the game state has been changed
+/// </summary>
 void OptionsScreen::reset()
 {
 	// Reset the top Gui elements to be in focus
 	volume->promoteFocus();
-
-	m_backToMenu = false;
 	transitionIn = true;
 	interpolation = 0.0f;
 	m_applyButtonPressed = false;
 }
 
 /// <summary>
-/// 
+/// update function processes input for the options screen
 /// </summary>
-/// <param name="controller"></param>
+/// <param name="controller">controller used for processing input</param>
 void OptionsScreen::update(XboxController &controller)
 {
-	m_gui.processInput(controller);
+	m_gui.processInput(controller); // Process input for the GUI object
 
 	if (controller.isButtonPressed(XBOX360_BACK))
 	{
@@ -181,82 +186,95 @@ void OptionsScreen::update(XboxController &controller)
 
 	if (m_applyButtonPressed)
 	{
-		m_gui.transitionOut(0.05f, interpolation);
+		m_gui.transitionOut(0.05f, interpolation); // run a transition out cycle
 
 		if (interpolation >= 1.0f)
 		{
-			std::cout << "Transition play finished" << std::endl;
-			m_backToMenu = true; // TODO : GET RID
-			m_nextGameState = GameState::MainMenu;
-			interpolation = 0.0f;
-			reset();
+			m_nextGameState = GameState::MainMenu; // Change the game state
+			interpolation = 0.0f; // Reset the interpolation
+			reset(); // Reset this
 		}
 	}
 
 	if (transitionIn)
 	{
-		m_gui.transitionIn(0.05f, interpolation);
+		m_gui.transitionIn(0.05f, interpolation); // Run a transition in cycle
 
 		if (interpolation >= 1.0f)
 		{
-			std::cout << "Transition play finished" << std::endl;
-			interpolation = 0.0f;
+			interpolation = 0.0f; // Reset the interpolation
 			transitionIn = false;
 		}
 	}
 }
 
+/// <summary>
+/// Function linked to a callback function for thhe volume music slider
+/// </summary>
 void OptionsScreen::volumeUpSliderMusic()
 {
 	if (!checkBox->getState())
 	{
-		std::cout << "volumeUpMusic callback" << std::endl;
-		backingTrack.setVolume(100 * volume->getPercentageFull());
+		backingTrack.setVolume(100 * volume->getPercentageFull()); // Set the volume of the sound
 	}
 }
 
+/// <summary>
+///  Function linked to a callback function for thhe volume music slider
+/// </summary>
 void OptionsScreen::volumeDownSliderMusic()
 {
 	if (!checkBox->getState())
 	{
-		std::cout << "volumeDownMusic callback" << std::endl;
-		backingTrack.setVolume(100 * volume->getPercentageFull());
+		backingTrack.setVolume(100 * volume->getPercentageFull()); // Set the volume of the sound
 	}
 }
 
+/// <summary>
+///  Function linked to a callback function for thhe volume effects slider
+/// </summary>
 void OptionsScreen::volumeUpSliderEffects()
 {
 	if (!checkBox->getState())
 	{
-		std::cout << "volumeUpEffects callback" << std::endl;
-		selectSound.setVolume(100 * (effects->getPercentageFull()));
+		selectSound.setVolume(100 * (effects->getPercentageFull())); // Set the volume of the sound
 	}	
 }
 
+/// <summary>
+///  Function linked to a callback function for thhe volume effects slider
+/// </summary>
 void OptionsScreen::volumeDownSliderEffects()
 {
 	if (!checkBox->getState())
 	{
-		std::cout << "volumeDownEffects callback" << std::endl;
-		selectSound.setVolume(100 * (effects->getPercentageFull()));
+		selectSound.setVolume(100 * (effects->getPercentageFull())); // Set the volume of the sound
 	}
 }
 
+/// <summary>
+/// Function linked to a callback function for the apply button
+/// </summary>
 void OptionsScreen::applyButtonSelected()
 {
 	m_applyButtonPressed = true;
 	applyButton->demoteFocus();
 }
 
+/// <summary>
+/// Function linked to a callback function for the mute check box
+/// </summary>
 void OptionsScreen::checkBoxSwitched()
 {
 	if (checkBox->getState())
 	{
+		// No sound if the check box is on
 		backingTrack.setVolume(0);
 		selectSound.setVolume(0);
 	}
 	else
 	{
+		// Otherwise the sound is set by the sliders
 		backingTrack.setVolume(100 * (volume->getPercentageFull()));
 		selectSound.setVolume(100 * (effects->getPercentageFull()));
 	}
@@ -268,9 +286,10 @@ void OptionsScreen::checkBoxSwitched()
 /// </summary>
 void OptionsScreen::setColorSliders()
 {
+	// We set the sliders based on what colour we are altering
 	if (colorRadioButtons.at(0)->getState())
 	{
-		m_redSlider->setPercentageFull(fillColor.r / 255.f);
+		m_redSlider->setPercentageFull(fillColor.r / 255.f); // Set the percentage full to be a percentage based off of RGB values
 		m_greenSlider->setPercentageFull(fillColor.g / 255.f);
 		m_blueSlider->setPercentageFull(fillColor.b / 255.f);
 	}
@@ -294,6 +313,8 @@ void OptionsScreen::setColorSliders()
 void OptionsScreen::setColor()
 {
 	sf::Color *color;
+
+	// First we check what color we have to change
 	if (colorRadioButtons.at(0)->getState())
 	{
 		color  = &fillColor;
@@ -306,6 +327,8 @@ void OptionsScreen::setColor()
 	{
 		color = &noFocusColor;
 	}
+
+	// Then we change that color based on what slider changed
 	if (m_redSlider->getFocus())
 	{
 		color->r = m_redSlider->getPercentageFull() * 255.f;
@@ -321,18 +344,13 @@ void OptionsScreen::setColor()
 	m_gui.setColors();
 }
 
-bool OptionsScreen::getChangeStateMenu()
-{
-	return m_backToMenu;
-}
-
-int OptionsScreen::getDifficulty() const
-{
-	return m_difficulty;
-}
-
+/// <summary>
+/// Function is linked to the call back functions for the difficulty
+/// radio buttons
+/// </summary>
 void OptionsScreen::changeDifficulty()
 {
+	// Change the difficulty based on what radio button is selected
 	if (difficultyRadioButtons.at(0)->getState())
 	{
 		m_difficulty = 3;
