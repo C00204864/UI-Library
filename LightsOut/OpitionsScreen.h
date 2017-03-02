@@ -28,7 +28,6 @@ public:
 		sf::Sound &backingTrackIn, sf::Sound &selectSound, int &difficultyIn);
 	~OptionsScreen();
 	void update(XboxController& controller) override;
-	bool getChangeStateMenu();
 	void reset() override;
 private:
 	void initialise();

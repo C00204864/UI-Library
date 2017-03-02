@@ -126,10 +126,7 @@ bool RadioButton::processInput(XboxController & controller)
 			{
 				select(); // Callback function
 			}
-			catch (std::bad_function_call)
-			{
-				std::cout << "RADIOBUTTON:: Bad function call" << std::endl;
-			}
+			catch (std::bad_function_call){}
 		}
 	}
 }

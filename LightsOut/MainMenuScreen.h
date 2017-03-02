@@ -12,7 +12,6 @@
 #include "Gui\Button.h"
 #include "Gui\Label.h"
 #include "Screen.h"
-#include <iostream>
 
 /// <summary>
 /// Brief: class represents the screen for the main menu of the game

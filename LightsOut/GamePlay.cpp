@@ -198,7 +198,7 @@ bool GamePlay::checkWin()
 {
 	for (int i = 0; i < arrayLength; i++)
 	{
-		if (m_pcheckBoxArray[i]->getState())
+		if (!m_pcheckBoxArray[i]->getState())
 		{
 			return false; // Return false if a square is on
 		}

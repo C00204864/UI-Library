@@ -84,10 +84,7 @@ bool Slider::processInput(XboxController &controller)
 			{
 				increase(); // Call the associated callback function
 			}
-			catch (std::bad_function_call &e)
-			{
-				std::cout << "SLIDER:: Bad function call (increase() function)" << std::endl;
-			}
+			catch (std::bad_function_call &e){}
 			m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight)); // Set the new size of the bar
 			return true;
 		}
@@ -106,10 +103,7 @@ bool Slider::processInput(XboxController &controller)
 			{
 				decrease(); // Call the associtaed callback function
 			}
-			catch (std::bad_function_call &e)
-			{
-				std::cout << "SLIDER:: Bad function call (decrease() function)" << std::endl;
-			}
+			catch (std::bad_function_call &e){}
 			m_bar.setSize(sf::Vector2f(m_barSize, m_barBaseHeight)); // Set the new size of the bar
 			return true;
 		}

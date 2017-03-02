@@ -129,9 +129,7 @@ bool Button::processInput(XboxController & controller)
 			}
 		}
 		catch (std::bad_function_call &e)
-		{
-			// The callback function may not be assinged here.
-			std::cout << "BUTTON:: Bad function call!" << std::endl;
+		{// The callback function may not be assinged here.
 		}
 	}
 }

@@ -81,10 +81,7 @@ bool CheckBox::processInput(XboxController & controller)
 				{
 					up();
 				}
-				catch (const std::bad_function_call &e)
-				{
-					std::cout << "CHECKBOX:: Bad function call" << std::endl;
-				}
+				catch (const std::bad_function_call &e){}
 				return true;
 			}
 		}
@@ -100,10 +97,7 @@ bool CheckBox::processInput(XboxController & controller)
 				{
 					down();
 				}
-				catch (const std::bad_function_call &e)
-				{
-					std::cout << "CHECKBOX:: Bad function call" << std::endl;
-				}
+				catch (const std::bad_function_call &e){}
 				return true;
 			}
 		}
@@ -119,10 +113,7 @@ bool CheckBox::processInput(XboxController & controller)
 				{
 					left();
 				}
-				catch (const std::bad_function_call &e)
-				{
-					std::cout << "CHECKBOX:: Bad function call" << std::endl;
-				}
+				catch (const std::bad_function_call &e){}
 				return true;
 			}
 		}
@@ -138,10 +129,7 @@ bool CheckBox::processInput(XboxController & controller)
 				{
 					right();
 				}
-				catch (const std::bad_function_call &e)
-				{
-					std::cout << "CHECKBOX:: Bad function call" << std::endl;
-				}
+				catch (const std::bad_function_call &e){}
 				return true;
 			}
 		}
@@ -154,10 +142,7 @@ bool CheckBox::processInput(XboxController & controller)
 			{
 				select();
 			}
-			catch (const std::bad_function_call &e)
-			{
-				std::cout << "CHECKBOX:: Bad function call" << std::endl;
-			}
+			catch (const std::bad_function_call &e){}
 		}
 	}
 }

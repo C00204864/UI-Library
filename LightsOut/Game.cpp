@@ -1,5 +1,4 @@
 #include "Game.h"
-#include <iostream>
 
 /// <summary>
 /// Default constructor function for the Game class

@@ -11,7 +11,6 @@
 #include "Gui\Button.h"
 #include "Gui\Label.h"
 #include "Screen.h"
-#include <iostream>
 
 /// <summary>
 /// Brief: Class represents the quit screen for the game
