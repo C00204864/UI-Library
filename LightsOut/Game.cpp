@@ -7,7 +7,7 @@ Game::Game()
 	: m_window(sf::VideoMode(800, 800, 32), "Lights Out!", sf::Style::Close), // Set up the render window
 	xboxController(CONTROLLER_ONE), // Set up the xbox controller for input
 	// Set up the colors
-	m_focusColor(sf::Color(166, 98, 75, 255)),
+	m_focusColor(sf::Color(255, 34, 35, 255)),
 	m_noFocusColor(sf::Color(114, 53, 68, 255)),
 	m_fillColor(sf::Color(65, 138, 108, 155)),
 	m_difficulty(3), // Set the difficulty

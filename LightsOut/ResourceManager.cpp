@@ -20,7 +20,7 @@ ResourceManager::ResourceManager()
 	{
 		std::cout << "ResourceManager:: backingSoundBuffer failed to load!" << std::endl;
 	}
-	if (!selectSoundBuffer.loadFromFile("Assets/Sounds/Select.wav"))
+	if (!selectSoundBuffer.loadFromFile("Assets/Sounds/Menu_Nav.wav"))
 	{
 		std::cout << "ResourceManager:: selectSoundBuffer failed to load!" << std::endl;
 	}
