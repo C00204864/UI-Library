@@ -1,3 +1,16 @@
+/// <summary>
+/// @Authors Darren Sweeney and Liam Hickey
+/// @version 1.0
+/// @brief Group project which showcases a re-usable UI library in a game form called lights out.
+/// 
+/// A game where the player has to turn off a square set of lights where each
+/// toggled light effects adjacent cells.
+/// 
+/// Contributions from Authors: https://github.com/PeterLowe/button-game-darren-and-liam/graphs/contributors
+/// 
+/// Time and Commits: https://github.com/PeterLowe/button-game-darren-and-liam/graphs/punch-card
+/// </summary>
+
 #ifdef _DEBUG 
 #pragma comment(lib,"sfml-graphics-d.lib") 
 #pragma comment(lib,"sfml-audio-d.lib") 
